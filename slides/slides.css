@@ -33,6 +33,7 @@ html, body {
 .slide.hero {
   min-height: 100vh;
   padding-bottom: 48px;
+  position: relative;
 }
 
 /* Content slides — vertically center in viewport */
@@ -92,7 +93,7 @@ html, body {
 
 /* QR Code on hero slide */
 .hero__qr {
-  position: absolute;
+  position: absolute !important;
   right: 72px;
   top: 50%;
   transform: translateY(-50%);
@@ -104,6 +105,7 @@ html, body {
   border: 1px solid rgba(250,247,240,0.12);
   border-radius: 20px;
   padding: 24px;
+  z-index: 10;
 }
 
 .hero__qr img {
