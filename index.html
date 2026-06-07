@@ -1,310 +1,727 @@
 <!DOCTYPE html>
-<html lang="ko" dir="ltr">
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>트럼프 관세와 한국 기업의 공급망 생존 전략</title>
-  <meta name="description" content="2026 글로벌 경영환경 사례 분석 — 성공과 위기의 갈림길에서, 실리적 투트랙 전략" />
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RE:PIUM — 커피박 업사이클링 향초 사업계획서</title>
+
+  <!-- Fonts: Manrope (SoDoSans substitute) + Noto Serif KR (editorial) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Chart.js CDN (v4.4.7) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- ============ LANGUAGE SWITCHER (Fixed) ============ -->
-  <div class="lang-switcher">
-    <span class="lang-switcher__label" data-i18n="langLabel">🌐 언어</span>
-    <div class="lang-switcher__buttons">
-      <button class="lang-btn lang-btn--active" data-lang="ko">한국어</button>
-      <button class="lang-btn" data-lang="en">EN</button>
-      <button class="lang-btn" data-lang="zh">中文</button>
-      <button class="lang-btn" data-lang="ur">اردو</button>
-    </div>
+<!-- Mobile Nav Toggle -->
+<button class="nav-toggle" aria-label="메뉴 열기">☰</button>
+
+<!-- Nav Overlay (mobile) -->
+<div class="nav-overlay"></div>
+
+<!-- Sidebar Navigation -->
+<nav class="nav-sidebar">
+  <div class="nav-logo">
+    다시, 피움<br>
+    <span>RE:PIUM 사업계획서</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#hero">표지</a></li>
+    <li><a href="#problem">문제 & 기회</a></li>
+    <li><a href="#solution">솔루션 & 제품</a></li>
+    <li><a href="#effects">커피박의 효과</a></li>
+    <li><a href="#market">시장 분석</a></li>
+    <li><a href="#competition">경쟁사 분석</a></li>
+    <li><a href="#bmc">비즈니스 모델</a></li>
+    <li><a href="#roadmap">사업 전략</a></li>
+    <li><a href="#manufacturing">제조 공정</a></li>
+    <li><a href="#recipe">레시피 & 자재</a></li>
+    <li><a href="#cost">원가 구조</a></li>
+    <li><a href="#bep">손익분기점</a></li>
+    <li><a href="#marketing">판매 & 마케팅</a></li>
+    <li><a href="#funding">자금 계획</a></li>
+    <li><a href="#risk">리스크 & 대응</a></li>
+    <li><a href="#impact">기대효과 & 향후</a></li>
+    <li><a href="#vision">비전</a></li>
+  </ul>
+</nav>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- ===== 1. HERO ===== -->
+  <div class="hero-wrapper">
+    <section id="hero" class="hero">
+      <div class="hero-badge">창업 사업계획서</div>
+      <h1>다시, 피움</h1>
+      <p class="brand-en">RE:PIUM</p>
+      <p class="tagline">커피박 업사이클링 향초 — 버려질 커피박을 재활용해, 향·탈취·친환경을 담은 향초로 되살리는 사업</p>
+      <p class="meta">팀: 임상민, 서정빈 | 창업기술경제</p>
+    </section>
   </div>
 
-  <!-- ============ SECTION 1: HERO ============ -->
-  <section class="hero">
-    <div class="hero__bg"></div>
-    <div class="hero__content">
-      <p class="hero__eyebrow fade-in" data-i18n="heroEyebrow">2026 글로벌 경영환경 사례 분석</p>
-      <h1 class="hero__title fade-in" data-i18n="heroTitle">트럼프 관세와<br>한국 기업의<br>공급망 생존 전략</h1>
-      <p class="hero__subtitle fade-in" data-i18n="heroSubtitle">성공과 위기의 갈림길에서 — 실리적 투트랙 전략</p>
-      <p class="hero__presenter fade-in" data-i18n="heroPresenter">전자상거래전공 224494 임상민</p>
-    </div>
-    <div class="hero__scroll">
-      <span data-i18n="heroScroll">스크롤로 따라오세요</span>
-      <span class="hero__arrow">↓</span>
-    </div>
-  </section>
+  <!-- ===== 2. 문제 & 기회 ===== -->
+  <div class="band-white">
+    <section id="problem">
+      <h2 class="reveal">문제 & 기회</h2>
+      <p class="section-subtitle reveal">버려지는 자원 + 자라는 시장 = 교차점에 기회가 있다</p>
 
-  <!-- ============ SECTION 2: CONTEXT ============ -->
-  <section class="section section--white" id="context">
-    <div class="container">
-      <p class="section__label reveal" data-i18n="contextLabel">01 — Context</p>
-      <h2 class="section__title reveal" data-i18n="contextTitle">왜 지금, 공급망 생존 전략인가?</h2>
-      <p class="section__lead reveal" data-i18n="contextLead">
-        2025년, 트럼프 행정부의 상호관세 정책은 지난 30년간의 글로벌 자유무역 질서를 정면으로 흔들고 있다.
-        한국 기업의 수출 중 절반 이상이 미국·중국 두 시장에 묶여 있는 지금, 단순한 "탈중국"은 답이 아니다.
-        문제는 더 복잡하고, 답은 더 정교해야 한다.
-      </p>
-      <div class="kpi-grid reveal">
-        <div class="kpi-card">
-          <span class="kpi-card__number" data-target="57">0</span><span class="kpi-card__suffix">%</span>
-          <p class="kpi-card__label" data-i18n="kpi1Label">韓 수출의 미·중 합산 의존도</p>
+      <div class="split">
+        <div>
+          <h3 class="reveal">☕ 커피박 폐기 문제</h3>
+          <div class="card-grid reveal" style="grid-template-columns: 1fr 1fr;">
+            <div class="card stat-callout">
+              <div class="number"><span data-counter="0.2" data-suffix="%" data-decimals="1">0%</span></div>
+              <div class="label">커피 추출 시 실제 섭취량</div>
+              <span class="source">출처: 환경 관련 보도 종합</span>
+            </div>
+            <div class="card stat-callout">
+              <div class="number"><span data-counter="99.8" data-suffix="%" data-decimals="1">0%</span></div>
+              <div class="label">커피박으로 폐기</div>
+              <span class="source">출처: 환경 관련 보도 종합</span>
+            </div>
+            <div class="card stat-callout">
+              <div class="number">연 <span data-counter="15" data-suffix="만 톤">0</span></div>
+              <div class="label">국내 커피박 발생량 (2019)</div>
+              <span class="source">출처: 환경부 추정</span>
+            </div>
+            <div class="card stat-callout">
+              <div class="number"><span data-counter="353" data-suffix="잔/년">0</span></div>
+              <div class="label">한국 1인당 커피 소비 (세계 평균 2.7배)</div>
+              <span class="source">출처: 현대경제연구원</span>
+            </div>
+          </div>
+          <div class="highlight-box reveal">
+            대부분 생활폐기물로 소각·매립 → 탄소 배출. 2022년 환경부, 커피박을 순환자원으로 인정·재활용 간소화 추진.
+            <span class="source">출처: 환경부</span>
+          </div>
         </div>
-        <div class="kpi-card">
-          <span class="kpi-card__number" data-target="25">0</span><span class="kpi-card__suffix">%</span>
-          <p class="kpi-card__label" data-i18n="kpi2Label">한국산 자동차 신규 관세율</p>
-        </div>
-        <div class="kpi-card">
-          <span class="kpi-card__number" data-target="145">0</span><span class="kpi-card__suffix">%</span>
-          <p class="kpi-card__label" data-i18n="kpi3Label">대중국 누적 실효 관세율</p>
-        </div>
-      </div>
-      <p class="section__source reveal" data-i18n="contextSource">출처: 한국무역협회(KITA), USTR, 2025</p>
-    </div>
-  </section>
 
-  <!-- ============ SECTION 3: CONCEPT ============ -->
-  <section class="section section--dark" id="concept">
-    <div class="container">
-      <p class="section__label section__label--blue reveal" data-i18n="conceptLabel">02 — Concept</p>
-      <h2 class="section__title section__title--white reveal" data-i18n="conceptTitle">'상호관세'는 단순한 보복관세가 아니다</h2>
-      <p class="section__subtitle section__subtitle--white reveal" data-i18n="conceptSubtitle">미국 시장에 들어오려면 높은 '통행세'를 내라.</p>
-
-      <div class="quote-card reveal">
-        <p class="quote-card__label">THE NEW RULE</p>
-        <blockquote class="quote-card__text" data-i18n="quoteText">"상대국이 우리에게 매기는 만큼<br>우리도 똑같이 매긴다."</blockquote>
-        <p class="quote-card__source" data-i18n="quoteSource">— 美 행정명령 14257호, 2025.04</p>
-      </div>
-
-      <div class="section__body section__body--white reveal">
-        <p data-i18n="conceptBody1">트럼프 행정부의 상호관세(Reciprocal Tariff)는 단순한 보복 관세가 아니다. "상대국이 우리 상품에 부과하는 만큼 우리도 부과한다"는 논리로, 수십 년간 이어온 글로벌 자유무역 체제를 정면으로 흔드는 구조적 전환점이다.</p>
-        <p data-i18n="conceptBody2">즉, 이제 '어디서 만드느냐'가 '얼마나 잘 만드느냐'만큼 중요한 경영 변수가 됐다. 생산 입지 전략 자체가 곧 관세 전략이며, 공급망 전체의 재설계가 불가피하다.</p>
-      </div>
-
-      <!-- Bar Chart -->
-      <div class="chart-container reveal">
-        <h3 class="chart-container__title" data-i18n="chartTitle">주요국 대미 수출 관세율 비교</h3>
-        <p class="chart-container__sub" data-i18n="chartSub">2025년 기준, 단위: %</p>
-        <div class="bar-chart" id="tariffChart"></div>
-        <p class="chart-container__source" data-i18n="chartSource">출처: USTR, 2025.04 행정명령 기준</p>
-      </div>
-
-      <!-- Steps -->
-      <div class="steps-grid reveal">
-        <div class="step-card">
-          <span class="step-card__num">①</span>
-          <p class="step-card__title" data-i18n="step1Title">관세율 산정</p>
-          <p class="step-card__desc" data-i18n="step1Desc">무역 흑자 / 수입액으로 상호관세율 자동 산출</p>
-        </div>
-        <div class="step-card">
-          <span class="step-card__num">②</span>
-          <p class="step-card__title" data-i18n="step2Title">원산지 소급 추적</p>
-          <p class="step-card__desc" data-i18n="step2Desc">완제품 + 핵심 부품·원자재까지 — 중국산 우회 차단</p>
-        </div>
-        <div class="step-card">
-          <span class="step-card__num">③</span>
-          <p class="step-card__title" data-i18n="step3Title">섹션 232·301 연계</p>
-          <p class="step-card__desc" data-i18n="step3Desc">철강·반도체·배터리는 안보 조항 중복 적용</p>
+        <div>
+          <h3 class="reveal">🕯️ 성장하는 캔들 시장</h3>
+          <div class="card stat-callout reveal">
+            <div class="number"><span data-counter="2700" data-suffix="억 원">0</span></div>
+            <div class="label">2024년 국내 캔들 시장 (약 2억 달러, 추정)</div>
+            <span class="source">출처: IMARC Group (추정, 환율·시점에 따라 변동)</span>
+          </div>
+          <div class="card stat-callout mt-2 reveal">
+            <div class="number" style="color:var(--gold);">→ <span data-counter="4200" data-suffix="억 원">0</span></div>
+            <div class="label">2033년 전망 (연평균 약 5.0% 성장, 추정)</div>
+            <span class="source">출처: IMARC Group (추정, 환율·시점에 따라 변동)</span>
+          </div>
+          <div class="card mt-2 reveal">
+            <h4 style="color: var(--gold); margin-bottom:8px;">성장 동력</h4>
+            <ul style="font-size:0.8125rem; padding-left:16px; color: var(--text-secondary); line-height:1.8;">
+              <li>웰빙·아로마테라피</li>
+              <li>홈데코·선물 수요</li>
+              <li>가치소비·ESG 트렌드</li>
+              <li>홈카페 문화</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
-  <!-- ============ SECTION 4: SUCCESS ============ -->
-  <section class="section section--white" id="success">
-    <div class="container">
-      <p class="section__label section__label--blue reveal" data-i18n="successLabel">03 — Success Case · 현대자동차그룹</p>
-      <h2 class="section__title reveal" data-i18n="successTitle">위기 신호를 '투자 결정'으로 바꾼 속도</h2>
-      <p class="section__subtitle reveal" data-i18n="successSubtitle">현대차의 선제적 美 현지 생산 — HMGMA로 관세 정면 돌파</p>
+  <!-- ===== 3. 솔루션 & 제품 ===== -->
+  <div class="band-cream">
+    <section id="solution">
+      <h2 class="reveal">솔루션 & 제품</h2>
+      <p class="section-subtitle reveal">소이왁스 베이스 + 커피박은 향·텍스처·데코로 활용 (연료가 아닌 부재료)</p>
 
-      <div class="section__body reveal">
-        <p data-i18n="successBody1">현대자동차그룹은 트럼프 행정부 출범 이전부터 미국 조지아주 브라이언 카운티에 메타플랜트(HMGMA) 건설을 진행해 왔다. 2025년 본격 가동에 들어간 이 공장은 전기차·하이브리드를 포함한 연간 30만 대 생산 능력을 갖추고 있으며, 'Made in USA' 조건을 충족함으로써 25% 자동차 관세 압박을 정면으로 우회한다.</p>
-        <p data-i18n="successBody2">동시에 IRA(인플레이션 감축법)의 전기차 보조금 적격성을 확보해, 관세 회피와 보조금 수혜를 모두 잡는 이중 효과를 거두고 있다.</p>
-      </div>
-
-      <div class="kpi-grid reveal">
-        <div class="kpi-card">
-          <span class="kpi-card__value" data-i18n="successKpi1Value">76억 달러</span>
-          <p class="kpi-card__sub" data-i18n="successKpi1Sub">약 10조 원</p>
-          <p class="kpi-card__label" data-i18n="successKpi1Label">총 투자액</p>
+      <div class="card-grid-3">
+        <div class="card product-card reveal reveal-delay-1">
+          <div class="product-name">☕ 시그니처 (커피향)</div>
+          <div class="product-desc">소이왁스 + 건조 커피박 배합. 은은한 카페 향과 다공성 텍스처. 탈취 기능 부여.</div>
+          <div class="img-placeholder mt-2">제품 이미지 자리</div>
         </div>
-        <div class="kpi-card">
-          <span class="kpi-card__value" data-i18n="successKpi2Value">30만 대</span>
-          <p class="kpi-card__label" data-i18n="successKpi2Label">연간 생산능력</p>
+        <div class="card product-card reveal reveal-delay-2">
+          <div class="product-name">🍃 여름 방충 에디션</div>
+          <div class="product-desc">시트로넬라·레몬그라스 천연 오일 배합. "벌레가 싫어하는 향" 수준의 기피 효과. (살충 효과 아님)</div>
+          <div class="img-placeholder mt-2">제품 이미지 자리</div>
         </div>
-        <div class="kpi-card">
-          <span class="kpi-card__value" data-i18n="successKpi3Value">약 8,500명</span>
-          <p class="kpi-card__label" data-i18n="successKpi3Label">직접 고용</p>
+        <div class="card product-card reveal reveal-delay-3">
+          <div class="product-name">🏪 카페 PB</div>
+          <div class="product-desc">제휴 카페의 실제 커피박 사용. 카페 자체 브랜드로 납품. B2B2C 모델.</div>
+          <div class="img-placeholder mt-2">제품 이미지 자리</div>
         </div>
       </div>
 
-      <!-- Timeline -->
+      <div class="highlight-box reveal mt-3">
+        <strong>핵심 포인트:</strong> 커피박은 연료(왁스)가 아니라 향·텍스처·장식 부재료로 활용됩니다. 베이스는 안전하고 잘 타는 소이왁스.
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== 4. 커피박의 효과 ===== -->
+  <div class="band-white">
+    <section id="effects">
+      <h2 class="reveal">커피박의 효과 (근거)</h2>
+      <p class="section-subtitle reveal">과학적 원리와 한계를 명확히 구분합니다</p>
+
+      <div class="card-grid-5">
+        <div class="card icon-card reveal reveal-delay-1">
+          <div class="icon">🫧</div>
+          <h4>탈취</h4>
+          <p>다공성(셀룰로오스 그물망) 구조가 냄새 분자 흡착. 숯과 동일 원리. 활성탄 대비 약 60~75% 수준이나 원료비 0원.</p>
+          <span class="source">출처: 생활정보 보도 종합</span>
+        </div>
+        <div class="card icon-card reveal reveal-delay-2">
+          <div class="icon">☕</div>
+          <h4>카페 향</h4>
+          <p>커피 고유의 은은한 향이 공간에 카페 감성을 부여.</p>
+          <span class="source">출처: 제품 특성</span>
+        </div>
+        <div class="card icon-card reveal reveal-delay-3">
+          <div class="icon">♻️</div>
+          <h4>친환경·탄소 저감</h4>
+          <p>소각·매립 대신 재활용 → 탄소 배출 감소, 순환경제 기여.</p>
+          <span class="source">출처: 환경부</span>
+        </div>
+        <div class="card icon-card reveal reveal-delay-4">
+          <div class="icon">🌱</div>
+          <h4>끝까지 순환 (거름)</h4>
+          <p>질소·칼륨·마그네슘 풍부, 중금속 없음 → 화분 거름으로 재활용 가능.</p>
+          <span class="source">출처: 생활정보 보도 종합</span>
+        </div>
+        <div class="card icon-card reveal reveal-delay-4">
+          <div class="icon">🍃</div>
+          <h4>벌레 기피 향<br>(여름 에디션)</h4>
+          <p>커피향 단독 근거 약함. 시트로넬라·레몬그라스 오일을 더한 한정 에디션.</p>
+          <span class="source">출처: 생활정보 보도 종합 (살충 효과 아님)</span>
+        </div>
+      </div>
+
+      <div class="highlight-box reveal mt-3">
+        <strong>⚠️ 품질 핵심 리스크:</strong> 수분 잔류 시 24시간 내 곰팡이 발생 확률 약 70% → 수분 10% 이하 저온 건조 필수.
+        <span class="source">출처: 생활정보 보도 종합</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== 5. 시장 분석 ===== -->
+  <div class="band-cream">
+    <section id="market">
+      <h2 class="reveal">시장 분석</h2>
+      <p class="section-subtitle reveal">국내 캔들 시장은 연평균 약 5.0%씩 성장 중 (추정)</p>
+
+      <div class="split">
+        <div class="reveal">
+          <h3>캔들 시장 규모 성장 전망</h3>
+          <div class="chart-container">
+            <canvas id="chart-candle-market"></canvas>
+          </div>
+          <span class="source" style="display:block; text-align:center;">출처: IMARC Group (추정, 환율·시점에 따라 변동)</span>
+        </div>
+        <div>
+          <h3 class="reveal">TAM — SAM — SOM</h3>
+          <div class="card mt-2 reveal">
+            <table class="data-table">
+              <thead><tr><th>구분</th><th>규모</th><th>정의</th></tr></thead>
+              <tbody>
+                <tr><td><strong>TAM</strong></td><td>약 2,700억 원</td><td>국내 전체 캔들 시장 (2024, 추정)</td></tr>
+                <tr><td><strong>SAM</strong></td><td>약 270~540억 원</td><td>친환경·프리미엄 세그먼트 (TAM 10~20%, 가정)</td></tr>
+                <tr><td><strong>SOM</strong></td><td>약 1~3억 원</td><td>1차년도 펀딩+자사몰 목표 (가정)</td></tr>
+              </tbody>
+            </table>
+            <span class="source">TAM: IMARC Group (추정) / SAM·SOM: 팀 가정</span>
+          </div>
+
+          <h3 class="mt-3 reveal">성장 동력 & 정책 순풍</h3>
+          <div class="card mt-1 reveal">
+            <ul style="font-size:0.8125rem; padding-left:16px; color:var(--text-secondary); line-height:1.8;">
+              <li>웰빙·아로마테라피 관심 증가</li>
+              <li>홈데코·선물 수요 확대</li>
+              <li>가치소비·ESG → 친환경 제품 선호</li>
+              <li>홈카페 문화 → 커피+캔들 시너지</li>
+              <li><strong>2022년 환경부:</strong> 커피박 순환자원 인정</li>
+            </ul>
+            <span class="source">출처: IMARC Group, 환경부</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== 6. 경쟁사 분석 ===== -->
+  <div class="band-white">
+    <section id="competition">
+      <h2 class="reveal">경쟁사 분석</h2>
+      <p class="section-subtitle reveal">경쟁사 틈새: 로컬 관계성·PB 모델 부재 → 우리의 진입점</p>
+
+      <h3 class="reveal">비교표</h3>
+      <div class="reveal" style="overflow-x:auto;">
+        <table class="data-table">
+          <thead>
+            <tr><th>경쟁사</th><th>유형</th><th>가격대</th><th>강점</th><th>약점</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>커피어게인</strong></td><td>커피박 소이캔들</td><td>7,500~11,000원</td><td>와디즈 펀딩 경험</td><td>로컬 PB·방충 라인 없음</td></tr>
+            <tr><td><strong>커피점토 B2B</strong></td><td>커피박 소재·화분</td><td>B2B</td><td>소재 활용</td><td>소비자 접점 약함</td></tr>
+            <tr><td><strong>일반 향초 브랜드</strong></td><td>향초·디자인</td><td>15,000~40,000원</td><td>향·디자인 강점</td><td>스토리·친환경 약함</td></tr>
+            <tr class="highlight-row"><td><strong>RE:PIUM (우리)</strong></td><td>로컬 순환+PB+탈취+여름 라인</td><td>22,000원</td><td>로컬 관계성·PB 모델·차별화</td><td>신규 브랜드 인지도</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="mt-4 reveal">포지셔닝 맵</h3>
+      <p class="reveal" style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:var(--space-3);">가로축: 가격대 (만 원) / 세로축: 차별성·로컬 관계성 점수 (10점 만점)</p>
+      <div class="chart-container reveal" style="max-width:560px; margin:0 auto;">
+        <canvas id="chart-positioning"></canvas>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== 7. BMC ===== -->
+  <div class="band-cream">
+    <section id="bmc">
+      <h2 class="reveal">비즈니스 모델 캔버스 (BMC)</h2>
+      <p class="section-subtitle reveal">9블록으로 보는 사업 구조</p>
+
+      <div class="bmc-grid reveal">
+        <div class="bmc-cell bmc-partners"><h4>핵심 파트너</h4><ul><li>팀 카페 + 제휴 카페</li><li>커피박 수거 네트워크/지자체</li><li>왁스·향료·패키지 공급사</li><li>펀딩 플랫폼</li><li>커피점토 소재사</li></ul></div>
+        <div class="bmc-cell bmc-activities"><h4>핵심 활동</h4><ul><li>커피박 수거·건조</li><li>캔들 제조</li><li>펀딩·마케팅</li><li>제휴 카페 관리</li></ul></div>
+        <div class="bmc-cell bmc-resources"><h4>핵심 자원</h4><ul><li>팀 카페의 커피박 공급</li><li>건조·조향 노하우</li><li>브랜드 스토리</li><li>디자인</li></ul></div>
+        <div class="bmc-cell bmc-value"><h4>가치 제안</h4><ul><li>버려질 커피박 → 향+탈취+친환경+로컬 순환</li><li>"카페 감성을 집·사무실로"</li><li>여름 방충 라인</li></ul></div>
+        <div class="bmc-cell bmc-relationships"><h4>고객 관계</h4><ul><li>펀딩 서포터 커뮤니티</li><li>순환 프로그램 (거름·리필)</li><li>정기구독</li></ul></div>
+        <div class="bmc-cell bmc-channels"><h4>채널</h4><ul><li>와디즈/텀블벅 펀딩</li><li>자사몰·스마트스토어</li><li>제휴 카페 입점</li><li>인스타·숏폼</li></ul></div>
+        <div class="bmc-cell bmc-segments"><h4>고객 세그먼트</h4><ul><li>홈카페·오피스 2030</li><li>친환경 선물 구매자</li><li>제휴 카페 (B2B2C)</li><li>기업 ESG 선물</li></ul></div>
+        <div class="bmc-cell bmc-cost"><h4>비용 구조</h4><ul style="display:flex; flex-wrap:wrap; gap:8px;"><li>재료비</li><li>인건비</li><li>펀딩 수수료</li><li>마케팅/촬영</li><li>패키지</li><li>초기 장비</li></ul></div>
+        <div class="bmc-cell bmc-revenue"><h4>수익원</h4><ul style="display:flex; flex-wrap:wrap; gap:8px;"><li>제품 판매·선물세트</li><li>카페 PB 공급</li><li>기업 ESG 굿즈</li><li>DIY 클래스</li></ul></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== 8. 로드맵 ===== -->
+  <div class="band-white">
+    <section id="roadmap">
+      <h2 class="reveal">사업 전략 / 로드맵</h2>
+      <p class="section-subtitle reveal">3단계 성장 전략: 검증 → 확장 → 스케일업</p>
+
       <div class="timeline reveal">
-        <p class="timeline__title" data-i18n="timelineTitle">타임라인</p>
-        <div class="timeline__item"><span class="timeline__date">2022.10</span><span class="timeline__event" data-i18n="timeline1">착공</span></div>
-        <div class="timeline__item"><span class="timeline__date">2024.10</span><span class="timeline__event" data-i18n="timeline2">시험 가동 시작</span></div>
-        <div class="timeline__item"><span class="timeline__date">2025 상반기</span><span class="timeline__event" data-i18n="timeline3">본격 양산</span></div>
-        <div class="timeline__item"><span class="timeline__date">2026~</span><span class="timeline__event" data-i18n="timeline4">2단계 확장 검토</span></div>
+        <div class="timeline-item">
+          <span class="phase-label">Phase 1 · 0~6개월</span>
+          <h4>수요 검증</h4>
+          <ul><li>제품 안전 신고 (KTR 시험 → 환경산업기술원 신고)</li><li>다채널 판매 개시 (자사몰·카페·펀딩)</li><li>시그니처 라인 출시</li><li>팀 카페 파일럿 운영</li></ul>
+        </div>
+        <div class="timeline-item">
+          <span class="phase-label">Phase 2 · 6~18개월</span>
+          <h4>채널 확장</h4>
+          <ul><li>자사몰·스마트스토어 상시판매</li><li>제휴 카페 5~10곳 입점</li><li>여름 방충 에디션 출시</li></ul>
+        </div>
+        <div class="timeline-item">
+          <span class="phase-label">Phase 3 · 18개월~</span>
+          <h4>스케일업</h4>
+          <ul><li>카페 PB 제조 확대</li><li>기업 ESG 굿즈 B2B</li><li>라인 확장 (디퓨저·스크럽)</li></ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== 9. 제조 공정 ===== -->
+  <div class="band-cream">
+    <section id="manufacturing">
+      <h2 class="reveal">제조 공정 & 필요 설비</h2>
+      <p class="section-subtitle reveal">9단계 공정 — 핵심 노하우는 건조 표준화 (곰팡이 70% 리스크 관리)</p>
+
+      <div class="mfg-flow reveal">
+        <div class="mfg-step"><div class="step-num">1</div><div class="step-name">수거</div><div class="step-desc">제휴 카페</div></div>
+        <div class="mfg-arrow">→</div>
+        <div class="mfg-step"><div class="step-num">2</div><div class="step-name">저온 건조</div><div class="step-desc">수분 10%↓</div></div>
+        <div class="mfg-arrow">→</div>
+        <div class="mfg-step"><div class="step-num">3</div><div class="step-name">분쇄·체질</div><div class="step-desc">균일 입자</div></div>
+        <div class="mfg-arrow">→</div>
+        <div class="mfg-step"><div class="step-num">4</div><div class="step-name">왁스 용해</div><div class="step-desc">적정 온도</div></div>
+        <div class="mfg-arrow">→</div>
+        <div class="mfg-step"><div class="step-num">5</div><div class="step-name">배합</div><div class="step-desc">향료·커피박</div></div>
+        <div class="mfg-arrow">→</div>
+        <div class="mfg-step"><div class="step-num">6</div><div class="step-name">심지 고정</div><div class="step-desc">센터링</div></div>
+        <div class="mfg-arrow">→</div>
+        <div class="mfg-step"><div class="step-num">7</div><div class="step-name">붓기</div><div class="step-desc">왁스 주입</div></div>
+        <div class="mfg-arrow">→</div>
+        <div class="mfg-step"><div class="step-num">8</div><div class="step-name">큐어링</div><div class="step-desc">24~48h</div></div>
+        <div class="mfg-arrow">→</div>
+        <div class="mfg-step"><div class="step-num">9</div><div class="step-name">QC·패키지</div><div class="step-desc">검수·포장</div></div>
       </div>
 
-      <!-- Insight -->
-      <div class="insight-box insight-box--blue reveal">
-        <p class="insight-box__icon" data-i18n="successInsightIcon">💡 시사점</p>
-        <p class="insight-box__text" data-i18n="successInsightText">정책 변화보다 빠른 제조 입지 결정이 핵심이었다. "관세가 시행될 때 짓기 시작하면 늦다"는 시간 싸움.</p>
-        <p class="insight-box__source" data-i18n="successInsightSource">출처: 현대차그룹 IR 자료, 美 조지아주 경제개발청, 2025</p>
+      <div class="split mt-4">
+        <div class="highlight-box reveal">
+          <strong>핵심 노하우 — 건조 프로토콜:</strong><br>
+          저온 식품건조기 60℃ 내외, 0.5~1cm로 얇게 펴 4~8시간, 수분 10% 이하(손에서 부서지는 질감)까지.<br>
+          <strong>당일 수거·당일 건조, 건조 후 밀폐 보관.</strong> 수분 잔류 시 24시간 내 곰팡이 ~70%.
+          <span class="source">출처: 생활정보 보도 종합</span>
+        </div>
+        <div class="highlight-box reveal">
+          <strong>생산 시뮬레이션:</strong> 1배치 50개 / 1일 1배치 × 20일 = 월 약 1,000개.<br>
+          팀 카페 일 150잔 → 젖은 커피박 약 3kg/일 = 1배치분 → "공급 = 생산능력" 맞물림.<br>
+          <strong>1차 펀딩 500개는 약 10일 생산.</strong>
+          <span class="source">가정·예시</span>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
-  <!-- ============ SECTION 5: RISK ============ -->
-  <section class="section section--parchment" id="risk">
-    <div class="container">
-      <p class="section__label section__label--red reveal" data-i18n="riskLabel">04 — Risk Case · 배터리·소재 산업</p>
-      <h2 class="section__title reveal" data-i18n="riskTitle">완제품은 美 현지, 그러나 원자재가 발목을 잡다</h2>
-      <p class="section__subtitle reveal" data-i18n="riskSubtitle">리튬·전구체의 특정국 의존도가 IRA 원산지 요건을 충족하지 못해 보조금 제외 위기.</p>
+  <!-- ===== 제품 레시피 & 자재 소요 ===== -->
+  <div class="band-white">
+    <section id="recipe">
+      <h2 class="reveal">제품 레시피 & 자재 소요</h2>
+      <p class="section-subtitle reveal">200ml 시그니처 캔들 1개 기준 — 내용물 약 162g (가정·예시)</p>
 
-      <div class="section__body reveal">
-        <p data-i18n="riskBody1">한국 배터리 3사(LG에너지솔루션·삼성SDI·SK온)는 모두 미국 내 합작 공장을 운영 중이다. 그러나 정작 배터리의 핵심 원자재 — 수산화리튬, 전구체, 양극재 — 의 중국 의존도는 여전히 70~80% 수준이다.</p>
-        <p data-i18n="riskBody2">미국 재무부의 IRA "Foreign Entity of Concern(FEOC)" 조항은 2025년부터 중국산 핵심 광물의 비율을 엄격히 제한한다. 한국 기업들은 완제품 공장은 미국에 옮겼지만, 상류 공급망(upstream)을 단기간에 다변화하지 못해 IRA 보조금 적격에서 제외될 가능성에 직면해 있다.</p>
+      <div class="split">
+        <div class="reveal">
+          <h3>레시피 (1개)</h3>
+          <table class="data-table">
+            <thead><tr><th>재료</th><th>투입량</th><th>비고</th></tr></thead>
+            <tbody>
+              <tr><td>소이왁스</td><td>150g</td><td>베이스</td></tr>
+              <tr><td>합성향료</td><td>12g</td><td>약 8%</td></tr>
+              <tr><td>건조 커피박</td><td>18g</td><td>왁스 혼합 8g + 토핑 10g</td></tr>
+              <tr><td>면심지</td><td>1개</td><td></td></tr>
+              <tr><td>용기</td><td>1개</td><td></td></tr>
+              <tr class="highlight-row"><td><strong>내용물 합계</strong></td><td><strong>약 162g</strong></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="reveal">
+          <h3>자재 소요 표</h3>
+          <table class="data-table">
+            <thead><tr><th>자재</th><th>1개</th><th>1배치 (50개)</th><th>1차 펀딩 (500개)</th></tr></thead>
+            <tbody>
+              <tr><td>소이왁스</td><td>150g</td><td>7.5kg</td><td>75kg</td></tr>
+              <tr><td>합성향료</td><td>12g</td><td>0.6kg</td><td>6kg</td></tr>
+              <tr><td>건조 커피박</td><td>18g</td><td>0.9kg</td><td>9kg</td></tr>
+              <tr><td>젖은 커피박 (역산)</td><td>약 60g</td><td>약 3kg</td><td>약 30kg</td></tr>
+              <tr class="highlight-row"><td>생산 소요</td><td>—</td><td>1일</td><td>약 10일</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <!-- Donut Chart -->
-      <div class="chart-container chart-container--light reveal">
-        <h3 class="chart-container__title chart-container__title--dark" data-i18n="donutTitle">韓 배터리 핵심 원자재 원산지 비중</h3>
-        <p class="chart-container__sub chart-container__sub--dark" data-i18n="donutSub">2024년 기준</p>
-        <div class="donut-wrapper">
-          <svg class="donut-chart" viewBox="0 0 200 200" id="donutChart"></svg>
-          <div class="donut-center">
-            <span class="donut-center__value">78%</span>
-            <span class="donut-center__label" data-i18n="donutCenter">중국 의존도</span>
+      <div class="highlight-box reveal mt-3">
+        <strong>환경 임팩트:</strong> 캔들 1개 ≈ 커피 약 2.5~3잔분 커피박(건조 18g) 재활용 / 1차 펀딩 500개 ≈ 건조 커피박 약 9kg (젖은 약 30kg) 재활용.
+        <span class="source">가정·예시</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== 10. 원가 구조 ===== -->
+  <div class="band-white">
+    <section id="cost">
+      <h2 class="reveal">원가 구조</h2>
+      <p class="section-subtitle reveal">캔들 1개 (200ml) 기준 — 공헌이익률 약 58%</p>
+
+      <div class="split">
+        <div class="reveal">
+          <h3>① 단위 원가표</h3>
+          <table class="data-table">
+            <thead><tr><th>항목</th><th>금액</th></tr></thead>
+            <tbody>
+              <tr><td>소이왁스 150g</td><td>975원</td></tr>
+              <tr><td>합성향료 12g</td><td>3,080원</td></tr>
+              <tr><td>용기 1개</td><td>1,000원</td></tr>
+              <tr><td>면심지+심지탭+고정재</td><td>150원</td></tr>
+              <tr><td>라벨·패키지</td><td>1,500원</td></tr>
+              <tr><td>커피박</td><td><strong style="color:var(--green);">0원</strong></td></tr>
+              <tr class="highlight-row"><td>직접재료비 합계</td><td>6,705원</td></tr>
+              <tr><td>변동 포장·물류</td><td>800원</td></tr>
+              <tr><td>플랫폼 수수료 (약 8%)</td><td>1,760원</td></tr>
+              <tr class="highlight-row"><td>단위 변동비 합계</td><td>9,265원</td></tr>
+              <tr><td><strong>판매가</strong></td><td><strong>22,000원</strong></td></tr>
+              <tr class="highlight-row"><td><strong>공헌이익</strong></td><td><strong>12,735원 (약 58%)</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="reveal">
+          <h3>② 예산 (6개월, 보증금 별도)</h3>
+          <table class="data-table">
+            <thead><tr><th>구분</th><th>항목</th><th>금액</th></tr></thead>
+            <tbody>
+              <tr><td rowspan="3"><strong>설립</strong></td><td><a href="https://smartstore.naver.com/pnet/products/8036947029?NaPm=ct%3Dmq3x4i9k%7Cci%3D0b07498878d0f6fdb8573317ffac6036a9926d33%7Ctr%3Dslsl%7Csn%3D2406158%7Chk%3Df28d7adbbf9719d0df85037c81e6da9d3ac85911&nl-au=df072932c0e14908910c882d4e63671d&nl-query=식품건조기" target="_blank" rel="noopener" style="color:var(--accent-brown); text-decoration:underline; text-underline-offset:3px;">식품건조기</a></td><td>20만 원</td></tr>
+              <tr><td>멜팅도구·온도계·저울</td><td>15만 원</td></tr>
+              <tr><td>몰드·초기 용기</td><td>25만 원</td></tr>
+              <tr><td>제품 안전 신고·시험비</td><td>40만 원</td></tr>
+              <tr class="highlight-row"><td colspan="2">설립자금 소계</td><td><strong>100만 원</strong></td></tr>
+              <tr><td rowspan="5"><strong>운영<br>(6개월)</strong></td><td>인건비</td><td>0원 *</td></tr>
+              <tr><td>임차료 (월 50만×6)</td><td>300만 원</td></tr>
+              <tr><td>공과금 (월 8만×6)</td><td>48만 원</td></tr>
+              <tr><td>마케팅비</td><td>180만 원</td></tr>
+              <tr><td>소모품·예비</td><td>60만 원</td></tr>
+              <tr class="highlight-row"><td colspan="2">운영 소계</td><td><strong>588만 원</strong></td></tr>
+              <tr class="highlight-row"><td colspan="2"><strong>합계</strong></td><td><strong>약 688만 원</strong></td></tr>
+            </tbody>
+          </table>
+          <span class="source">* 인건비 0: 초기 팀 직접 제작. 보증금은 회수 자산 → 별도. 가정·예시.</span>
+        </div>
+      </div>
+
+      <!-- 도넛 차트: 아래 전폭 -->
+      <h3 class="mt-4 reveal">판매가 분해 (22,000원)</h3>
+      <div class="chart-container reveal" style="max-width:400px;">
+        <canvas id="chart-donut"></canvas>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== 11. BEP ===== -->
+  <div class="band-cream">
+    <section id="bep">
+      <h2 class="reveal">손익분기점 (BEP) — 월 단위</h2>
+      <p class="section-subtitle reveal">상시 판매만으로 월 46개면 운영비 회수 — 생산능력 대비 가동률 약 5%</p>
+
+      <div class="callout-row reveal">
+        <div class="card stat-callout">
+          <div class="number">월 <span data-counter="46" data-suffix="개">0</span></div>
+          <div class="label">월 BEP (흑자 전환점)</div>
+        </div>
+        <div class="card stat-callout">
+          <div class="number">≈ <span data-counter="101" data-suffix="만 원">0</span></div>
+          <div class="label">월 BEP 매출</div>
+        </div>
+        <div class="card stat-callout">
+          <div class="number"><span data-counter="12735" data-suffix="원">0</span></div>
+          <div class="label">단위 공헌이익 (약 58%)</div>
+        </div>
+        <div class="card stat-callout">
+          <div class="number"><span data-counter="5" data-suffix="%">0</span></div>
+          <div class="label">BEP 가동률<br>(월 1,000개 대비)</div>
+        </div>
+      </div>
+
+      <div class="highlight-box reveal">
+        <strong>산출:</strong> 월 고정비 58만 원(임차 50만 + 공과금 8만, 인건비 0·마케팅 일회성 제외) ÷ 공헌이익 12,735원 ≈ <strong>약 46개/월</strong>
+      </div>
+
+      <!-- 시나리오 표 -->
+      <h3 class="mt-3 reveal">월 판매 시나리오</h3>
+      <table class="data-table reveal">
+        <thead><tr><th>월 판매</th><th>월 공헌이익</th><th>월 영업이익</th><th>초기투자(240만) 회수</th></tr></thead>
+        <tbody>
+          <tr><td>46개 (BEP)</td><td>약 59만</td><td>± 0</td><td>—</td></tr>
+          <tr><td>100개</td><td>약 127만</td><td>+69만</td><td>약 3.5개월</td></tr>
+          <tr class="highlight-row"><td>150개</td><td>약 191만</td><td>+133만</td><td>약 1.8개월</td></tr>
+        </tbody>
+      </table>
+      <span class="source">초기투자 = 시설60만 + 마케팅180만 = 약 240만 원 (일회성). 모든 수치는 가정·예시.</span>
+
+      <h3 class="mt-3 reveal">월 BEP 차트 (월 매출 vs 월 총비용)</h3>
+      <div class="chart-container reveal" style="max-width:700px;">
+        <canvas id="chart-bep"></canvas>
+      </div>
+      <p class="reveal" style="text-align:center; font-size:0.75rem; color:var(--text-secondary);">교차점 ≈ 약 46개/월 — 적은 판매로도 흑자 전환 가능한 구조</p>
+
+      <div class="highlight-box reveal mt-2">
+        <strong>전략적 의미:</strong> 생산능력 월 1,000개 대비 BEP 46개 = 가동률 약 5%만으로 흑자. 자사몰·카페·B2B 다채널 합산으로 달성하며, 펀딩은 초기 물량을 앞당기는 역할.
+        <span class="source">모든 수치는 가정·예시</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== 12. 마케팅 ===== -->
+  <div class="band-white">
+    <section id="marketing">
+      <h2 class="reveal">판매 & 마케팅 전략</h2>
+      <p class="section-subtitle reveal">다채널 매출 구조 — 펀딩은 신제품 런칭용 채널 중 하나</p>
+
+      <div class="funnel">
+        <div class="funnel-stage reveal reveal-delay-1">
+          <h4>🛒 자사몰·스마트스토어</h4>
+          <ul><li>상시 판매 (온라인 핵심)</li><li>정기구독·선물세트</li><li>숏폼/UGC·인스타 유입</li></ul>
+        </div>
+        <div class="funnel-stage reveal reveal-delay-2">
+          <h4>☕ 팀 카페·제휴 카페 입점</h4>
+          <ul><li>오프라인 체험·판매</li><li>카페 PB 제조 납품</li><li>실물 접점 → 신뢰도 ↑</li></ul>
+        </div>
+        <div class="funnel-stage reveal reveal-delay-3">
+          <h4>🏢 B2B · 크라우드펀딩</h4>
+          <ul><li>기업 ESG 굿즈 대량 납품</li><li>크라우드펀딩: 신제품 런칭·수요검증</li><li>단일 채널 의존 아님</li></ul>
+        </div>
+      </div>
+
+      <div class="highlight-box reveal mt-3">
+        <strong>핵심:</strong> 단일 채널 의존이 아닌 다채널 매출 구조. 펀딩은 신제품 런칭용 채널이며, 팀원이 운영하는 실제 카페가 1호 오프라인 거점으로 기능합니다. 펀딩 미달 시에도 자사몰·카페 입점·B2B로 매출이 발생합니다.
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== 13. 자금 계획 ===== -->
+  <div class="band-cream">
+    <section id="funding">
+      <h2 class="reveal">자금 계획 & 조달 전략</h2>
+      <p class="section-subtitle reveal">저자본·저설비 구조 — 6개월 총 예산 약 688만 원 (보증금 별도, 모든 수치: 가정·예시)</p>
+
+      <!-- 조달 우선순위 -->
+      <h3 class="reveal">자금 조달 우선순위</h3>
+      <table class="data-table reveal">
+        <thead><tr><th>순위</th><th>조달원</th><th>역할</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1순위</strong></td><td>자기자본 (기존 자본금)</td><td>기본 토대 / 초기 장비·자재·운영</td><td></td></tr>
+          <tr><td><strong>2순위</strong></td><td>정부 창업지원금 (조달 추진 중)</td><td>사업화 자금 / 양산·인증·BM 고도화</td><td style="font-size:0.72rem;">예: 창업중심대학 청년 예비창업자 지원 등<br>(2026년 공고 기준, 금액 미확정)</td></tr>
+          <tr><td><strong>3순위</strong></td><td>크라우드펀딩 (선주문)</td><td>초기 판매·마케팅·수요검증 채널</td><td style="font-size:0.72rem;">필수 전제 아님, 다채널 중 하나</td></tr>
+        </tbody>
+      </table>
+      <span class="source">출처: 창업진흥원 2026년 공고 기준 (조달 추진 중인 계획, 확보 아님)</span>
+
+      <div class="highlight-box reveal mt-3">
+        이 사업은 <strong>저자본·저설비 구조</strong>로 자기자본과 정부 창업지원금만으로 시작 가능합니다. 크라우드펀딩은 필수 전제가 아니라 수요검증·초기판매 채널 중 하나이며, 펀딩 미달 시에도 자사몰·카페 입점·B2B로 매출이 발생합니다.<br>
+        <span style="color:var(--gold); font-weight:600;">※ 팀은 만 29세 이하 생애최초 예비창업자로, 청년창업 지원 대상에 해당합니다.</span>
+      </div>
+
+      <div class="split mt-4">
+        <div class="reveal">
+          <h3>예산 (6개월 기준, 보증금 별도)</h3>
+          <table class="data-table">
+            <thead><tr><th>구분</th><th>항목</th><th>금액</th><th>조달</th></tr></thead>
+            <tbody>
+              <tr><td rowspan="4"><strong>설립자금</strong></td><td><a href="https://smartstore.naver.com/pnet/products/8036947029?NaPm=ct%3Dmq3x4i9k%7Cci%3D0b07498878d0f6fdb8573317ffac6036a9926d33%7Ctr%3Dslsl%7Csn%3D2406158%7Chk%3Df28d7adbbf9719d0df85037c81e6da9d3ac85911&nl-au=df072932c0e14908910c882d4e63671d&nl-query=식품건조기" target="_blank" rel="noopener" style="color:var(--accent-brown); text-decoration:underline; text-underline-offset:3px;">식품건조기</a></td><td>20만 원</td><td>자기자본</td></tr>
+              <tr><td>멜팅도구·온도계·저울</td><td>15만 원</td><td>자기자본</td></tr>
+              <tr><td>몰드·초기 용기</td><td>25만 원</td><td>자기자본</td></tr>
+              <tr><td>제품 안전 신고·시험비 (KTR 등)</td><td>40만 원</td><td>자기자본</td></tr>
+              <tr class="highlight-row"><td colspan="2">설립자금 소계</td><td><strong>100만 원</strong></td><td></td></tr>
+              <tr><td rowspan="5"><strong>운영자금<br>(6개월)</strong></td><td>인건비</td><td>0원 *</td><td>—</td></tr>
+              <tr><td>임차료 (월 50만×6)</td><td>300만 원</td><td>자기자본·매출</td></tr>
+              <tr><td>공과금·관리비 (월 8만×6) ※전기 비중</td><td>48만 원</td><td>매출</td></tr>
+              <tr><td>마케팅비 (디자인+촬영+콘텐츠)</td><td>180만 원</td><td>자기자본·매출</td></tr>
+              <tr><td>소모품·예비 (초도 자재·포장)</td><td>60만 원</td><td>자기자본</td></tr>
+              <tr class="highlight-row"><td colspan="2">운영자금 소계</td><td><strong>588만 원</strong></td><td></td></tr>
+              <tr class="highlight-row"><td colspan="2"><strong>전체 합계</strong></td><td><strong>약 688만 원</strong></td><td>자기자본+지원금+매출</td></tr>
+            </tbody>
+          </table>
+          <span class="source">* 인건비: 초기 팀 직접 제작, 수익 안정화 후 반영. 임대보증금은 회수 자산 → 비용 합계 제외 (별도 관리). 모든 수치는 가정·예시.</span>
+        </div>
+        <div>
+          <h3 class="reveal">예산 사용처</h3>
+          <div class="chart-container">
+            <canvas id="chart-funding-pie"></canvas>
+          </div>
+          <span class="source" style="display:block; text-align:center;">예산 항목별 비중 (단위: 만 원) / 가정·예시</span>
+
+          <div class="highlight-box reveal mt-3">
+            <strong>월 고정비 약 58만 원</strong> (임차 50만 + 공과금 8만) → 월 46개 판매로 흑자 전환.<br>
+            초기투자(시설60만+마케팅180만=240만)은 월 100개 판매 시 약 3.5개월 회수.
+            <span class="source">가정·예시</span>
           </div>
         </div>
-        <div class="donut-legend" id="donutLegend"></div>
-        <p class="chart-container__source chart-container__source--dark" data-i18n="donutSource">출처: 한국무역협회·산업통상자원부, 2025</p>
       </div>
+    </section>
+  </div>
 
-      <!-- Comparison -->
-      <div class="comparison-grid reveal">
-        <div class="comparison-card comparison-card--safe">
-          <p class="comparison-card__title" data-i18n="compSafeTitle">완제품 레이어 (US-localized)</p>
-          <ul class="comparison-card__list">
-            <li data-i18n="compSafe1">미국 내 합작 공장 가동中</li>
-            <li data-i18n="compSafe2">IRA 보조금 적격 (조건부)</li>
-            <li data-i18n="compSafe3">25% 관세 회피</li>
-          </ul>
-        </div>
-        <div class="comparison-card comparison-card--risk">
-          <p class="comparison-card__title" data-i18n="compRiskTitle">원자재 레이어 (China-dependent)</p>
-          <ul class="comparison-card__list">
-            <li data-i18n="compRisk1">의존도 70~80%</li>
-            <li data-i18n="compRisk2">FEOC 조항 충돌 위험</li>
-            <li data-i18n="compRisk3">보조금 제외 시 단가 ↑↑</li>
-          </ul>
-        </div>
+  <!-- ===== 14. 리스크 ===== -->
+  <div class="band-white">
+    <section id="risk">
+      <h2 class="reveal">리스크 & 대응</h2>
+      <p class="section-subtitle reveal">예상 리스크를 사전에 식별하고 대응 방안을 준비합니다</p>
+
+      <div class="reveal" style="overflow-x:auto;">
+        <table class="data-table">
+          <thead><tr><th>위험도</th><th>리스크</th><th>대응 방안</th></tr></thead>
+          <tbody>
+            <tr><td><span class="risk-badge risk-mid">중</span></td><td>신규성 부족 / 유사 제품</td><td>로컬·PB·여름방충 차별화, 카페 파일럿 진정성</td></tr>
+            <tr><td><span class="risk-badge risk-high">고</span></td><td>곰팡이·위생 문제</td><td>저온건조 표준화 (수분 10% 이하), QC 프로세스</td></tr>
+            <tr><td><span class="risk-badge risk-mid">중</span></td><td>수요 불확실</td><td>펀딩 선검증 → 재고·자본 리스크 최소화</td></tr>
+            <tr><td><span class="risk-badge risk-low">저</span></td><td>원료(커피박) 확장성</td><td>제휴카페·지자체 수거망 확대</td></tr>
+            <tr><td><span class="risk-badge risk-mid">중</span></td><td>효능표시 법규 리스크</td><td>단정·살충 표현 회피, "은은한 탈취감" 수준 한정</td></tr>
+            <tr><td><span class="risk-badge risk-low">저</span></td><td>제품 안전 신고 (생활화학제품)</td><td>판매 전 안전확인대상생활화학제품 적합확인·신고 완료 예정. 살충·살균·박멸 표현 배제.</td></tr>
+          </tbody>
+        </table>
+        <span class="source">출처: 생활화학제품 및 살생물제의 안전관리에 관한 법률 / 한국환경산업기술원·KTR</span>
       </div>
+    </section>
+  </div>
+  <!-- ===== 15. 기대효과 및 향후 방향 ===== -->
+  <div class="band-cream">
+    <section id="impact">
+      <h2 class="reveal">기대효과 및 향후 방향</h2>
+      <p class="section-subtitle reveal">환경·경제·사회 3가지 측면의 임팩트 + 성장 로드맵</p>
 
-      <!-- Insight -->
-      <div class="insight-box insight-box--red reveal">
-        <p class="insight-box__icon" data-i18n="riskInsightIcon">⚠️ 시사점</p>
-        <p class="insight-box__text" data-i18n="riskInsightText">공장 이전만으로는 부족하다. 상류 공급망(원자재 → 중간재)까지 가야 진짜 'Made in USA'다.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SECTION 6: INSIGHT ============ -->
-  <section class="section section--dark" id="insight">
-    <div class="container">
-      <p class="section__label section__label--blue reveal" data-i18n="insightLabel">05 — Key Insight</p>
-      <h2 class="section__title section__title--white reveal" data-i18n="insightTitle">답은 '탈중국'이 아니다.<br>'투트랙(Two-Track)'이다.</h2>
-      <p class="section__subtitle section__subtitle--white reveal" data-i18n="insightSubtitle">거대 시장 중국은 유지하되, 미국 규제용과 기존 시장용을 분리 운영한다.</p>
-
-      <!-- Diagram -->
-      <div class="diagram reveal">
-        <div class="diagram__hq">Korean Company HQ</div>
-        <div class="diagram__connector">
-          <div class="diagram__line"></div>
-          <div class="diagram__branches">
-            <div class="diagram__branch-line"></div>
-            <div class="diagram__dot"></div>
-            <div class="diagram__branch-line"></div>
-          </div>
+      <h3 class="reveal">기대효과</h3>
+      <div class="card-grid-3">
+        <div class="card icon-card reveal reveal-delay-1">
+          <div class="icon">♻️</div>
+          <h4>환경</h4>
+          <p>캔들 1개 ≈ 커피 약 2.5~3잔분 커피박(건조 18g) 재활용<br>1차 500개 ≈ 건조 약 9kg (젖은 약 30kg) 재활용</p>
+          <span class="source">가정·예시</span>
         </div>
-        <div class="diagram__tracks">
-          <div class="diagram__track diagram__track--a">
-            <p class="diagram__track-title" data-i18n="trackATitle">Track A: US-Regulated</p>
-            <ul>
-              <li data-i18n="trackA1">미국 현지 생산</li>
-              <li data-i18n="trackA2">IRA·관세 적격 원자재</li>
-              <li data-i18n="trackA3">비용 ↑ / 안전성 ↑</li>
-            </ul>
-            <p class="diagram__track-dest" data-i18n="trackADest">↓ North America</p>
-          </div>
-          <div class="diagram__track diagram__track--b">
-            <p class="diagram__track-title" data-i18n="trackBTitle">Track B: Legacy Global</p>
-            <ul>
-              <li data-i18n="trackB1">중국 기존 공급망 유지</li>
-              <li data-i18n="trackB2">가격 경쟁력 중심</li>
-              <li data-i18n="trackB3">비용 ↓ / 규제 노출 ↑</li>
-            </ul>
-            <p class="diagram__track-dest" data-i18n="trackBDest">↓ China · ASEAN · EU</p>
-          </div>
+        <div class="card icon-card reveal reveal-delay-2">
+          <div class="icon">💰</div>
+          <h4>경제</h4>
+          <p>제휴 카페에 부가수익 창출<br>커피박 폐기비용 절감 (수거→재활용)</p>
+        </div>
+        <div class="card icon-card reveal reveal-delay-3">
+          <div class="icon">🤝</div>
+          <h4>사회·소비자</h4>
+          <p>가치소비 만족 + 로컬 순환 경제 기여<br>동네 카페와 소비자를 연결하는 순환 스토리</p>
         </div>
       </div>
 
-      <div class="section__body section__body--white reveal">
-        <p data-i18n="insightBody1">거대 시장 중국을 포기하는 "탈중국"은 비현실적이다. 중국은 여전히 한국 기업에게 거대한 소비 시장이자 핵심 공급망 파트너다. 정답은 <strong>위험을 분산하는 공급망 포트폴리오 — '투트랙 전략'</strong>이다.</p>
-        <p data-i18n="insightBody2">미국 규제 대응용 공급망과 기존 시장용 공급망을 분리 운영하되, 가능한 영역에서는 공통 자산을 활용해 비용을 최소화한다. 이는 곧 공급망 자체가 경영 전략이 되는 시대의 도래를 의미한다.</p>
-      </div>
-
-      <!-- Policy Proposals -->
-      <div class="proposals-grid reveal">
-        <div class="proposal-card">
-          <p class="proposal-card__title" data-i18n="proposal1Title">시나리오 경영</p>
-          <p class="proposal-card__desc" data-i18n="proposal1Desc">정치 리스크 시나리오별 사전 대응 시뮬레이션. 단일 시나리오에 베팅하지 않는 의사결정 체계.</p>
+      <h3 class="mt-4 reveal">향후 방향</h3>
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <span class="phase-label">단기</span>
+          <h4>채널 확립</h4>
+          <ul><li>자사몰·스마트스토어 상시판매</li><li>팀·제휴 카페 입점 확대</li><li>여름 방충 에디션 출시</li></ul>
         </div>
-        <div class="proposal-card">
-          <p class="proposal-card__title" data-i18n="proposal2Title">정부–기업 '원팀' 통상 외교</p>
-          <p class="proposal-card__desc" data-i18n="proposal2Desc">민·관 상시 협의 채널 구축. 美 IRA·관세 협상에서 기업 현장 데이터가 곧 외교 자산.</p>
+        <div class="timeline-item">
+          <span class="phase-label">중기</span>
+          <h4>B2B 확장</h4>
+          <ul><li>카페 PB 제조 확대</li><li>기업 ESG 굿즈 B2B</li></ul>
         </div>
-      </div>
-
-      <!-- Final Statement -->
-      <div class="final-statement reveal">
-        <p data-i18n="finalStatement">단일 시장 의존이 아닌, 공급망 포트폴리오가 새 시대의 경쟁력이다.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SECTION 7: CTA ============ -->
-  <section class="section section--white" id="cta">
-    <div class="container container--narrow">
-      <p class="section__label section__label--blue reveal" data-i18n="ctaLabel">06 — Take It Further</p>
-      <h2 class="section__title section__title--center reveal" data-i18n="ctaTitle">더 깊이 알아보기</h2>
-
-      <div class="cta-cards">
-        <!-- Report -->
-        <div class="cta-card reveal">
-          <span class="cta-card__icon">📑</span>
-          <div class="cta-card__content">
-            <h3 class="cta-card__title" data-i18n="ctaReportTitle">발표자료 보기</h3>
-            <p class="cta-card__desc" data-i18n="ctaReportDesc">발표에 사용된 슬라이드를 새 탭에서 확인합니다</p>
-            <a href="slides/index.html" target="_blank" class="btn btn--primary" data-i18n="ctaReportBtn">슬라이드 열기</a>
-          </div>
+        <div class="timeline-item">
+          <span class="phase-label">장기</span>
+          <h4>라인 확장</h4>
+          <ul><li>디퓨저·스크럽 등 라인 확장</li><li>수거 네트워크·지자체 연계</li></ul>
         </div>
       </div>
 
-      <!-- Footer -->
-      <footer class="footer">
-        <p data-i18n="footerLine1">2026 글로벌 경영환경 사례 분석</p>
-        <p data-i18n="footerLine2">이 페이지는 2026 글로벌 경영환경 사례 분석 프로젝트의 보조 자료입니다.</p>
-        <p class="footer__sources" data-i18n="footerSources">데이터 출처: USTR · KITA · 산업통상자원부 · 현대차그룹 IR · 美 재무부 IRA 가이드라인</p>
-      </footer>
-    </div>
-  </section>
+      <div class="highlight-box reveal mt-3" style="text-align:center;">
+        <strong>"동네 카페가 도는 커피 순환 경제 — 카페 → 향초 → 거름 → 다시 카페."</strong>
+      </div>
+    </section>
+  </div>
 
-  <script src="i18n.js"></script>
-  <script src="script.js"></script>
+  <!-- ===== 16. 비전 ===== -->
+  <div class="vision-wrapper">
+    <section id="vision" class="vision-section">
+      <h2 class="reveal">비전</h2>
+      <p class="section-subtitle reveal">"동네 카페가 도는 커피 순환 경제"</p>
+
+      <div class="callout-row reveal" style="margin:var(--space-5) 0;">
+        <div class="card stat-callout" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
+          <div class="number" style="color:var(--gold);"><span data-counter="500" data-suffix="개">0</span></div>
+          <div class="label" style="color:var(--text-white-soft);">1차 목표 판매 (다채널 합산)</div>
+        </div>
+        <div class="card stat-callout" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
+          <div class="number" style="color:var(--gold);"><span data-counter="1100" data-suffix="만 원">0</span></div>
+          <div class="label" style="color:var(--text-white-soft);">목표 매출 (가정)</div>
+        </div>
+        <div class="card stat-callout" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
+          <div class="number" style="color:var(--gold);"><span data-counter="58" data-suffix="%">0</span></div>
+          <div class="label" style="color:var(--text-white-soft);">공헌이익률</div>
+        </div>
+      </div>
+
+      <div class="reveal" style="max-width:560px; margin:0 auto; text-align:center;">
+        <p style="font-size:1rem; color:var(--text-white-soft); line-height:1.8;">
+          매일 버려지는 커피박을, 향과 가치를 담은 향초로 되살립니다.<br>
+          카페에서 시작해, 동네로, 도시로 이어지는 <strong style="color:var(--gold);">커피 순환 경제</strong>를 만들어 갑니다.
+        </p>
+        <p style="margin-top:var(--space-5); font-size:0.8125rem; color:rgba(255,255,255,0.4);">
+          RE:PIUM — 다시, 피움 | 임상민, 서정빈
+        </p>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<!-- Scripts -->
+<script src="js/data.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/main.js"></script>
+
 </body>
 </html>
