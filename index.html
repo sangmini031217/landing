@@ -3,725 +3,954 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RE:PIUM — 커피박 업사이클링 향초 사업계획서</title>
-
-  <!-- Fonts: Manrope (SoDoSans substitute) + Noto Serif KR (editorial) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- Chart.js CDN (v4.4.7) -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="바다봄(BADA BOM) - 여수 해양 폐플라스틱을 직장인의 책상 위 가치로 전환하는 소셜 벤처 사업계획서">
+  <title>바다봄 BADA BOM — 소셜벤처 사업계획서</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- Mobile Nav Toggle -->
-<button class="nav-toggle" aria-label="메뉴 열기">☰</button>
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo"><img src="BADA BOM로고.png" alt="BADA BOM" class="nav-logo-img"></a>
+      <button class="nav-toggle" id="navToggle" aria-label="메뉴">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#summary">요약</a></li>
+        <li><a href="#problem">문제</a></li>
+        <li><a href="#solution">솔루션</a></li>
+        <li><a href="#equipment">장비</a></li>
+        <li><a href="#products">제품</a></li>
+        <li><a href="#market">시장</a></li>
+        <li><a href="#competition">경쟁</a></li>
+        <li><a href="#revenue">수익</a></li>
+        <li><a href="#bep">BEP</a></li>
+        <li><a href="#impact">임팩트</a></li>
+        <li><a href="#team">팀</a></li>
+        <li><a href="#marketing">마케팅</a></li>
+      </ul>
+    </div>
+  </nav>
 
-<!-- Nav Overlay (mobile) -->
-<div class="nav-overlay"></div>
+  <!-- SECTION 1: HERO -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-layout">
+        <div class="hero-content">
+          <span class="hero-badge">Social Venture Business Plan</span>
+          <h1 class="hero-title">바다봄 <span class="hero-eng">BADA BOM</span></h1>
+          <p class="hero-slogan">"쓰러져도, 바다는 다시 일어섭니다."</p>
+          <p class="hero-desc">여수 해양 폐플라스틱을 수거·재생하여<br>직장인의 책상 위 실용적인 데스크 굿즈로 만드는 소셜벤처</p>
+          <a href="#summary" class="btn-primary">사업 개요 보기 ↓</a>
+        </div>
+        <div class="hero-logo-area">
+          <img src="BADA BOM로고.png" alt="바다봄 BADA BOM 로고" class="hero-logo-img">
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- Sidebar Navigation -->
-<nav class="nav-sidebar">
-  <div class="nav-logo">
-    다시, 피움<br>
-    <span>RE:PIUM 사업계획서</span>
-  </div>
-  <ul class="nav-links">
-    <li><a href="#hero">표지</a></li>
-    <li><a href="#problem">문제 & 기회</a></li>
-    <li><a href="#solution">솔루션 & 제품</a></li>
-    <li><a href="#effects">커피박의 효과</a></li>
-    <li><a href="#market">시장 분석</a></li>
-    <li><a href="#competition">경쟁사 분석</a></li>
-    <li><a href="#bmc">비즈니스 모델</a></li>
-    <li><a href="#roadmap">사업 전략</a></li>
-    <li><a href="#manufacturing">제조 공정</a></li>
-    <li><a href="#recipe">레시피 & 자재</a></li>
-    <li><a href="#cost">원가 구조</a></li>
-    <li><a href="#bep">손익분기점</a></li>
-    <li><a href="#marketing">판매 & 마케팅</a></li>
-    <li><a href="#funding">자금 계획</a></li>
-    <li><a href="#risk">리스크 & 대응</a></li>
-    <li><a href="#impact">기대효과 & 향후</a></li>
-    <li><a href="#vision">비전</a></li>
-  </ul>
-</nav>
+  <!-- SECTION 2: 핵심 요약 -->
+  <section class="section" id="summary">
+    <div class="container">
+      <h2 class="section-title fade-up">핵심 요약</h2>
+      <p class="section-subtitle fade-up">6가지 핵심 지표로 보는 바다봄</p>
+      <div class="summary-grid">
+        <div class="summary-card fade-up">
+          <div class="sc-label">문제</div>
+          <div class="sc-value">순환 단절</div>
+          <div class="sc-desc">수거된 해양쓰레기의 대부분이 소각·매립으로 가치 소실</div>
+        </div>
+        <div class="summary-card fade-up">
+          <div class="sc-label">제품</div>
+          <div class="sc-value">데스크 굿즈 3종</div>
+          <div class="sc-desc">케이블 홀더 · 가방 걸이 · 데스크 스탠드</div>
+        </div>
+        <div class="summary-card fade-up">
+          <div class="sc-label">판매가</div>
+          <div class="sc-value">9,900원</div>
+          <div class="sc-desc">단품 기준 / 세트 24,900원</div>
+        </div>
+        <div class="summary-card fade-up">
+          <div class="sc-label">기여이익</div>
+          <div class="sc-value">약 2,715원</div>
+          <div class="sc-desc">단위당 약 27% 마진</div>
+        </div>
+        <div class="summary-card fade-up">
+          <div class="sc-label">손익분기점</div>
+          <div class="sc-value">월 약 277개</div>
+          <div class="sc-desc">하루 약 11개 판매 시 달성</div>
+        </div>
+        <div class="summary-card fade-up">
+          <div class="sc-label">사회적 가치</div>
+          <div class="sc-value">3년 1.5톤</div>
+          <div class="sc-desc">해양 폐플라스틱 재자원화 목표</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- Main Content -->
-<main class="main-content">
+  <!-- SECTION 3: 창업 동기 & 문제 정의 -->
+  <section class="section section-gray" id="problem">
+    <div class="container">
+      <h2 class="section-title fade-up">왜 바다봄인가?</h2>
+      <p class="section-subtitle fade-up">사업 구상 배경</p>
 
-  <!-- ===== 1. HERO ===== -->
-  <div class="hero-wrapper">
-    <section id="hero" class="hero">
-      <div class="hero-badge">창업 사업계획서</div>
-      <h1>다시, 피움</h1>
-      <p class="brand-en">RE:PIUM</p>
-      <p class="tagline">커피박 업사이클링 향초 — 버려질 커피박을 재활용해, 향·탈취·친환경을 담은 향초로 되살리는 사업</p>
-      <p class="meta">팀: 임상민, 서정빈 | 창업기술경제</p>
-    </section>
-  </div>
+      <div class="story-box fade-up">
+        <h3>우리가 본 장면</h3>
+        <p>한 인플루언서가 '여수의 섬'을 세계에 알리려 방문했지만, 정작 그 섬은 해양쓰레기로 덮여 있었다.<br>세계에 자랑하려던 바다가, 우리가 외면한 쓰레기로 가득 차 있다는 모순.<br>우리는 그 바다 옆 대학(여수 소재)에서 이 장면을 직접 목격하고 문제를 풀기로 했다.</p>
+        <blockquote>"가장 아름다워야 할 바다가, 가장 방치된 쓰레기장이었다."</blockquote>
+      </div>
 
-  <!-- ===== 2. 문제 & 기회 ===== -->
-  <div class="band-white">
-    <section id="problem">
-      <h2 class="reveal">문제 & 기회</h2>
-      <p class="section-subtitle reveal">버려지는 자원 + 자라는 시장 = 교차점에 기회가 있다</p>
+      <h3 class="subsection-title fade-up">문제의 규모</h3>
+      <div class="problem-stats fade-up">
+        <div class="ps-item">
+          <div class="ps-number" data-target="132686">0</div>
+          <div class="ps-unit">톤</div>
+          <div class="ps-desc">2024년 국내 해양쓰레기 수거량</div>
+        </div>
+        <div class="ps-item">
+          <div class="ps-number-text">1위</div>
+          <div class="ps-desc">전라남도 최근 5년 수거량</div>
+        </div>
+        <div class="ps-item">
+          <div class="ps-number-text">대부분</div>
+          <div class="ps-desc">수거 후 소각·매립 처리</div>
+        </div>
+      </div>
+      <div class="problem-flow fade-up">
+        <div class="pf-step">수거</div>
+        <div class="pf-arrow">→</div>
+        <div class="pf-step pf-red">소각·매립</div>
+        <div class="pf-arrow">→</div>
+        <div class="pf-step pf-red">가치 소멸</div>
+      </div>
+      <blockquote class="problem-quote fade-up">
+        "문제는 쓰레기가 아니라, <strong>순환의 단절</strong>이다."
+      </blockquote>
+    </div>
+  </section>
 
-      <div class="split">
-        <div>
-          <h3 class="reveal">☕ 커피박 폐기 문제</h3>
-          <div class="card-grid reveal" style="grid-template-columns: 1fr 1fr;">
-            <div class="card stat-callout">
-              <div class="number"><span data-counter="0.2" data-suffix="%" data-decimals="1">0%</span></div>
-              <div class="label">커피 추출 시 실제 섭취량</div>
-              <span class="source">출처: 환경 관련 보도 종합</span>
-            </div>
-            <div class="card stat-callout">
-              <div class="number"><span data-counter="99.8" data-suffix="%" data-decimals="1">0%</span></div>
-              <div class="label">커피박으로 폐기</div>
-              <span class="source">출처: 환경 관련 보도 종합</span>
-            </div>
-            <div class="card stat-callout">
-              <div class="number">연 <span data-counter="15" data-suffix="만 톤">0</span></div>
-              <div class="label">국내 커피박 발생량 (2019)</div>
-              <span class="source">출처: 환경부 추정</span>
-            </div>
-            <div class="card stat-callout">
-              <div class="number"><span data-counter="353" data-suffix="잔/년">0</span></div>
-              <div class="label">한국 1인당 커피 소비 (세계 평균 2.7배)</div>
-              <span class="source">출처: 현대경제연구원</span>
-            </div>
-          </div>
-          <div class="highlight-box reveal">
-            대부분 생활폐기물로 소각·매립 → 탄소 배출. 2022년 환경부, 커피박을 순환자원으로 인정·재활용 간소화 추진.
-            <span class="source">출처: 환경부</span>
+  <!-- SECTION 4: 솔루션 -->
+  <section class="section" id="solution">
+    <div class="container">
+      <h2 class="section-title fade-up">바다봄의 해결 방식</h2>
+      <p class="section-subtitle fade-up">8단계 순환 공정</p>
+      <div class="solution-timeline fade-up">
+        <div class="st-step">
+          <div class="st-num">01</div>
+          <div class="st-content">
+            <h4>수거</h4>
+            <p>여수 어촌계·해안에서 폐플라스틱 수거</p>
           </div>
         </div>
-
-        <div>
-          <h3 class="reveal">🕯️ 성장하는 캔들 시장</h3>
-          <div class="card stat-callout reveal">
-            <div class="number"><span data-counter="2700" data-suffix="억 원">0</span></div>
-            <div class="label">2024년 국내 캔들 시장 (약 2억 달러, 추정)</div>
-            <span class="source">출처: IMARC Group (추정, 환율·시점에 따라 변동)</span>
+        <div class="st-step">
+          <div class="st-num">02</div>
+          <div class="st-content">
+            <h4>세척·분류</h4>
+            <p>종류별 선별, 염분·이물질 제거</p>
           </div>
-          <div class="card stat-callout mt-2 reveal">
-            <div class="number" style="color:var(--gold);">→ <span data-counter="4200" data-suffix="억 원">0</span></div>
-            <div class="label">2033년 전망 (연평균 약 5.0% 성장, 추정)</div>
-            <span class="source">출처: IMARC Group (추정, 환율·시점에 따라 변동)</span>
+        </div>
+        <div class="st-step">
+          <div class="st-num">03</div>
+          <div class="st-content">
+            <h4>건조</h4>
+            <p>수분 완전 제거 (불량 방지)</p>
           </div>
-          <div class="card mt-2 reveal">
-            <h4 style="color: var(--gold); margin-bottom:8px;">성장 동력</h4>
-            <ul style="font-size:0.8125rem; padding-left:16px; color: var(--text-secondary); line-height:1.8;">
-              <li>웰빙·아로마테라피</li>
-              <li>홈데코·선물 수요</li>
-              <li>가치소비·ESG 트렌드</li>
-              <li>홈카페 문화</li>
-            </ul>
+        </div>
+        <div class="st-step">
+          <div class="st-num">04</div>
+          <div class="st-content">
+            <h4>분쇄</h4>
+            <p>프레셔스 플라스틱 분쇄기로 알갱이 가공</p>
+          </div>
+        </div>
+        <div class="st-step">
+          <div class="st-num">05</div>
+          <div class="st-content">
+            <h4>가공</h4>
+            <p>펠릿 준비 및 색상 배합</p>
+          </div>
+        </div>
+        <div class="st-step">
+          <div class="st-num">06</div>
+          <div class="st-content">
+            <h4>사출 성형</h4>
+            <p>녹여서 몰드에 주입, 마블링 무늬 형성</p>
+          </div>
+        </div>
+        <div class="st-step">
+          <div class="st-num">07</div>
+          <div class="st-content">
+            <h4>마감·검수</h4>
+            <p>다듬기, 자석·겔패드 결합, 품질 확인</p>
+          </div>
+        </div>
+        <div class="st-step">
+          <div class="st-num">08</div>
+          <div class="st-content">
+            <h4>기록·판매</h4>
+            <p>해양쓰레기 실중량(g) 표기 후 출고</p>
           </div>
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
-  <!-- ===== 3. 솔루션 & 제품 ===== -->
-  <div class="band-cream">
-    <section id="solution">
-      <h2 class="reveal">솔루션 & 제품</h2>
-      <p class="section-subtitle reveal">소이왁스 베이스 + 커피박은 향·텍스처·데코로 활용 (연료가 아닌 부재료)</p>
+  <!-- SECTION 4-2: 프레셔스 플라스틱 장비 상세 -->
+  <section class="section section-gray" id="equipment">
+    <div class="container">
+      <h2 class="section-title fade-up">생산 장비: 프레셔스 플라스틱</h2>
+      <p class="section-subtitle fade-up">네덜란드발 오픈소스 플라스틱 재활용 프로젝트 — 기계 도면·매뉴얼 무료 공개 (Creative Commons)</p>
 
-      <div class="card-grid-3">
-        <div class="card product-card reveal reveal-delay-1">
-          <div class="product-name">☕ 시그니처 (커피향)</div>
-          <div class="product-desc">소이왁스 + 건조 커피박 배합. 은은한 카페 향과 다공성 텍스처. 탈취 기능 부여.</div>
-          <div class="img-placeholder mt-2">제품 이미지 자리</div>
-        </div>
-        <div class="card product-card reveal reveal-delay-2">
-          <div class="product-name">🍃 여름 방충 에디션</div>
-          <div class="product-desc">시트로넬라·레몬그라스 천연 오일 배합. "벌레가 싫어하는 향" 수준의 기피 효과. (살충 효과 아님)</div>
-          <div class="img-placeholder mt-2">제품 이미지 자리</div>
-        </div>
-        <div class="card product-card reveal reveal-delay-3">
-          <div class="product-name">🏪 카페 PB</div>
-          <div class="product-desc">제휴 카페의 실제 커피박 사용. 카페 자체 브랜드로 납품. B2B2C 모델.</div>
-          <div class="img-placeholder mt-2">제품 이미지 자리</div>
+      <div class="equip-intro fade-up">
+        <div class="ei-card">
+          <h4>왜 프레셔스 플라스틱인가?</h4>
+          <ul>
+            <li>전 세계 수백 개 팀이 동일 장비를 제작·운영 중 — 검증된 설계</li>
+            <li>도면·매뉴얼·동영상 50개+ 무료 공개 → 직접 제작 또는 제작 의뢰 가능</li>
+            <li>산업용 대비 초기 투자 비용 대폭 절감 (장비 2종 합산 약 200~400만원)</li>
+            <li>국내 커뮤니티(프레셔스 플라스틱 서울 ppseoul.com / 대전) 활동 중 → 노하우 공유</li>
+            <li>분쇄 후 깨끗하게 분류한 알갱이는 산업체에 판매 가능 — 분쇄 전 대비 8~10배 가격</li>
+          </ul>
         </div>
       </div>
 
-      <div class="highlight-box reveal mt-3">
-        <strong>핵심 포인트:</strong> 커피박은 연료(왁스)가 아니라 향·텍스처·장식 부재료로 활용됩니다. 베이스는 안전하고 잘 타는 소이왁스.
-      </div>
-    </section>
-  </div>
-
-  <!-- ===== 4. 커피박의 효과 ===== -->
-  <div class="band-white">
-    <section id="effects">
-      <h2 class="reveal">커피박의 효과 (근거)</h2>
-      <p class="section-subtitle reveal">과학적 원리와 한계를 명확히 구분합니다</p>
-
-      <div class="card-grid-5">
-        <div class="card icon-card reveal reveal-delay-1">
-          <div class="icon">🫧</div>
-          <h4>탈취</h4>
-          <p>다공성(셀룰로오스 그물망) 구조가 냄새 분자 흡착. 숯과 동일 원리. 활성탄 대비 약 60~75% 수준이나 원료비 0원.</p>
-          <span class="source">출처: 생활정보 보도 종합</span>
-        </div>
-        <div class="card icon-card reveal reveal-delay-2">
-          <div class="icon">☕</div>
-          <h4>카페 향</h4>
-          <p>커피 고유의 은은한 향이 공간에 카페 감성을 부여.</p>
-          <span class="source">출처: 제품 특성</span>
-        </div>
-        <div class="card icon-card reveal reveal-delay-3">
-          <div class="icon">♻️</div>
-          <h4>친환경·탄소 저감</h4>
-          <p>소각·매립 대신 재활용 → 탄소 배출 감소, 순환경제 기여.</p>
-          <span class="source">출처: 환경부</span>
-        </div>
-        <div class="card icon-card reveal reveal-delay-4">
-          <div class="icon">🌱</div>
-          <h4>끝까지 순환 (거름)</h4>
-          <p>질소·칼륨·마그네슘 풍부, 중금속 없음 → 화분 거름으로 재활용 가능.</p>
-          <span class="source">출처: 생활정보 보도 종합</span>
-        </div>
-        <div class="card icon-card reveal reveal-delay-4">
-          <div class="icon">🍃</div>
-          <h4>벌레 기피 향<br>(여름 에디션)</h4>
-          <p>커피향 단독 근거 약함. 시트로넬라·레몬그라스 오일을 더한 한정 에디션.</p>
-          <span class="source">출처: 생활정보 보도 종합 (살충 효과 아님)</span>
-        </div>
-      </div>
-
-      <div class="highlight-box reveal mt-3">
-        <strong>⚠️ 품질 핵심 리스크:</strong> 수분 잔류 시 24시간 내 곰팡이 발생 확률 약 70% → 수분 10% 이하 저온 건조 필수.
-        <span class="source">출처: 생활정보 보도 종합</span>
-      </div>
-    </section>
-  </div>
-
-  <!-- ===== 5. 시장 분석 ===== -->
-  <div class="band-cream">
-    <section id="market">
-      <h2 class="reveal">시장 분석</h2>
-      <p class="section-subtitle reveal">국내 캔들 시장은 연평균 약 5.0%씩 성장 중 (추정)</p>
-
-      <div class="split">
-        <div class="reveal">
-          <h3>캔들 시장 규모 성장 전망</h3>
-          <div class="chart-container">
-            <canvas id="chart-candle-market"></canvas>
+      <h3 class="subsection-title fade-up">핵심 장비 2종 상세 스펙</h3>
+      <div class="equip-grid fade-up">
+        <!-- 분쇄기 -->
+        <div class="equip-card">
+          <div class="eq-header">
+            <div class="eq-icon">⚙️</div>
+            <h4>분쇄기 (Shredder)</h4>
+            <span class="eq-badge">공정의 출발점</span>
           </div>
-          <span class="source" style="display:block; text-align:center;">출처: IMARC Group (추정, 환율·시점에 따라 변동)</span>
-        </div>
-        <div>
-          <h3 class="reveal">TAM — SAM — SOM</h3>
-          <div class="card mt-2 reveal">
-            <table class="data-table">
-              <thead><tr><th>구분</th><th>규모</th><th>정의</th></tr></thead>
+          <div class="eq-body">
+            <p class="eq-desc">세척한 폐플라스틱을 작은 플레이크(알갱이)로 분쇄합니다. 분쇄된 플라스틱은 다양한 크기·색상으로 분류하여 가치를 높입니다.</p>
+            <table class="eq-spec-table">
+              <caption>Basic Shredder 기술 사양</caption>
               <tbody>
-                <tr><td><strong>TAM</strong></td><td>약 2,700억 원</td><td>국내 전체 캔들 시장 (2024, 추정)</td></tr>
-                <tr><td><strong>SAM</strong></td><td>약 270~540억 원</td><td>친환경·프리미엄 세그먼트 (TAM 10~20%, 가정)</td></tr>
-                <tr><td><strong>SOM</strong></td><td>약 1~3억 원</td><td>1차년도 펀딩+자사몰 목표 (가정)</td></tr>
+                <tr><th>유형</th><td>단축 (Single Axis)</td></tr>
+                <tr><th>자재비 (NL 기준)</th><td>약 1,100유로 (약 160만원 환산)</td></tr>
+                <tr><th>중량</th><td>약 150kg</td></tr>
+                <tr><th>외형 치수</th><td>600 × 300 × 1,200 mm</td></tr>
+                <tr><th>소비 전력</th><td>2.2 kW</td></tr>
+                <tr><th>전압 / 전류</th><td>400V / 16A (삼상)</td></tr>
+                <tr><th>권장 모터 토크</th><td>약 200 Nm (70 rpm 기준)</td></tr>
               </tbody>
             </table>
-            <span class="source">TAM: IMARC Group (추정) / SAM·SOM: 팀 가정</span>
+            <div class="eq-note">
+              <strong>Pro 버전 옵션:</strong> 이축(Double Axis) 분쇄기 — 시간당 최대 약 50kg 분쇄 가능, 3~4kW 권장, 토크 1,100~3,000 Nm. 생산량 확대 시 업그레이드 고려.
+            </div>
           </div>
+        </div>
 
-          <h3 class="mt-3 reveal">성장 동력 & 정책 순풍</h3>
-          <div class="card mt-1 reveal">
-            <ul style="font-size:0.8125rem; padding-left:16px; color:var(--text-secondary); line-height:1.8;">
-              <li>웰빙·아로마테라피 관심 증가</li>
-              <li>홈데코·선물 수요 확대</li>
-              <li>가치소비·ESG → 친환경 제품 선호</li>
-              <li>홈카페 문화 → 커피+캔들 시너지</li>
-              <li><strong>2022년 환경부:</strong> 커피박 순환자원 인정</li>
-            </ul>
-            <span class="source">출처: IMARC Group, 환경부</span>
+        <!-- 사출기 -->
+        <div class="equip-card">
+          <div class="eq-header">
+            <div class="eq-icon">🔧</div>
+            <h4>사출기 (Injection Machine)</h4>
+            <span class="eq-badge">제품 성형 핵심</span>
+          </div>
+          <div class="eq-body">
+            <p class="eq-desc">분쇄된 플라스틱 알갱이를 배럴에서 가열·용융 후, 레버를 당겨 몰드(틀)에 주입하여 제품을 성형합니다. 같은 디자인을 빠르게 양산할 수 있어 미니 굿즈에 최적입니다.</p>
+            <table class="eq-spec-table">
+              <caption>Injection Machine v3 기술 사양</caption>
+              <tbody>
+                <tr><th>유형</th><td>수동 레버식 (Hand Powered)</td></tr>
+                <tr><th>자재비 (NL 기준)</th><td>약 350유로 (약 50만원 환산)</td></tr>
+                <tr><th>중량</th><td>약 30kg</td></tr>
+                <tr><th>외형 치수</th><td>830 × 700 × 1,300 mm</td></tr>
+                <tr><th>배럴 용량</th><td>150 cm³</td></tr>
+                <tr><th>사출 압력</th><td>약 44~45 bar</td></tr>
+                <tr><th>레버 비율</th><td>3배 (기계적 이점)</td></tr>
+                <tr><th>최대 몰드 크기</th><td>360 × 330 mm</td></tr>
+                <tr><th>시간당 사출 횟수</th><td>약 10~30회</td></tr>
+                <tr><th>가열 전력</th><td>800W (220V / 3.5A 단상)</td></tr>
+              </tbody>
+            </table>
+            <div class="eq-note">
+              <strong>150cm³ = 바다봄 제품 1개 성형에 적합한 용량.</strong> 제품 중량 약 80~100g 기준, 1회 사출로 1개 제품 완성 가능. 시간당 10~30회 사출 가능하므로 하루 8시간 기준 최대 80~240개 생산 잠재력.
+            </div>
           </div>
         </div>
       </div>
-    </section>
-  </div>
 
-  <!-- ===== 6. 경쟁사 분석 ===== -->
-  <div class="band-white">
-    <section id="competition">
-      <h2 class="reveal">경쟁사 분석</h2>
-      <p class="section-subtitle reveal">경쟁사 틈새: 로컬 관계성·PB 모델 부재 → 우리의 진입점</p>
+      <h3 class="subsection-title fade-up">몰드(금형) 제작</h3>
+      <div class="equip-mold fade-up">
+        <div class="mold-item">
+          <h4>제작 방식</h4>
+          <p>CNC 밀링 또는 선반(Lathe)으로 알루미늄·스틸 블록을 깎아 제작. 또는 용접 방식으로 간이 금형 제작 가능.</p>
+        </div>
+        <div class="mold-item">
+          <h4>금형 비용</h4>
+          <p>제품 1종당 약 50~200만원 — 형상 복잡도와 재질에 따라 상이. 3종 합산 약 150~600만원.</p>
+        </div>
+        <div class="mold-item">
+          <h4>금형 내구성</h4>
+          <p>알루미늄 금형 기준 수천~수만 회 사출 가능. 바다봄 연간 목표량(약 3,000개) 대비 충분한 수명.</p>
+        </div>
+      </div>
 
-      <h3 class="reveal">비교표</h3>
-      <div class="reveal" style="overflow-x:auto;">
-        <table class="data-table">
+      <h3 class="subsection-title fade-up">장비 확보 계획</h3>
+      <div class="equip-plan fade-up">
+        <table class="plan-table">
           <thead>
-            <tr><th>경쟁사</th><th>유형</th><th>가격대</th><th>강점</th><th>약점</th></tr>
+            <tr><th>항목</th><th>방법</th><th>추정 비용</th><th>비고</th></tr>
           </thead>
           <tbody>
-            <tr><td><strong>커피어게인</strong></td><td>커피박 소이캔들</td><td>7,500~11,000원</td><td>와디즈 펀딩 경험</td><td>로컬 PB·방충 라인 없음</td></tr>
-            <tr><td><strong>커피점토 B2B</strong></td><td>커피박 소재·화분</td><td>B2B</td><td>소재 활용</td><td>소비자 접점 약함</td></tr>
-            <tr><td><strong>일반 향초 브랜드</strong></td><td>향초·디자인</td><td>15,000~40,000원</td><td>향·디자인 강점</td><td>스토리·친환경 약함</td></tr>
-            <tr class="highlight-row"><td><strong>RE:PIUM (우리)</strong></td><td>로컬 순환+PB+탈취+여름 라인</td><td>22,000원</td><td>로컬 관계성·PB 모델·차별화</td><td>신규 브랜드 인지도</td></tr>
+            <tr>
+              <td>분쇄기 (Basic)</td>
+              <td>국내 제작 의뢰 또는 PP 커뮤니티 협업 제작</td>
+              <td>약 200~300만원</td>
+              <td>도면 무료, 인건·재료비만 발생</td>
+            </tr>
+            <tr>
+              <td>사출기 (v3)</td>
+              <td>자체 제작 또는 제작 의뢰</td>
+              <td>약 80~150만원</td>
+              <td>구조 단순, 용접+히터+레버</td>
+            </tr>
+            <tr>
+              <td>금형 3종</td>
+              <td>CNC 외주 (국내 금형업체)</td>
+              <td>약 150~600만원</td>
+              <td>디자인 확정 후 견적</td>
+            </tr>
+            <tr>
+              <td>합계</td>
+              <td>—</td>
+              <td>약 430~1,050만원</td>
+              <td>창업지원금 자산취득 항목 활용</td>
+            </tr>
           </tbody>
         </table>
       </div>
 
-      <h3 class="mt-4 reveal">포지셔닝 맵</h3>
-      <p class="reveal" style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:var(--space-3);">가로축: 가격대 (만 원) / 세로축: 차별성·로컬 관계성 점수 (10점 만점)</p>
-      <div class="chart-container reveal" style="max-width:560px; margin:0 auto;">
-        <canvas id="chart-positioning"></canvas>
-      </div>
-    </section>
-  </div>
-
-  <!-- ===== 7. BMC ===== -->
-  <div class="band-cream">
-    <section id="bmc">
-      <h2 class="reveal">비즈니스 모델 캔버스 (BMC)</h2>
-      <p class="section-subtitle reveal">9블록으로 보는 사업 구조</p>
-
-      <div class="bmc-grid reveal">
-        <div class="bmc-cell bmc-partners"><h4>핵심 파트너</h4><ul><li>팀 카페 + 제휴 카페</li><li>커피박 수거 네트워크/지자체</li><li>왁스·향료·패키지 공급사</li><li>펀딩 플랫폼</li><li>커피점토 소재사</li></ul></div>
-        <div class="bmc-cell bmc-activities"><h4>핵심 활동</h4><ul><li>커피박 수거·건조</li><li>캔들 제조</li><li>펀딩·마케팅</li><li>제휴 카페 관리</li></ul></div>
-        <div class="bmc-cell bmc-resources"><h4>핵심 자원</h4><ul><li>팀 카페의 커피박 공급</li><li>건조·조향 노하우</li><li>브랜드 스토리</li><li>디자인</li></ul></div>
-        <div class="bmc-cell bmc-value"><h4>가치 제안</h4><ul><li>버려질 커피박 → 향+탈취+친환경+로컬 순환</li><li>"카페 감성을 집·사무실로"</li><li>여름 방충 라인</li></ul></div>
-        <div class="bmc-cell bmc-relationships"><h4>고객 관계</h4><ul><li>펀딩 서포터 커뮤니티</li><li>순환 프로그램 (거름·리필)</li><li>정기구독</li></ul></div>
-        <div class="bmc-cell bmc-channels"><h4>채널</h4><ul><li>와디즈/텀블벅 펀딩</li><li>자사몰·스마트스토어</li><li>제휴 카페 입점</li><li>인스타·숏폼</li></ul></div>
-        <div class="bmc-cell bmc-segments"><h4>고객 세그먼트</h4><ul><li>홈카페·오피스 2030</li><li>친환경 선물 구매자</li><li>제휴 카페 (B2B2C)</li><li>기업 ESG 선물</li></ul></div>
-        <div class="bmc-cell bmc-cost"><h4>비용 구조</h4><ul style="display:flex; flex-wrap:wrap; gap:8px;"><li>재료비</li><li>인건비</li><li>펀딩 수수료</li><li>마케팅/촬영</li><li>패키지</li><li>초기 장비</li></ul></div>
-        <div class="bmc-cell bmc-revenue"><h4>수익원</h4><ul style="display:flex; flex-wrap:wrap; gap:8px;"><li>제품 판매·선물세트</li><li>카페 PB 공급</li><li>기업 ESG 굿즈</li><li>DIY 클래스</li></ul></div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ===== 8. 로드맵 ===== -->
-  <div class="band-white">
-    <section id="roadmap">
-      <h2 class="reveal">사업 전략 / 로드맵</h2>
-      <p class="section-subtitle reveal">3단계 성장 전략: 검증 → 확장 → 스케일업</p>
-
-      <div class="timeline reveal">
-        <div class="timeline-item">
-          <span class="phase-label">Phase 1 · 0~6개월</span>
-          <h4>수요 검증</h4>
-          <ul><li>제품 안전 신고 (KTR 시험 → 환경산업기술원 신고)</li><li>다채널 판매 개시 (자사몰·카페·펀딩)</li><li>시그니처 라인 출시</li><li>팀 카페 파일럿 운영</li></ul>
-        </div>
-        <div class="timeline-item">
-          <span class="phase-label">Phase 2 · 6~18개월</span>
-          <h4>채널 확장</h4>
-          <ul><li>자사몰·스마트스토어 상시판매</li><li>제휴 카페 5~10곳 입점</li><li>여름 방충 에디션 출시</li></ul>
-        </div>
-        <div class="timeline-item">
-          <span class="phase-label">Phase 3 · 18개월~</span>
-          <h4>스케일업</h4>
-          <ul><li>카페 PB 제조 확대</li><li>기업 ESG 굿즈 B2B</li><li>라인 확장 (디퓨저·스크럽)</li></ul>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ===== 9. 제조 공정 ===== -->
-  <div class="band-cream">
-    <section id="manufacturing">
-      <h2 class="reveal">제조 공정 & 필요 설비</h2>
-      <p class="section-subtitle reveal">9단계 공정 — 핵심 노하우는 건조 표준화 (곰팡이 70% 리스크 관리)</p>
-
-      <div class="mfg-flow reveal">
-        <div class="mfg-step"><div class="step-num">1</div><div class="step-name">수거</div><div class="step-desc">제휴 카페</div></div>
-        <div class="mfg-arrow">→</div>
-        <div class="mfg-step"><div class="step-num">2</div><div class="step-name">저온 건조</div><div class="step-desc">수분 10%↓</div></div>
-        <div class="mfg-arrow">→</div>
-        <div class="mfg-step"><div class="step-num">3</div><div class="step-name">분쇄·체질</div><div class="step-desc">균일 입자</div></div>
-        <div class="mfg-arrow">→</div>
-        <div class="mfg-step"><div class="step-num">4</div><div class="step-name">왁스 용해</div><div class="step-desc">적정 온도</div></div>
-        <div class="mfg-arrow">→</div>
-        <div class="mfg-step"><div class="step-num">5</div><div class="step-name">배합</div><div class="step-desc">향료·커피박</div></div>
-        <div class="mfg-arrow">→</div>
-        <div class="mfg-step"><div class="step-num">6</div><div class="step-name">심지 고정</div><div class="step-desc">센터링</div></div>
-        <div class="mfg-arrow">→</div>
-        <div class="mfg-step"><div class="step-num">7</div><div class="step-name">붓기</div><div class="step-desc">왁스 주입</div></div>
-        <div class="mfg-arrow">→</div>
-        <div class="mfg-step"><div class="step-num">8</div><div class="step-name">큐어링</div><div class="step-desc">24~48h</div></div>
-        <div class="mfg-arrow">→</div>
-        <div class="mfg-step"><div class="step-num">9</div><div class="step-name">QC·패키지</div><div class="step-desc">검수·포장</div></div>
-      </div>
-
-      <div class="split mt-4">
-        <div class="highlight-box reveal">
-          <strong>핵심 노하우 — 건조 프로토콜:</strong><br>
-          저온 식품건조기 60℃ 내외, 0.5~1cm로 얇게 펴 4~8시간, 수분 10% 이하(손에서 부서지는 질감)까지.<br>
-          <strong>당일 수거·당일 건조, 건조 후 밀폐 보관.</strong> 수분 잔류 시 24시간 내 곰팡이 ~70%.
-          <span class="source">출처: 생활정보 보도 종합</span>
-        </div>
-        <div class="highlight-box reveal">
-          <strong>생산 시뮬레이션:</strong> 1배치 50개 / 1일 1배치 × 20일 = 월 약 1,000개.<br>
-          팀 카페 일 150잔 → 젖은 커피박 약 3kg/일 = 1배치분 → "공급 = 생산능력" 맞물림.<br>
-          <strong>1차 펀딩 500개는 약 10일 생산.</strong>
-          <span class="source">가정·예시</span>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ===== 제품 레시피 & 자재 소요 ===== -->
-  <div class="band-white">
-    <section id="recipe">
-      <h2 class="reveal">제품 레시피 & 자재 소요</h2>
-      <p class="section-subtitle reveal">200ml 시그니처 캔들 1개 기준 — 내용물 약 162g (가정·예시)</p>
-
-      <div class="split">
-        <div class="reveal">
-          <h3>레시피 (1개)</h3>
-          <table class="data-table">
-            <thead><tr><th>재료</th><th>투입량</th><th>비고</th></tr></thead>
-            <tbody>
-              <tr><td>소이왁스</td><td>150g</td><td>베이스</td></tr>
-              <tr><td>합성향료</td><td>12g</td><td>약 8%</td></tr>
-              <tr><td>건조 커피박</td><td>18g</td><td>왁스 혼합 8g + 토핑 10g</td></tr>
-              <tr><td>면심지</td><td>1개</td><td></td></tr>
-              <tr><td>용기</td><td>1개</td><td></td></tr>
-              <tr class="highlight-row"><td><strong>내용물 합계</strong></td><td><strong>약 162g</strong></td><td></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="reveal">
-          <h3>자재 소요 표</h3>
-          <table class="data-table">
-            <thead><tr><th>자재</th><th>1개</th><th>1배치 (50개)</th><th>1차 펀딩 (500개)</th></tr></thead>
-            <tbody>
-              <tr><td>소이왁스</td><td>150g</td><td>7.5kg</td><td>75kg</td></tr>
-              <tr><td>합성향료</td><td>12g</td><td>0.6kg</td><td>6kg</td></tr>
-              <tr><td>건조 커피박</td><td>18g</td><td>0.9kg</td><td>9kg</td></tr>
-              <tr><td>젖은 커피박 (역산)</td><td>약 60g</td><td>약 3kg</td><td>약 30kg</td></tr>
-              <tr class="highlight-row"><td>생산 소요</td><td>—</td><td>1일</td><td>약 10일</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="highlight-box reveal mt-3">
-        <strong>환경 임팩트:</strong> 캔들 1개 ≈ 커피 약 2.5~3잔분 커피박(건조 18g) 재활용 / 1차 펀딩 500개 ≈ 건조 커피박 약 9kg (젖은 약 30kg) 재활용.
-        <span class="source">가정·예시</span>
-      </div>
-    </section>
-  </div>
-
-  <!-- ===== 10. 원가 구조 ===== -->
-  <div class="band-white">
-    <section id="cost">
-      <h2 class="reveal">원가 구조</h2>
-      <p class="section-subtitle reveal">캔들 1개 (200ml) 기준 — 공헌이익률 약 58%</p>
-
-      <div class="split">
-        <div class="reveal">
-          <h3>① 단위 원가표</h3>
-          <table class="data-table">
-            <thead><tr><th>항목</th><th>금액</th></tr></thead>
-            <tbody>
-              <tr><td>소이왁스 150g</td><td>975원</td></tr>
-              <tr><td>합성향료 12g</td><td>3,080원</td></tr>
-              <tr><td>용기 1개</td><td>1,000원</td></tr>
-              <tr><td>면심지+심지탭+고정재</td><td>150원</td></tr>
-              <tr><td>라벨·패키지</td><td>1,500원</td></tr>
-              <tr><td>커피박</td><td><strong style="color:var(--green);">0원</strong></td></tr>
-              <tr class="highlight-row"><td>직접재료비 합계</td><td>6,705원</td></tr>
-              <tr><td>변동 포장·물류</td><td>800원</td></tr>
-              <tr><td>플랫폼 수수료 (약 8%)</td><td>1,760원</td></tr>
-              <tr class="highlight-row"><td>단위 변동비 합계</td><td>9,265원</td></tr>
-              <tr><td><strong>판매가</strong></td><td><strong>22,000원</strong></td></tr>
-              <tr class="highlight-row"><td><strong>공헌이익</strong></td><td><strong>12,735원 (약 58%)</strong></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="reveal">
-          <h3>② 예산 (6개월, 보증금 별도)</h3>
-          <table class="data-table">
-            <thead><tr><th>구분</th><th>항목</th><th>금액</th></tr></thead>
-            <tbody>
-              <tr><td rowspan="3"><strong>설립</strong></td><td><a href="https://smartstore.naver.com/pnet/products/8036947029?NaPm=ct%3Dmq3x4i9k%7Cci%3D0b07498878d0f6fdb8573317ffac6036a9926d33%7Ctr%3Dslsl%7Csn%3D2406158%7Chk%3Df28d7adbbf9719d0df85037c81e6da9d3ac85911&nl-au=df072932c0e14908910c882d4e63671d&nl-query=식품건조기" target="_blank" rel="noopener" style="color:var(--accent-brown); text-decoration:underline; text-underline-offset:3px;">식품건조기</a></td><td>20만 원</td></tr>
-              <tr><td>멜팅도구·온도계·저울</td><td>15만 원</td></tr>
-              <tr><td>몰드·초기 용기</td><td>25만 원</td></tr>
-              <tr><td>제품 안전 신고·시험비</td><td>40만 원</td></tr>
-              <tr class="highlight-row"><td colspan="2">설립자금 소계</td><td><strong>100만 원</strong></td></tr>
-              <tr><td rowspan="5"><strong>운영<br>(6개월)</strong></td><td>인건비</td><td>0원 *</td></tr>
-              <tr><td>임차료 (월 50만×6)</td><td>300만 원</td></tr>
-              <tr><td>공과금 (월 8만×6)</td><td>48만 원</td></tr>
-              <tr><td>마케팅비</td><td>180만 원</td></tr>
-              <tr><td>소모품·예비</td><td>60만 원</td></tr>
-              <tr class="highlight-row"><td colspan="2">운영 소계</td><td><strong>588만 원</strong></td></tr>
-              <tr class="highlight-row"><td colspan="2"><strong>합계</strong></td><td><strong>약 688만 원</strong></td></tr>
-            </tbody>
-          </table>
-          <span class="source">* 인건비 0: 초기 팀 직접 제작. 보증금은 회수 자산 → 별도. 가정·예시.</span>
-        </div>
-      </div>
-
-      <!-- 도넛 차트: 아래 전폭 -->
-      <h3 class="mt-4 reveal">판매가 분해 (22,000원)</h3>
-      <div class="chart-container reveal" style="max-width:400px;">
-        <canvas id="chart-donut"></canvas>
-      </div>
-    </section>
-  </div>
-
-  <!-- ===== 11. BEP ===== -->
-  <div class="band-cream">
-    <section id="bep">
-      <h2 class="reveal">손익분기점 (BEP) — 월 단위</h2>
-      <p class="section-subtitle reveal">상시 판매만으로 월 46개면 운영비 회수 — 생산능력 대비 가동률 약 5%</p>
-
-      <div class="callout-row reveal">
-        <div class="card stat-callout">
-          <div class="number">월 <span data-counter="46" data-suffix="개">0</span></div>
-          <div class="label">월 BEP (흑자 전환점)</div>
-        </div>
-        <div class="card stat-callout">
-          <div class="number">≈ <span data-counter="101" data-suffix="만 원">0</span></div>
-          <div class="label">월 BEP 매출</div>
-        </div>
-        <div class="card stat-callout">
-          <div class="number"><span data-counter="12735" data-suffix="원">0</span></div>
-          <div class="label">단위 공헌이익 (약 58%)</div>
-        </div>
-        <div class="card stat-callout">
-          <div class="number"><span data-counter="5" data-suffix="%">0</span></div>
-          <div class="label">BEP 가동률<br>(월 1,000개 대비)</div>
-        </div>
-      </div>
-
-      <div class="highlight-box reveal">
-        <strong>산출:</strong> 월 고정비 58만 원(임차 50만 + 공과금 8만, 인건비 0·마케팅 일회성 제외) ÷ 공헌이익 12,735원 ≈ <strong>약 46개/월</strong>
-      </div>
-
-      <!-- 시나리오 표 -->
-      <h3 class="mt-3 reveal">월 판매 시나리오</h3>
-      <table class="data-table reveal">
-        <thead><tr><th>월 판매</th><th>월 공헌이익</th><th>월 영업이익</th><th>초기투자(240만) 회수</th></tr></thead>
-        <tbody>
-          <tr><td>46개 (BEP)</td><td>약 59만</td><td>± 0</td><td>—</td></tr>
-          <tr><td>100개</td><td>약 127만</td><td>+69만</td><td>약 3.5개월</td></tr>
-          <tr class="highlight-row"><td>150개</td><td>약 191만</td><td>+133만</td><td>약 1.8개월</td></tr>
-        </tbody>
-      </table>
-      <span class="source">초기투자 = 시설60만 + 마케팅180만 = 약 240만 원 (일회성). 모든 수치는 가정·예시.</span>
-
-      <h3 class="mt-3 reveal">월 BEP 차트 (월 매출 vs 월 총비용)</h3>
-      <div class="chart-container reveal" style="max-width:700px;">
-        <canvas id="chart-bep"></canvas>
-      </div>
-      <p class="reveal" style="text-align:center; font-size:0.75rem; color:var(--text-secondary);">교차점 ≈ 약 46개/월 — 적은 판매로도 흑자 전환 가능한 구조</p>
-
-      <div class="highlight-box reveal mt-2">
-        <strong>전략적 의미:</strong> 생산능력 월 1,000개 대비 BEP 46개 = 가동률 약 5%만으로 흑자. 자사몰·카페·B2B 다채널 합산으로 달성하며, 펀딩은 초기 물량을 앞당기는 역할.
-        <span class="source">모든 수치는 가정·예시</span>
-      </div>
-    </section>
-  </div>
-
-  <!-- ===== 12. 마케팅 ===== -->
-  <div class="band-white">
-    <section id="marketing">
-      <h2 class="reveal">판매 & 마케팅 전략</h2>
-      <p class="section-subtitle reveal">다채널 매출 구조 — 펀딩은 신제품 런칭용 채널 중 하나</p>
-
-      <div class="funnel">
-        <div class="funnel-stage reveal reveal-delay-1">
-          <h4>🛒 자사몰·스마트스토어</h4>
-          <ul><li>상시 판매 (온라인 핵심)</li><li>정기구독·선물세트</li><li>숏폼/UGC·인스타 유입</li></ul>
-        </div>
-        <div class="funnel-stage reveal reveal-delay-2">
-          <h4>☕ 팀 카페·제휴 카페 입점</h4>
-          <ul><li>오프라인 체험·판매</li><li>카페 PB 제조 납품</li><li>실물 접점 → 신뢰도 ↑</li></ul>
-        </div>
-        <div class="funnel-stage reveal reveal-delay-3">
-          <h4>🏢 B2B · 크라우드펀딩</h4>
-          <ul><li>기업 ESG 굿즈 대량 납품</li><li>크라우드펀딩: 신제품 런칭·수요검증</li><li>단일 채널 의존 아님</li></ul>
-        </div>
-      </div>
-
-      <div class="highlight-box reveal mt-3">
-        <strong>핵심:</strong> 단일 채널 의존이 아닌 다채널 매출 구조. 펀딩은 신제품 런칭용 채널이며, 팀원이 운영하는 실제 카페가 1호 오프라인 거점으로 기능합니다. 펀딩 미달 시에도 자사몰·카페 입점·B2B로 매출이 발생합니다.
-      </div>
-    </section>
-  </div>
-
-  <!-- ===== 13. 자금 계획 ===== -->
-  <div class="band-cream">
-    <section id="funding">
-      <h2 class="reveal">자금 계획 & 조달 전략</h2>
-      <p class="section-subtitle reveal">저자본·저설비 구조 — 6개월 총 예산 약 688만 원 (보증금 별도, 모든 수치: 가정·예시)</p>
-
-      <!-- 조달 우선순위 -->
-      <h3 class="reveal">자금 조달 우선순위</h3>
-      <table class="data-table reveal">
-        <thead><tr><th>순위</th><th>조달원</th><th>역할</th><th>비고</th></tr></thead>
-        <tbody>
-          <tr><td><strong>1순위</strong></td><td>자기자본 (기존 자본금)</td><td>기본 토대 / 초기 장비·자재·운영</td><td></td></tr>
-          <tr><td><strong>2순위</strong></td><td>정부 창업지원금 (조달 추진 중)</td><td>사업화 자금 / 양산·인증·BM 고도화</td><td style="font-size:0.72rem;">예: 창업중심대학 청년 예비창업자 지원 등<br>(2026년 공고 기준, 금액 미확정)</td></tr>
-          <tr><td><strong>3순위</strong></td><td>크라우드펀딩 (선주문)</td><td>초기 판매·마케팅·수요검증 채널</td><td style="font-size:0.72rem;">필수 전제 아님, 다채널 중 하나</td></tr>
-        </tbody>
-      </table>
-      <span class="source">출처: 창업진흥원 2026년 공고 기준 (조달 추진 중인 계획, 확보 아님)</span>
-
-      <div class="highlight-box reveal mt-3">
-        이 사업은 <strong>저자본·저설비 구조</strong>로 자기자본과 정부 창업지원금만으로 시작 가능합니다. 크라우드펀딩은 필수 전제가 아니라 수요검증·초기판매 채널 중 하나이며, 펀딩 미달 시에도 자사몰·카페 입점·B2B로 매출이 발생합니다.<br>
-        <span style="color:var(--gold); font-weight:600;">※ 팀은 만 29세 이하 생애최초 예비창업자로, 청년창업 지원 대상에 해당합니다.</span>
-      </div>
-
-      <div class="split mt-4">
-        <div class="reveal">
-          <h3>예산 (6개월 기준, 보증금 별도)</h3>
-          <table class="data-table">
-            <thead><tr><th>구분</th><th>항목</th><th>금액</th><th>조달</th></tr></thead>
-            <tbody>
-              <tr><td rowspan="4"><strong>설립자금</strong></td><td><a href="https://smartstore.naver.com/pnet/products/8036947029?NaPm=ct%3Dmq3x4i9k%7Cci%3D0b07498878d0f6fdb8573317ffac6036a9926d33%7Ctr%3Dslsl%7Csn%3D2406158%7Chk%3Df28d7adbbf9719d0df85037c81e6da9d3ac85911&nl-au=df072932c0e14908910c882d4e63671d&nl-query=식품건조기" target="_blank" rel="noopener" style="color:var(--accent-brown); text-decoration:underline; text-underline-offset:3px;">식품건조기</a></td><td>20만 원</td><td>자기자본</td></tr>
-              <tr><td>멜팅도구·온도계·저울</td><td>15만 원</td><td>자기자본</td></tr>
-              <tr><td>몰드·초기 용기</td><td>25만 원</td><td>자기자본</td></tr>
-              <tr><td>제품 안전 신고·시험비 (KTR 등)</td><td>40만 원</td><td>자기자본</td></tr>
-              <tr class="highlight-row"><td colspan="2">설립자금 소계</td><td><strong>100만 원</strong></td><td></td></tr>
-              <tr><td rowspan="5"><strong>운영자금<br>(6개월)</strong></td><td>인건비</td><td>0원 *</td><td>—</td></tr>
-              <tr><td>임차료 (월 50만×6)</td><td>300만 원</td><td>자기자본·매출</td></tr>
-              <tr><td>공과금·관리비 (월 8만×6) ※전기 비중</td><td>48만 원</td><td>매출</td></tr>
-              <tr><td>마케팅비 (디자인+촬영+콘텐츠)</td><td>180만 원</td><td>자기자본·매출</td></tr>
-              <tr><td>소모품·예비 (초도 자재·포장)</td><td>60만 원</td><td>자기자본</td></tr>
-              <tr class="highlight-row"><td colspan="2">운영자금 소계</td><td><strong>588만 원</strong></td><td></td></tr>
-              <tr class="highlight-row"><td colspan="2"><strong>전체 합계</strong></td><td><strong>약 688만 원</strong></td><td>자기자본+지원금+매출</td></tr>
-            </tbody>
-          </table>
-          <span class="source">* 인건비: 초기 팀 직접 제작, 수익 안정화 후 반영. 임대보증금은 회수 자산 → 비용 합계 제외 (별도 관리). 모든 수치는 가정·예시.</span>
-        </div>
-        <div>
-          <h3 class="reveal">예산 사용처</h3>
-          <div class="chart-container">
-            <canvas id="chart-funding-pie"></canvas>
-          </div>
-          <span class="source" style="display:block; text-align:center;">예산 항목별 비중 (단위: 만 원) / 가정·예시</span>
-
-          <div class="highlight-box reveal mt-3">
-            <strong>월 고정비 약 58만 원</strong> (임차 50만 + 공과금 8만) → 월 46개 판매로 흑자 전환.<br>
-            초기투자(시설60만+마케팅180만=240만)은 월 100개 판매 시 약 3.5개월 회수.
-            <span class="source">가정·예시</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- ===== 14. 리스크 ===== -->
-  <div class="band-white">
-    <section id="risk">
-      <h2 class="reveal">리스크 & 대응</h2>
-      <p class="section-subtitle reveal">예상 리스크를 사전에 식별하고 대응 방안을 준비합니다</p>
-
-      <div class="reveal" style="overflow-x:auto;">
-        <table class="data-table">
-          <thead><tr><th>위험도</th><th>리스크</th><th>대응 방안</th></tr></thead>
+      <h3 class="subsection-title fade-up">산업용 장비 대비 비교</h3>
+      <div class="equip-compare fade-up">
+        <table class="compare-table">
+          <thead>
+            <tr><th>구분</th><th>산업용 사출기</th><th>프레셔스 플라스틱 사출기</th></tr>
+          </thead>
           <tbody>
-            <tr><td><span class="risk-badge risk-mid">중</span></td><td>신규성 부족 / 유사 제품</td><td>로컬·PB·여름방충 차별화, 카페 파일럿 진정성</td></tr>
-            <tr><td><span class="risk-badge risk-high">고</span></td><td>곰팡이·위생 문제</td><td>저온건조 표준화 (수분 10% 이하), QC 프로세스</td></tr>
-            <tr><td><span class="risk-badge risk-mid">중</span></td><td>수요 불확실</td><td>펀딩 선검증 → 재고·자본 리스크 최소화</td></tr>
-            <tr><td><span class="risk-badge risk-low">저</span></td><td>원료(커피박) 확장성</td><td>제휴카페·지자체 수거망 확대</td></tr>
-            <tr><td><span class="risk-badge risk-mid">중</span></td><td>효능표시 법규 리스크</td><td>단정·살충 표현 회피, "은은한 탈취감" 수준 한정</td></tr>
-            <tr><td><span class="risk-badge risk-low">저</span></td><td>제품 안전 신고 (생활화학제품)</td><td>판매 전 안전확인대상생활화학제품 적합확인·신고 완료 예정. 살충·살균·박멸 표현 배제.</td></tr>
+            <tr><td>가격</td><td>수천만~수억원</td><td>약 50~150만원</td></tr>
+            <tr><td>설치 공간</td><td>공장 필수</td><td>작업실·창업보육센터 가능</td></tr>
+            <tr><td>전력</td><td>대용량 삼상</td><td>220V 단상 (800W)</td></tr>
+            <tr><td>생산 규모</td><td>대량생산 적합</td><td>소량 다품종 적합 (굿즈에 최적)</td></tr>
+            <tr><td>진입 장벽</td><td>높음</td><td>낮음 (오픈소스)</td></tr>
+            <tr><td>디자인 자유도</td><td>금형 교체 고비용</td><td>금형 자체 제작 가능</td></tr>
           </tbody>
         </table>
-        <span class="source">출처: 생활화학제품 및 살생물제의 안전관리에 관한 법률 / 한국환경산업기술원·KTR</span>
-      </div>
-    </section>
-  </div>
-  <!-- ===== 15. 기대효과 및 향후 방향 ===== -->
-  <div class="band-cream">
-    <section id="impact">
-      <h2 class="reveal">기대효과 및 향후 방향</h2>
-      <p class="section-subtitle reveal">환경·경제·사회 3가지 측면의 임팩트 + 성장 로드맵</p>
-
-      <h3 class="reveal">기대효과</h3>
-      <div class="card-grid-3">
-        <div class="card icon-card reveal reveal-delay-1">
-          <div class="icon">♻️</div>
-          <h4>환경</h4>
-          <p>캔들 1개 ≈ 커피 약 2.5~3잔분 커피박(건조 18g) 재활용<br>1차 500개 ≈ 건조 약 9kg (젖은 약 30kg) 재활용</p>
-          <span class="source">가정·예시</span>
-        </div>
-        <div class="card icon-card reveal reveal-delay-2">
-          <div class="icon">💰</div>
-          <h4>경제</h4>
-          <p>제휴 카페에 부가수익 창출<br>커피박 폐기비용 절감 (수거→재활용)</p>
-        </div>
-        <div class="card icon-card reveal reveal-delay-3">
-          <div class="icon">🤝</div>
-          <h4>사회·소비자</h4>
-          <p>가치소비 만족 + 로컬 순환 경제 기여<br>동네 카페와 소비자를 연결하는 순환 스토리</p>
-        </div>
       </div>
 
-      <h3 class="mt-4 reveal">향후 방향</h3>
-      <div class="timeline reveal">
-        <div class="timeline-item">
-          <span class="phase-label">단기</span>
-          <h4>채널 확립</h4>
-          <ul><li>자사몰·스마트스토어 상시판매</li><li>팀·제휴 카페 입점 확대</li><li>여름 방충 에디션 출시</li></ul>
+      <h3 class="subsection-title fade-up">생산성 시나리오</h3>
+      <div class="equip-scenario fade-up">
+        <div class="scenario-card">
+          <h4>보수적 시나리오</h4>
+          <ul>
+            <li>시간당 10회 사출 (초보 단계, 냉각 대기 포함)</li>
+            <li>1일 4시간 가동 = 약 40개/일</li>
+            <li>월 25일 기준 = 약 1,000개/월</li>
+          </ul>
         </div>
-        <div class="timeline-item">
-          <span class="phase-label">중기</span>
-          <h4>B2B 확장</h4>
-          <ul><li>카페 PB 제조 확대</li><li>기업 ESG 굿즈 B2B</li></ul>
+        <div class="scenario-card">
+          <h4>표준 시나리오</h4>
+          <ul>
+            <li>시간당 20회 사출 (숙련 후)</li>
+            <li>1일 6시간 가동 = 약 120개/일</li>
+            <li>월 25일 기준 = 약 3,000개/월</li>
+          </ul>
         </div>
-        <div class="timeline-item">
-          <span class="phase-label">장기</span>
-          <h4>라인 확장</h4>
-          <ul><li>디퓨저·스크럽 등 라인 확장</li><li>수거 네트워크·지자체 연계</li></ul>
+        <div class="scenario-card">
+          <h4>참고: BEP 대비</h4>
+          <ul>
+            <li>손익분기: 월 약 277개</li>
+            <li>보수적 시나리오로도 BEP의 약 3.6배 생산 가능</li>
+            <li>핵심 병목: 전처리(세척·분류)와 판매</li>
+          </ul>
         </div>
       </div>
 
-      <div class="highlight-box reveal mt-3" style="text-align:center;">
-        <strong>"동네 카페가 도는 커피 순환 경제 — 카페 → 향초 → 거름 → 다시 카페."</strong>
+      <div class="equip-source fade-up">
+        <p><strong>출처:</strong> Precious Plastic 공식 사이트(preciousplastic.com) — Basic Machines 기술 사양, Injection Machine v3 스펙, Shredder Pro 스펙. 비용은 네덜란드 기준 자재비이며 국내 제작 시 인건비·물류비 별도. 환율 1유로 ≈ 1,450원 적용.</p>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
-  <!-- ===== 16. 비전 ===== -->
-  <div class="vision-wrapper">
-    <section id="vision" class="vision-section">
-      <h2 class="reveal">비전</h2>
-      <p class="section-subtitle reveal">"동네 카페가 도는 커피 순환 경제"</p>
+  <!-- SECTION 5: 제품 소개 -->
+  <section class="section section-gray" id="products">
+    <div class="container">
+      <h2 class="section-title fade-up">제품 소개</h2>
+      <p class="section-subtitle fade-up">데스크 굿즈 3종 · 단품 9,900원 / 세트 24,900원</p>
+      <div class="product-grid">
+        <div class="product-card fade-up" id="prod1">
+          <div class="prod-image">
+            <img src="고래꼬리 멀티 케이블 홀더.png" alt="윤슬의 이음 멀티 케이블 홀더 제품 이미지">
+          </div>
+          <div class="prod-body">
+            <div class="prod-price">9,900원</div>
+            <h3>윤슬의 이음 : 멀티 케이블 홀더</h3>
+            <p class="prod-short">자석 내장 · 듀얼 슬릿 · 논슬립 패드</p>
+            <ul class="prod-features">
+              <li>윤슬(물결에 반사되는 빛)을 형상화한 묵직한 통플라스틱 굿즈</li>
+              <li>네오디움 자석 매립 → 맥세이프 충전선·에어팟 부착</li>
+              <li>듀얼 슬릿(3mm/5mm)으로 모든 케이블 고정</li>
+              <li>바닥 리유저블 논슬립 겔패드(물 세척 재사용)</li>
+              <li>제품당 해양 폐플라스틱 약 80g 사용</li>
+            </ul>
+          </div>
+        </div>
+        <div class="product-card fade-up" id="prod2">
+          <div class="prod-image">
+            <img src="파도 가방 걸이.png" alt="파도의 찰나 가방걸이 제품 이미지">
+          </div>
+          <div class="prod-body">
+            <div class="prod-price">9,900원</div>
+            <h3>파도의 찰나 : 가방걸이</h3>
+            <p class="prod-short">2-in-1 · 백참 활용 · 최대 6~8kg</p>
+            <ul class="prod-features">
+              <li>파도 포말을 S자로 형상화한 2-in-1 데스크 훅</li>
+              <li>톱니형 실리콘 패드 — 유리·대리석에서도 미끄러지지 않음</li>
+              <li>가방끈 이탈 방지턱 적용</li>
+              <li>평소엔 가방에 거는 패션 키링(백참)으로 사용</li>
+              <li>제품당 해양 폐플라스틱 약 80g 사용</li>
+            </ul>
+          </div>
+        </div>
+        <div class="product-card fade-up" id="prod3">
+          <div class="prod-image">
+            <img src="고래의 숨결.png" alt="고래의 숨결 멀티 데스크 스텐드 제품 이미지">
+          </div>
+          <div class="prod-body">
+            <div class="prod-price">9,900원</div>
+            <h3>고래의 숨결 : 멀티 데스크 스텐드</h3>
+            <p class="prod-short">오거나이저 · 펜슬 홀더 · 에어팟 홈</p>
+            <ul class="prod-features">
+              <li>고래 등 곡선을 따라 다양한 크기·깊이의 슬롯 배치</li>
+              <li>V자 슬릿(인공눈물 4~5개), 계단식 원형 홀(볼펜/애플펜슬)</li>
+              <li>에어팟 전용 홈</li>
+              <li>재생 플라스틱 마블링으로 오브제 역할</li>
+              <li>제품당 해양 폐플라스틱 약 80g 사용</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <div class="callout-row reveal" style="margin:var(--space-5) 0;">
-        <div class="card stat-callout" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
-          <div class="number" style="color:var(--gold);"><span data-counter="500" data-suffix="개">0</span></div>
-          <div class="label" style="color:var(--text-white-soft);">1차 목표 판매 (다채널 합산)</div>
+  <!-- SECTION 6: 시장 분석 -->
+  <section class="section" id="market">
+    <div class="container">
+      <h2 class="section-title fade-up">시장 분석</h2>
+      <p class="section-subtitle fade-up">TAM → SAM → SOM</p>
+
+      <h3 class="subsection-title fade-up">시장 수요 근거</h3>
+      <div class="trend-grid fade-up">
+        <div class="trend-card">
+          <div class="trend-icon">📊</div>
+          <p>데스크테리어(책상 꾸미기)가 MZ세대 취미·소비 카테고리로 정착. 성인 디자인 문구가 새 소비 코드로 부상.</p>
         </div>
-        <div class="card stat-callout" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
-          <div class="number" style="color:var(--gold);"><span data-counter="1100" data-suffix="만 원">0</span></div>
-          <div class="label" style="color:var(--text-white-soft);">목표 매출 (가정)</div>
+        <div class="trend-card">
+          <div class="trend-icon">🔌</div>
+          <p>케이블이 지저분하게 엉키는 문제가 데스크테리어 입문의 대표 동기로 언급 → 케이블 홀더의 존재 이유.</p>
         </div>
-        <div class="card stat-callout" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);">
-          <div class="number" style="color:var(--gold);"><span data-counter="58" data-suffix="%">0</span></div>
-          <div class="label" style="color:var(--text-white-soft);">공헌이익률</div>
+        <div class="trend-card">
+          <div class="trend-icon">🌱</div>
+          <p>MZ세대 약 71%가 "가격·조건이 같다면 친환경 활동 기업 제품을 우선 구매하겠다"고 응답.</p>
+        </div>
+        <div class="trend-card">
+          <div class="trend-icon">🎒</div>
+          <p>프라이탁(FREITAG): 폐방수천으로 '나만의 아이템'을 만들어 가치소비 시장을 연 대표 벤치마크. 바다봄의 마블링과 같은 전략.</p>
         </div>
       </div>
 
-      <div class="reveal" style="max-width:560px; margin:0 auto; text-align:center;">
-        <p style="font-size:1rem; color:var(--text-white-soft); line-height:1.8;">
-          매일 버려지는 커피박을, 향과 가치를 담은 향초로 되살립니다.<br>
-          카페에서 시작해, 동네로, 도시로 이어지는 <strong style="color:var(--gold);">커피 순환 경제</strong>를 만들어 갑니다.
-        </p>
-        <p style="margin-top:var(--space-5); font-size:0.8125rem; color:rgba(255,255,255,0.4);">
-          RE:PIUM — 다시, 피움 | 임상민, 서정빈
-        </p>
+      <h3 class="subsection-title fade-up">시장 규모 퍼널</h3>
+      <div class="market-funnel fade-up">
+        <div class="mf-item mf-tam">
+          <div class="mf-label">TAM</div>
+          <div class="mf-desc">국내 MZ세대 친환경·데스크테리어 라이프스타일 굿즈 시장</div>
+        </div>
+        <div class="mf-item mf-sam">
+          <div class="mf-label">SAM</div>
+          <div class="mf-desc">해양쓰레기 소재 + 20~30대 직장인·대학생 + 온라인·펀딩·B2B 채널</div>
+        </div>
+        <div class="mf-item mf-som">
+          <div class="mf-label">SOM</div>
+          <div class="mf-desc">연간 수주 가능 시장 (Bottom-up 추정)</div>
+        </div>
       </div>
-    </section>
-  </div>
+      <h3 class="subsection-title fade-up">SOM 매출 추정 (3개년)</h3>
+      <div class="market-chart fade-up">
+        <div class="mc-bar">
+          <div class="mc-fill" data-width="30" data-value="27,000,000"></div>
+          <div class="mc-label">1년 차</div>
+          <div class="mc-amount">약 2,700만원</div>
+        </div>
+        <div class="mc-bar">
+          <div class="mc-fill" data-width="60" data-value="54,000,000"></div>
+          <div class="mc-label">2년 차</div>
+          <div class="mc-amount">약 5,400만원</div>
+        </div>
+        <div class="mc-bar">
+          <div class="mc-fill" data-width="100" data-value="90,000,000"></div>
+          <div class="mc-label">3년 차</div>
+          <div class="mc-amount">약 9,000만원+</div>
+        </div>
+      </div>
+      <p class="market-note fade-up">※ 핵심 변수: 생산 캐파 + 판매 채널 전환율</p>
+    </div>
+  </section>
 
-</main>
+  <!-- SECTION 7: 수익 구조 -->
+  <section class="section section-gray" id="revenue">
+    <div class="container">
+      <h2 class="section-title fade-up">수익 구조</h2>
+      <p class="section-subtitle fade-up">제품 1개는 어떻게 수익이 되는가?</p>
+      <div class="revenue-layout fade-up">
+        <div class="rev-chart-area">
+          <canvas id="revenueChart" width="280" height="280" aria-label="수익 구조 도넛 차트"></canvas>
+        </div>
+        <div class="rev-breakdown">
+          <table class="rev-table">
+            <thead>
+              <tr><th>항목</th><th>금액</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>판매가</td><td class="text-bold">9,900원</td></tr>
+              <tr><td>소재비</td><td>400원</td></tr>
+              <tr><td>제작 인건비</td><td>2,000원</td></tr>
+              <tr><td>부자재</td><td>1,800원</td></tr>
+              <tr><td>포장·배송</td><td>1,500원</td></tr>
+              <tr><td>채널 수수료 (15%)</td><td>1,485원</td></tr>
+              <tr class="rev-highlight"><td>기여이익</td><td class="text-bold text-green">약 2,715원 (27%)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- Scripts -->
-<script src="js/data.js"></script>
-<script src="js/charts.js"></script>
-<script src="js/main.js"></script>
+  <!-- SECTION 7-2: 경쟁 분석 -->
+  <section class="section section-gray" id="competition">
+    <div class="container">
+      <h2 class="section-title fade-up">경쟁 분석</h2>
+      <p class="section-subtitle fade-up">대기업 패션도, 기념품 굿즈도, 환경 없는 문구도 아닌 — 그 교집합</p>
 
+      <div class="comp-table-wrap fade-up">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th>① 대기업 패션<br><small>플리츠마마·노스페이스</small></th>
+              <th>② PP 사회적기업<br><small>병뚜껑 키링·화분</small></th>
+              <th>③ 일반 데스크굿즈</th>
+              <th class="comp-highlight-col">바다봄</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="comp-row-label">소재</td>
+              <td>해양 재생원사</td>
+              <td>폐플라스틱(HDPE)</td>
+              <td>새 플라스틱</td>
+              <td class="comp-highlight-col">여수 해양 폐플라스틱</td>
+            </tr>
+            <tr>
+              <td class="comp-row-label">제품</td>
+              <td>가방·의류</td>
+              <td>키링·화분(기념품)</td>
+              <td>케이블홀더·정리함</td>
+              <td class="comp-highlight-col">기능성 데스크 굿즈</td>
+            </tr>
+            <tr>
+              <td class="comp-row-label">실용성</td>
+              <td>중</td>
+              <td>낮음</td>
+              <td>높음</td>
+              <td class="comp-highlight-col"><strong>높음</strong></td>
+            </tr>
+            <tr>
+              <td class="comp-row-label">환경 스토리</td>
+              <td>강함</td>
+              <td>강함</td>
+              <td>없음</td>
+              <td class="comp-highlight-col"><strong>강함 + 실측 g</strong></td>
+            </tr>
+            <tr>
+              <td class="comp-row-label">디자인</td>
+              <td>보통</td>
+              <td>약함</td>
+              <td>균일</td>
+              <td class="comp-highlight-col"><strong>고래 IP + 마블링</strong></td>
+            </tr>
+            <tr>
+              <td class="comp-row-label">가격</td>
+              <td>높음</td>
+              <td>낮음</td>
+              <td>낮음~중</td>
+              <td class="comp-highlight-col"><strong>9,900원</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="comp-conclusion fade-up">"다섯 축에서 모두 강점을 가진 것은 <strong>바다봄</strong>뿐."</p>
+      <p class="comp-footnote fade-up">* 참고: SK에코플랜트, S-OIL 스토리, 우리동네플라스틱연구소 등</p>
+
+      <h3 class="subsection-title fade-up">바다봄의 이점</h3>
+      <div class="advantage-grid fade-up">
+        <div class="adv-card">
+          <div class="adv-icon">🎯</div>
+          <h4>기능으로 승부</h4>
+          <p>기념품(②)이 아닌 책상의 진짜 문제 해결 — "필요해서 사는데 알고 보니 환경"</p>
+        </div>
+        <div class="adv-card">
+          <div class="adv-icon">🐋</div>
+          <h4>브랜드 IP</h4>
+          <p>고래 + 마블링으로 '나만의 아이템' — ②에는 없는 소유욕</p>
+        </div>
+        <div class="adv-card">
+          <div class="adv-icon">📊</div>
+          <h4>실용 + 환경 동시</h4>
+          <p>일반 문구(③)에는 없는 g 실측 임팩트 — 측정 가능한 가치</p>
+        </div>
+        <div class="adv-card">
+          <div class="adv-icon">💰</div>
+          <h4>가격 접근성</h4>
+          <p>대기업 가방(①)보다 부담 없는 9,900원 — 누구나 참여 가능</p>
+        </div>
+      </div>
+
+      <div class="comp-limitation fade-up">
+        <h4>솔직한 한계</h4>
+        <p>"우리는 최초가 아니다" — ②번은 이미 판매 중이고, 플리츠마마는 여수 해양플라스틱을 이미 사용하고 있다.</p>
+        <p><strong>"그래서 우리는 '여수 + 데스크 굿즈 + 고래 IP'라는 더 좁고 명확한 자리를 차지한다."</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: 손익분기점 -->
+  <section class="section" id="bep">
+    <div class="container">
+      <h2 class="section-title fade-up">손익분기점 분석</h2>
+      <p class="section-subtitle fade-up">월 몇 개를 팔아야 하는가?</p>
+
+      <h3 class="subsection-title fade-up">월 고정비 구조 (전남대 여수 창업보육센터 입주 기준)</h3>
+      <div class="fixed-cost-table fade-up">
+        <table class="rev-table">
+          <thead>
+            <tr><th>항목</th><th>금액</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>작업장 임대료 (평당 약 5,000원)</td><td>150,000원</td></tr>
+            <tr><td>전기·수도·관리비 (기계 가동 포함)</td><td>150,000원</td></tr>
+            <tr><td>통신·소프트웨어·웹</td><td>150,000원</td></tr>
+            <tr><td>보험·세무·기타</td><td>150,000원</td></tr>
+            <tr><td>마케팅 기본비</td><td>150,000원</td></tr>
+            <tr class="rev-highlight"><td>합계 (생존선 고정비)</td><td class="text-bold">750,000원</td></tr>
+          </tbody>
+        </table>
+        <p class="table-note">※ 전남대학교 창업보육센터 입주기업 모집 공고 기준 (국유재산 사용료 평당 약 5,000원/월)</p>
+      </div>
+
+      <div class="bep-grid fade-up">
+        <div class="bep-card">
+          <div class="bep-label">월 고정비</div>
+          <div class="bep-value">750,000원</div>
+          <div class="bep-desc">창업보육센터 기준</div>
+        </div>
+        <div class="bep-card">
+          <div class="bep-label">÷ 기여이익</div>
+          <div class="bep-value">2,715원</div>
+          <div class="bep-desc">제품 1개당</div>
+        </div>
+        <div class="bep-card">
+          <div class="bep-label">= 손익분기</div>
+          <div class="bep-value">월 약 277개</div>
+          <div class="bep-desc">월 매출 약 274만원</div>
+        </div>
+      </div>
+      <div class="bep-highlight fade-up">
+        <div class="bep-big">하루 약 11개</div>
+        <div class="bep-big-desc">판매 시 손익분기점 달성</div>
+      </div>
+
+      <h3 class="subsection-title fade-up">손익분기점 그래프</h3>
+      <div class="bep-chart-wrap fade-up">
+        <canvas id="bepChart" width="700" height="360" aria-label="손익분기점 그래프 - 매출과 총비용 교차점"></canvas>
+        <div class="bep-chart-legend">
+          <span class="bcl-item"><span class="bcl-dot bcl-revenue"></span>매출</span>
+          <span class="bcl-item"><span class="bcl-dot bcl-cost"></span>총비용 (고정비 + 변동비)</span>
+          <span class="bcl-item"><span class="bcl-dot bcl-fixed"></span>고정비</span>
+          <span class="bcl-item"><span class="bcl-dot bcl-bep"></span>BEP (277개)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 9: 사회적 가치 -->
+  <section class="section section-gray" id="impact">
+    <div class="container">
+      <h2 class="section-title fade-up">사회적 가치</h2>
+      <p class="section-subtitle fade-up">측정 가능한 환경 임팩트</p>
+      <div class="impact-grid fade-up">
+        <div class="impact-card">
+          <div class="ic-number">80g</div>
+          <div class="ic-desc">제품 1개당<br>여수 바다 정화량</div>
+        </div>
+        <div class="impact-card">
+          <div class="ic-number">1.5톤</div>
+          <div class="ic-desc">3년간 목표<br>재자원화량</div>
+        </div>
+        <div class="impact-card">
+          <div class="ic-number">100%</div>
+          <div class="ic-desc">실측·공시<br>그린워싱 방지</div>
+        </div>
+      </div>
+      <div class="impact-principles fade-up">
+        <h3>그린워싱 방지 원칙</h3>
+        <ol>
+          <li>제품 1개당 사용량(g)은 <strong>실투입 중량 계량</strong>으로 산정</li>
+          <li>소재 함량과 산정 근거를 <strong>제품·웹페이지에 공개</strong></li>
+          <li>연 1회 <strong>외부 기관 검증</strong></li>
+          <li>목표 미달 시에도 <strong>불리한 결과 투명 공개</strong></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 10: BMC -->
+  <section class="section" id="bmc">
+    <div class="container">
+      <h2 class="section-title fade-up">비즈니스 모델 캔버스</h2>
+      <div class="bmc-grid fade-up">
+        <div class="bmc-card bmc-kp">
+          <h4>핵심 파트너</h4>
+          <p>여수시·어촌계<br>전남대 창업보육센터<br>프레셔스 플라스틱<br>섬박람회</p>
+        </div>
+        <div class="bmc-card bmc-ka">
+          <h4>핵심 활동</h4>
+          <p>수거·세척·분쇄·사출<br>디자인·마케팅<br>펀딩·임팩트 검증</p>
+        </div>
+        <div class="bmc-card bmc-kr">
+          <h4>핵심 자원</h4>
+          <p>4개 전공 팀<br>PP 장비<br>폐기물 수급·브랜드</p>
+        </div>
+        <div class="bmc-card bmc-vp">
+          <h4>가치 제안</h4>
+          <p>실용 기능<br>+ 마블링 디자인<br>+ 측정 가능 임팩트</p>
+        </div>
+        <div class="bmc-card bmc-cr">
+          <h4>고객 관계</h4>
+          <p>실측 수거 리포트<br>SNS 커뮤니티<br>마블링 소속감</p>
+        </div>
+        <div class="bmc-card bmc-ch">
+          <h4>채널</h4>
+          <p>펀딩 → 자사몰<br>→ 편집숍<br>→ B2B ESG</p>
+        </div>
+        <div class="bmc-card bmc-cs">
+          <h4>고객</h4>
+          <p>20~30대 직장인<br>가치소비 MZ<br>B2B ESG 기관</p>
+        </div>
+        <div class="bmc-card bmc-cost">
+          <h4>비용 구조</h4>
+          <p>고정비 월 75만원 / 변동비(소재·인건·포장·배송·수수료) / 설비 400~1,000만원</p>
+        </div>
+        <div class="bmc-card bmc-rev">
+          <h4>수익원</h4>
+          <p>제품 판매(9,900원/세트 24,900원) / B2B 납품 / 재생 펠릿 판매</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 11: 팀 -->
+  <section class="section section-gray" id="team">
+    <div class="container">
+      <h2 class="section-title fade-up">팀 역량</h2>
+      <p class="section-subtitle fade-up">4개 전공이 사업의 4단계를 책임집니다</p>
+      <div class="team-grid fade-up">
+        <div class="team-card">
+          <div class="tc-role">판매</div>
+          <h4>전자상거래 <span class="tc-count">3명</span></h4>
+          <p>온라인 판매·펀딩 운영<br>마케팅·브랜딩 전략</p>
+        </div>
+        <div class="team-card">
+          <div class="tc-role">유통</div>
+          <h4>물류교통 <span class="tc-count">1명</span></h4>
+          <p>수거 동선 최적화<br>배송·재고 관리</p>
+        </div>
+        <div class="team-card">
+          <div class="tc-role">소재</div>
+          <h4>석유화학 <span class="tc-count">1명</span></h4>
+          <p>폐플라스틱 소재 분석<br>용융·재생 공정</p>
+        </div>
+        <div class="team-card">
+          <div class="tc-role">검증</div>
+          <h4>해양경찰 <span class="tc-count">1명</span></h4>
+          <p>해양 안전·수거 현장<br>임팩트 검증·감시</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 12: 로드맵 -->
+  <section class="section" id="roadmap">
+    <div class="container">
+      <h2 class="section-title fade-up">3개년 로드맵</h2>
+      <div class="roadmap fade-up">
+        <div class="rm-item">
+          <div class="rm-year">2026</div>
+          <div class="rm-tag">MVP &amp; 검증</div>
+          <ul>
+            <li>프레셔스 플라스틱 장비 확보</li>
+            <li>데스크 3종 출시</li>
+            <li>크라우드펀딩 수요 검증</li>
+            <li>여수세계섬박람회 MVP 테스트</li>
+          </ul>
+        </div>
+        <div class="rm-item">
+          <div class="rm-year">2027</div>
+          <div class="rm-tag">유통 확대</div>
+          <ul>
+            <li>자사몰·편집숍 입점 확대</li>
+            <li>B2B 단체 납품 본격화</li>
+            <li>재생 펠릿 판매 개시</li>
+          </ul>
+        </div>
+        <div class="rm-item">
+          <div class="rm-year">2028</div>
+          <div class="rm-tag">대량생산</div>
+          <ul>
+            <li>제품군 확장 (커스텀·한정판)</li>
+            <li>생산 캐파 확대</li>
+            <li>B2B 대량생산 체제</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 13: 리스크 -->
+  <section class="section section-gray" id="risk">
+    <div class="container">
+      <h2 class="section-title fade-up">리스크 및 대응</h2>
+      <p class="section-subtitle fade-up">인지된 약점과 극복 방안</p>
+      <div class="accordion fade-up">
+        <div class="acc-item">
+          <button class="acc-header" aria-expanded="false">
+            <span class="acc-q">전처리 어려움</span>
+            <span class="acc-toggle">+</span>
+          </button>
+          <div class="acc-body">
+            <p><strong>대응:</strong> 석유화학 전공자가 소재·공정 담당. 종류별 선별 검증 프로토콜 수립. 프레셔스 플라스틱 커뮤니티 노하우 활용.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-header" aria-expanded="false">
+            <span class="acc-q">설비 투자 부담</span>
+            <span class="acc-toggle">+</span>
+          </button>
+          <div class="acc-body">
+            <p><strong>대응:</strong> 오픈소스(프레셔스 플라스틱) 장비로 비용 절감. 창업보육센터 입주로 고정비 최소화. 창업지원금 활용.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-header" aria-expanded="false">
+            <span class="acc-q">그린워싱 우려</span>
+            <span class="acc-toggle">+</span>
+          </button>
+          <div class="acc-body">
+            <p><strong>대응:</strong> 제품당 사용 폐기물 g 실측·공시. 연 1회 제3자 검증. 불리한 결과도 투명 공개.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-header" aria-expanded="false">
+            <span class="acc-q">수요 불확실성</span>
+            <span class="acc-toggle">+</span>
+          </button>
+          <div class="acc-body">
+            <p><strong>대응:</strong> 3단계 수요 검증 — ① 크라우드펀딩 사전 알림 ② 섬박람회 팝업 MVP ③ 기관 ESG 구매 의향 타진</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 13-2: 마케팅 전략 -->
+  <section class="section" id="marketing">
+    <div class="container">
+      <h2 class="section-title fade-up">마케팅 전략</h2>
+      <p class="section-subtitle fade-up">제품의 '비포&애프터'가 그 자체로 콘텐츠</p>
+      <div class="funnel-grid fade-up">
+        <div class="funnel-step">
+          <div class="fs-stage">인지</div>
+          <p>릴스·숏폼 — 폐기물→고래 굿즈 비포&애프터, 제작 과정 영상</p>
+        </div>
+        <div class="funnel-step">
+          <div class="fs-stage">흥미</div>
+          <p>데스크테리어 콘텐츠, "책상 위 선 지옥 해결" 직장인 공감</p>
+        </div>
+        <div class="funnel-step">
+          <div class="fs-stage">구매</div>
+          <p>펀딩 한정 마블링 + 3종 세트 할인, 단품 9,900원 진입</p>
+        </div>
+        <div class="funnel-step">
+          <div class="fs-stage">충성</div>
+          <p>실측 수거 리포트, 한정 컬러 재구매, 후기 이벤트</p>
+        </div>
+      </div>
+      <h3 class="subsection-title fade-up">채널 전략</h3>
+      <div class="channel-list fade-up">
+        <div class="ch-item"><strong>SNS (핵심)</strong> — 인스타·릴스 중심, 데스크테리어 해시태그 공략</div>
+        <div class="ch-item"><strong>크라우드펀딩</strong> — 초기 수요 검증 + 자금 확보 + 한정판 마케팅</div>
+        <div class="ch-item"><strong>오프라인</strong> — 2026 여수세계섬박람회 연계 팝업 (주제: '섬, 바다와 미래를 잇다')</div>
+        <div class="ch-item"><strong>B2B</strong> — 기업·기관 ESG 굿즈·단체 기념품 (물량 단위 매출)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 14: 마무리 -->
+  <section class="section section-closing" id="closing">
+    <div class="container">
+      <div class="closing-content fade-up">
+        <h2>"디지털로 엉킨 일상의 선을 풀고,<br>바다의 생명선을 잇다."</h2>
+        <p>바다봄은 해양 폐기물을 단순히 재활용하는 것이 아니라,<br>가치 있는 제품으로 순환시키는 모델을 제안합니다.</p>
+        <div class="closing-meta">
+          <span>바다봄 BADA BOM</span>
+          <span>소셜벤처 사업계획서</span>
+          <span>2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="references fade-up">
+        <h3>출처 (References)</h3>
+        <ol>
+          <li>해양수산부 — 해양쓰레기 수거량 통계 (2024년 132,686톤), 지역별 현황 (전남 최근 5년 1위)</li>
+          <li>한국경제 등 — 성인 디자인 문구·데스크테리어 소비 부상</li>
+          <li>시사저널(2022) 인용 — MZ세대 71% "친환경이면 같은 값에 우선 구매"</li>
+          <li>디지털조선일보(2024) 등 — 업사이클 가치소비 사례 (프라이탁)</li>
+          <li>Precious Plastic 공식 (preciousplastic.com) — 오픈소스 장비 도면, 기술 사양</li>
+          <li>프레셔스 플라스틱 서울 (ppseoul.com) — 분쇄기 정의·원리·펠릿 판매</li>
+          <li>전남대학교 창업보육센터 모집 공고 — 국유재산 사용료 (평당 약 5,000원/월)</li>
+          <li>2026 여수세계섬박람회 공식 — 일정 (2026.9.5~11.4), 주제 '섬, 바다와 미래를 잇다'</li>
+        </ol>
+      </div>
+      <hr class="footer-divider">
+      <p>본 웹사이트는 수업 발표용 사업계획 자료입니다.</p>
+      <p class="footer-copy">&copy; 2026 바다봄 BADA BOM</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
