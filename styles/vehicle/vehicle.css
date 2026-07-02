@@ -1,0 +1,299 @@
+/* ===========================
+   vehicle.css — 공통 변수·레이아웃·헤더·Hero
+   =========================== */
+:root {
+  --vc-teal:       #0ea5e9;
+  --vc-teal-dark:  #0284c7;
+  --vc-teal-light: #e0f2fe;
+  --vc-green:      #22c55e;
+  --vc-green-dark: #16a34a;
+  --vc-green-light:#f0fdf4;
+  --vc-orange:     #f97316;
+  --vc-red:        #ef4444;
+  --vc-red-light:  #fef2f2;
+  --vc-yellow:     #f59e0b;
+  --vc-bg:         #f1f5f9;
+  --vc-white:      #ffffff;
+  --vc-text:       #1e293b;
+  --vc-text-light: #64748b;
+  --vc-text-muted: #94a3b8;
+  --vc-border:     #e2e8f0;
+  --vc-shadow-sm:  0 1px 3px rgba(0,0,0,0.08);
+  --vc-shadow-md:  0 4px 16px rgba(0,0,0,0.10);
+  --vc-shadow-lg:  0 8px 32px rgba(0,0,0,0.14);
+  --vc-radius-sm:  8px;
+  --vc-radius-md:  14px;
+  --vc-radius-lg:  20px;
+  --vc-transition: all 0.25s ease;
+  --vc-max-width:  1280px;
+
+  /* 권역 색상 */
+  --region-jeju-city: #3b82f6;
+  --region-seogwipo:  #f97316;
+  --region-east:      #22c55e;
+  --region-west:      #a855f7;
+  --region-north:     #0ea5e9;
+  --region-south:     #ef4444;
+}
+
+body {
+  font-family: 'Noto Sans KR','Apple SD Gothic Neo',sans-serif;
+  background: var(--vc-bg);
+  color: var(--vc-text);
+  overflow-x: hidden;
+}
+
+.vc-container {
+  max-width: var(--vc-max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── 헤더 ── */
+.vc-header {
+  position: fixed;
+  top:0;left:0;right:0;
+  z-index:1000;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: var(--vc-transition);
+}
+.vc-header.scrolled {
+  border-bottom-color: var(--vc-border);
+  box-shadow: var(--vc-shadow-md);
+}
+.vc-header-inner {
+  max-width: var(--vc-max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.vc-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.vc-logo-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--vc-shadow-sm);
+  flex-shrink: 0;
+}
+.vc-logo-text {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--vc-text);
+}
+.vc-logo-text span { color: var(--vc-teal); }
+
+.vc-header-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--vc-green-dark);
+}
+.vc-live-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--vc-green);
+  animation: vcPulse 1.6s infinite;
+}
+@keyframes vcPulse {
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.4;transform:scale(1.4)}
+}
+.vc-live-time {
+  font-variant-numeric: tabular-nums;
+  min-width: 58px;
+}
+.vc-back-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: var(--vc-teal-light);
+  color: var(--vc-teal-dark);
+  border-radius: 100px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--vc-transition);
+  flex-shrink: 0;
+}
+.vc-back-btn:hover {
+  background: var(--vc-teal);
+  color: var(--vc-white);
+}
+
+/* ── Hero ── */
+.vc-hero {
+  padding: 120px 0 44px;
+  background: linear-gradient(160deg,#f0fdf9 0%,#e0f2fe 55%,#f0fdf4 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.vc-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--vc-white);
+  border: 1px solid var(--vc-border);
+  border-radius: 100px;
+  padding: 6px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--vc-green-dark);
+  margin-bottom: 16px;
+  box-shadow: var(--vc-shadow-sm);
+}
+.vc-hero-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--vc-text);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.vc-accent { color: var(--vc-green-dark); }
+.vc-hero-desc {
+  font-size: 0.98rem;
+  color: var(--vc-text-light);
+  margin-bottom: 24px;
+}
+
+/* Hero 통계 */
+.vc-hero-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  background: var(--vc-white);
+  border: 1px solid var(--vc-border);
+  border-radius: var(--vc-radius-md);
+  padding: 16px 32px;
+  box-shadow: var(--vc-shadow-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.vc-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px;
+}
+.vc-stat-num {
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: var(--vc-text);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.vc-stat-num.available { color: var(--vc-green-dark); }
+.vc-stat-num.busy      { color: var(--vc-orange); }
+.vc-stat-label {
+  font-size: 0.75rem;
+  color: var(--vc-text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.vc-stat-divider {
+  width: 1px;
+  height: 36px;
+  background: var(--vc-border);
+}
+
+/* ── 앱 메인 레이아웃 ── */
+.vc-app { padding: 28px 0 80px; }
+.vc-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ── 모달 ── */
+.match-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.match-modal-box {
+  background: var(--vc-white);
+  border-radius: var(--vc-radius-lg);
+  padding: 40px 36px;
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.2);
+  animation: modalPop .3s ease;
+}
+@keyframes modalPop {
+  from { transform: scale(.85); opacity:0; }
+  to   { transform: scale(1);   opacity:1; }
+}
+.modal-icon { font-size: 3rem; margin-bottom: 12px; }
+.match-modal-box h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--vc-text);
+  margin-bottom: 8px;
+}
+.match-modal-box p {
+  font-size: 0.95rem;
+  color: var(--vc-text-light);
+  margin-bottom: 16px;
+}
+.modal-detail {
+  background: var(--vc-bg);
+  border-radius: var(--vc-radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  color: var(--vc-text);
+  text-align: left;
+  line-height: 1.8;
+}
+.modal-close-btn {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, var(--vc-green-dark), var(--vc-green));
+  color: var(--vc-white);
+  border: none;
+  border-radius: 100px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: var(--vc-transition);
+}
+.modal-close-btn:hover { opacity:.9; transform:translateY(-1px); }
+
+/* ── Footer ── */
+.vc-footer { background: #0f1923; padding: 36px 0; }
+.vc-footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.vc-footer-brand p { font-size:.84rem; color:rgba(255,255,255,.4); margin-top:6px; }
+.vc-footer .vc-logo-text { color: #fff; }
+.vc-footer-copy { font-size:.82rem; color:rgba(255,255,255,.3); }

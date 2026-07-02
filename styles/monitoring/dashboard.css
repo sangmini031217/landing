@@ -1,0 +1,294 @@
+/* ===========================
+   dashboard.css — KPI·그리드·위젯 스타일
+   =========================== */
+
+/* ── KPI 요약 바 ── */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.kpi-card {
+  background: var(--mn-white);
+  border: 1px solid var(--mn-border);
+  border-radius: var(--mn-radius-md);
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--mn-shadow-sm);
+  transition: var(--mn-transition);
+}
+.kpi-card:hover { transform: translateY(-2px); box-shadow: var(--mn-shadow-md); }
+.kpi-highlight {
+  border-color: var(--mn-teal-light);
+  background: linear-gradient(135deg,#f0fdf9,#e0f2fe);
+}
+.kpi-icon { font-size: 1.5rem; flex-shrink: 0; }
+.kpi-body { flex: 1; }
+.kpi-val {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--mn-text);
+  line-height: 1.1;
+}
+.kpi-highlight .kpi-val { color: var(--mn-teal-dark); }
+.kpi-label {
+  font-size: 0.74rem;
+  color: var(--mn-text-muted);
+  font-weight: 600;
+  margin-top: 2px;
+}
+.kpi-trend {
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 100px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.kpi-trend.up     { background: var(--mn-green-light); color: var(--mn-green-dark); }
+.kpi-trend.normal { background: var(--mn-teal-light);  color: var(--mn-teal-dark); }
+.kpi-trend.warn   { background: #fff7ed; color: #c2410c; }
+
+/* ── 중간 3열 그리드 ── */
+.db-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: start;
+}
+.db-center-col { display: flex; flex-direction: column; gap: 16px; }
+.db-right-col  { display: flex; flex-direction: column; gap: 16px; }
+
+/* ── 성숙도 게이지 ── */
+.maturity-gauge {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+.gauge-svg { width: 180px; height: auto; }
+.gauge-arc {
+  transition: stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1);
+}
+.gauge-pct {
+  font-size: 22px;
+  font-weight: 900;
+  fill: #1e293b;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.gauge-sub {
+  font-size: 11px;
+  fill: #94a3b8;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* ── 생육 바 ── */
+.growth-items { display: flex; flex-direction: column; gap: 10px; }
+.growth-item {
+  display: grid;
+  grid-template-columns: 64px 1fr 40px;
+  align-items: center;
+  gap: 10px;
+}
+.growth-label { font-size: 0.78rem; color: var(--mn-text-light); font-weight: 600; }
+.growth-bar-wrap {
+  height: 7px;
+  background: var(--mn-bg);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.growth-bar {
+  height: 100%;
+  width: var(--w, 0%);
+  background: linear-gradient(90deg, var(--mn-teal), var(--mn-green));
+  border-radius: 4px;
+  transition: width 1.2s ease;
+}
+.growth-bar.orange {
+  background: linear-gradient(90deg, var(--mn-orange), #f97316);
+}
+.growth-val { font-size: 0.78rem; font-weight: 700; color: var(--mn-text); text-align: right; }
+
+/* ── 기상 7일 예보 ── */
+.weather-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.weather-day {
+  text-align: center;
+  padding: 10px 4px;
+  border-radius: var(--mn-radius-sm);
+  background: var(--mn-bg);
+  border: 1px solid var(--mn-border);
+  transition: var(--mn-transition);
+}
+.weather-day:hover { background: var(--mn-teal-light); }
+.weather-day.today { background: var(--mn-teal-light); border-color: var(--mn-teal); }
+.weather-day.warn  { background: #fff7ed; border-color: #fed7aa; }
+.weather-day.good  { background: var(--mn-green-light); border-color: #bbf7d0; }
+.wd-label { font-size: 0.68rem; color: var(--mn-text-muted); margin-bottom: 4px; font-weight: 600; }
+.wd-icon  { font-size: 1.3rem; margin-bottom: 4px; }
+.wd-temp  { font-size: 0.82rem; font-weight: 700; color: var(--mn-text); }
+.wd-rain  { font-size: 0.68rem; color: var(--mn-text-muted); margin-top: 2px; }
+.weather-warn-msg {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #c2410c;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: var(--mn-radius-sm);
+  padding: 7px 12px;
+  text-align: center;
+}
+
+/* ── 알림 타임라인 ── */
+.alert-timeline { display: flex; flex-direction: column; gap: 0; }
+.alert-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--mn-border);
+  position: relative;
+}
+.alert-item:last-child { border-bottom: none; }
+.alert-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.alert-red    .alert-dot { background: var(--mn-red); }
+.alert-orange .alert-dot { background: var(--mn-orange); }
+.alert-green  .alert-dot { background: var(--mn-green); }
+.alert-blue   .alert-dot { background: var(--mn-teal); }
+
+.alert-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--mn-text);
+  margin-bottom: 3px;
+}
+.alert-desc { font-size: 0.8rem; color: var(--mn-text-light); line-height: 1.5; }
+.alert-time { font-size: 0.72rem; color: var(--mn-text-muted); margin-top: 4px; }
+
+/* ── D-Day 카드 ── */
+.dday-panel {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(135deg, #0c4a6e, #0e4f3a);
+  border-color: transparent;
+  color: var(--mn-white);
+}
+.dday-circle {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.dday-d   { font-size: 0.75rem; font-weight: 700; opacity: .7; line-height: 1; }
+.dday-num { font-size: 1.8rem; font-weight: 900; line-height: 1.1; color: #7dd3fc; }
+.dday-date{ font-size: 0.88rem; font-weight: 700; color: var(--mn-white); margin-bottom: 4px; }
+.dday-sub { font-size: 0.75rem; opacity: .6; margin-bottom: 6px; }
+.dday-conf{ font-size: 0.8rem; color: #4ade80; font-weight: 600; }
+.dday-conf strong { color: #4ade80; }
+
+/* ── 체크리스트 ── */
+.checklist { display: flex; flex-direction: column; gap: 8px; }
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+  padding: 8px 10px;
+  border-radius: var(--mn-radius-sm);
+  transition: var(--mn-transition);
+}
+.check-item.done    { background: var(--mn-green-light); color: var(--mn-green-dark); }
+.check-item.pending { background: var(--mn-bg); color: var(--mn-text-muted); }
+.check-icon {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.done    .check-icon { background: var(--mn-green); color: #fff; }
+.pending .check-icon { background: var(--mn-border); color: var(--mn-text-muted); }
+
+/* ── 농가 정보 ── */
+.farm-info-list { display: flex; flex-direction: column; gap: 8px; }
+.farm-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--mn-border);
+  font-size: 0.875rem;
+}
+.farm-info-row:last-child { border-bottom: none; }
+.fi-label { color: var(--mn-text-muted); font-weight: 500; }
+.fi-val   { color: var(--mn-text); font-weight: 700; }
+.fi-val.accent { color: var(--mn-teal-dark); }
+
+/* ── 센서 로그 테이블 ── */
+.sensor-panel { margin-top: 0; }
+.sensor-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--mn-radius-sm);
+  border: 1px solid var(--mn-border);
+}
+.sensor-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 640px;
+}
+.sensor-table th {
+  background: var(--mn-bg);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--mn-text-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  border-bottom: 1px solid var(--mn-border);
+  white-space: nowrap;
+}
+.sensor-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--mn-border);
+  color: var(--mn-text);
+  font-variant-numeric: tabular-nums;
+}
+.sensor-table tbody tr:last-child td { border-bottom: none; }
+.sensor-table tbody tr:hover { background: #f8fafc; }
+.sensor-table tbody tr.new-row { animation: rowFadeIn .5s ease; }
+@keyframes rowFadeIn {
+  from { background: #e0f2fe; opacity:.6; }
+  to   { background: transparent; opacity:1; }
+}
+.status-tag {
+  display: inline-flex;
+  padding: 2px 9px;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.status-tag.green  { background: var(--mn-green-light); color: var(--mn-green-dark); }
+.status-tag.yellow { background: var(--mn-yellow-light); color: #92400e; }
+.status-tag.red    { background: var(--mn-red-light); color: #991b1b; }

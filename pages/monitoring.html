@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="제주 감귤 농가 실시간 생육 모니터링 대시보드 — 제주모아" />
+  <title>실시간 모니터링 | 제주모아</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../styles/monitoring/monitoring.css" />
+  <link rel="stylesheet" href="../styles/monitoring/dashboard.css" />
+  <link rel="stylesheet" href="../styles/monitoring/responsive.css" />
+</head>
+<body>
+
+<!-- ── 헤더 ── -->
+<header class="mn-header" id="mnHeader">
+  <div class="mn-header-inner">
+    <a href="../index.html" class="mn-logo" aria-label="제주모아 홈">
+      <div class="mn-logo-icon"
+        style="background-image:url('../assets/images/hero-main.png');
+               background-size:145%;background-position:50% 38%;background-repeat:no-repeat;">
+      </div>
+      <span class="mn-logo-text">제주<span>모아</span></span>
+    </a>
+    <div class="mn-header-center">
+      <span class="mn-live-dot"></span>
+      <span class="mn-live-label">실시간 모니터링</span>
+      <span class="mn-live-time" id="liveTime">--:--:--</span>
+    </div>
+    <a href="../index.html" class="mn-back-btn">← 메인으로</a>
+  </div>
+</header>
+
+<!-- ── 페이지 타이틀 ── -->
+<section class="mn-hero">
+  <div class="mn-container">
+    <div class="mn-hero-badge">🔔 Live Monitoring Dashboard</div>
+    <h1 class="mn-hero-title">제주 감귤 농가<br><span class="mn-accent">실시간 생육 모니터링</span></h1>
+    <p class="mn-hero-desc">기상·생육·알림 데이터를 한눈에 파악하고 수확 시기를 놓치지 마세요.</p>
+    <div class="mn-hero-badges">
+      <span class="mn-badge green"><span class="mn-dot"></span>데이터 수신 중</span>
+      <span class="mn-badge blue">🌿 한림읍 A농가</span>
+      <span class="mn-badge orange">🍊 감귤 · 2025 시즌</span>
+    </div>
+  </div>
+  <div class="mn-orb mn-orb1"></div>
+  <div class="mn-orb mn-orb2"></div>
+</section>
+
+<!-- ── 메인 대시보드 ── -->
+<main class="mn-dashboard" id="dashboard">
+  <div class="mn-container">
+
+    <!-- ① 상단 KPI 요약 바 -->
+    <div class="kpi-row fade-up">
+      <div class="kpi-card">
+        <div class="kpi-icon">🌡️</div>
+        <div class="kpi-body">
+          <div class="kpi-val" id="kpiTemp">24.3°C</div>
+          <div class="kpi-label">현재 기온</div>
+        </div>
+        <div class="kpi-trend up">↑ 1.2°</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">💧</div>
+        <div class="kpi-body">
+          <div class="kpi-val" id="kpiHumid">68%</div>
+          <div class="kpi-label">습도</div>
+        </div>
+        <div class="kpi-trend normal">→ 정상</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">🌧️</div>
+        <div class="kpi-body">
+          <div class="kpi-val" id="kpiRain">2.1mm</div>
+          <div class="kpi-label">오늘 강수량</div>
+        </div>
+        <div class="kpi-trend normal">→ 적정</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">☀️</div>
+        <div class="kpi-body">
+          <div class="kpi-val" id="kpiSun">6.4h</div>
+          <div class="kpi-label">일조시간</div>
+        </div>
+        <div class="kpi-trend up">↑ 양호</div>
+      </div>
+      <div class="kpi-card kpi-highlight">
+        <div class="kpi-icon">🍊</div>
+        <div class="kpi-body">
+          <div class="kpi-val" id="kpiMaturity">85%</div>
+          <div class="kpi-label">현재 성숙도</div>
+        </div>
+        <div class="kpi-trend up">D-8일</div>
+      </div>
+    </div>
+
+    <!-- ② 중간 3열 그리드 -->
+    <div class="db-grid">
+
+      <!-- 왼쪽: 생육 상태 패널 -->
+      <div class="db-panel fade-up">
+        <div class="db-panel-head">
+          <span class="db-panel-title">🌱 생육 상태</span>
+          <span class="db-badge green">정상</span>
+        </div>
+        <div class="maturity-gauge">
+          <svg viewBox="0 0 200 110" class="gauge-svg" aria-label="성숙도 게이지">
+            <!-- 배경 호 -->
+            <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#e2e8f0" stroke-width="14" stroke-linecap="round"/>
+            <!-- 진행 호 (85%) -->
+            <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none"
+                  stroke="url(#gaugeGrad)" stroke-width="14" stroke-linecap="round"
+                  stroke-dasharray="251.2" stroke-dashoffset="37.7" class="gauge-arc"/>
+            <defs>
+              <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#0ea5e9"/>
+                <stop offset="100%" stop-color="#22c55e"/>
+              </linearGradient>
+            </defs>
+            <text x="100" y="88" text-anchor="middle" class="gauge-pct">85%</text>
+            <text x="100" y="106" text-anchor="middle" class="gauge-sub">성숙도</text>
+          </svg>
+        </div>
+        <div class="growth-items">
+          <div class="growth-item">
+            <span class="growth-label">과실 크기</span>
+            <div class="growth-bar-wrap">
+              <div class="growth-bar" style="--w:78%"></div>
+            </div>
+            <span class="growth-val">78%</span>
+          </div>
+          <div class="growth-item">
+            <span class="growth-label">당도(Brix)</span>
+            <div class="growth-bar-wrap">
+              <div class="growth-bar" style="--w:82%"></div>
+            </div>
+            <span class="growth-val">10.8°</span>
+          </div>
+          <div class="growth-item">
+            <span class="growth-label">착색도</span>
+            <div class="growth-bar-wrap">
+              <div class="growth-bar orange" style="--w:85%"></div>
+            </div>
+            <span class="growth-val">85%</span>
+          </div>
+          <div class="growth-item">
+            <span class="growth-label">산도(TA)</span>
+            <div class="growth-bar-wrap">
+              <div class="growth-bar" style="--w:70%"></div>
+            </div>
+            <span class="growth-val">적정</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 가운데: 기상 7일 예보 + 알림 타임라인 -->
+      <div class="db-center-col">
+
+        <!-- 기상 7일 예보 -->
+        <div class="db-panel fade-up">
+          <div class="db-panel-head">
+            <span class="db-panel-title">🌦️ 7일 기상 예보</span>
+          </div>
+          <div class="weather-row">
+            <div class="weather-day today">
+              <div class="wd-label">오늘</div>
+              <div class="wd-icon">⛅</div>
+              <div class="wd-temp">24°</div>
+              <div class="wd-rain">2mm</div>
+            </div>
+            <div class="weather-day">
+              <div class="wd-label">내일</div>
+              <div class="wd-icon">🌤️</div>
+              <div class="wd-temp">26°</div>
+              <div class="wd-rain">0mm</div>
+            </div>
+            <div class="weather-day">
+              <div class="wd-label">모레</div>
+              <div class="wd-icon">☀️</div>
+              <div class="wd-temp">27°</div>
+              <div class="wd-rain">0mm</div>
+            </div>
+            <div class="weather-day warn">
+              <div class="wd-label">+3일</div>
+              <div class="wd-icon">🌧️</div>
+              <div class="wd-temp">21°</div>
+              <div class="wd-rain">18mm</div>
+            </div>
+            <div class="weather-day">
+              <div class="wd-label">+4일</div>
+              <div class="wd-icon">⛅</div>
+              <div class="wd-temp">23°</div>
+              <div class="wd-rain">4mm</div>
+            </div>
+            <div class="weather-day">
+              <div class="wd-label">+5일</div>
+              <div class="wd-icon">🌤️</div>
+              <div class="wd-temp">25°</div>
+              <div class="wd-rain">0mm</div>
+            </div>
+            <div class="weather-day good">
+              <div class="wd-label">+6일</div>
+              <div class="wd-icon">☀️</div>
+              <div class="wd-temp">28°</div>
+              <div class="wd-rain">0mm</div>
+            </div>
+          </div>
+          <div class="weather-warn-msg">⚠️ +3일 강우 예보 — 수확 시기 조정 권장</div>
+        </div>
+
+        <!-- 알림 타임라인 -->
+        <div class="db-panel fade-up">
+          <div class="db-panel-head">
+            <span class="db-panel-title">🔔 알림 타임라인</span>
+            <span class="db-badge blue" id="alertCount">4건</span>
+          </div>
+          <div class="alert-timeline" id="alertTimeline">
+            <div class="alert-item alert-red">
+              <div class="alert-dot"></div>
+              <div class="alert-body">
+                <div class="alert-title">⚠️ 수확 임박 알림</div>
+                <div class="alert-desc">예상 수확일까지 8일 남았습니다. 물류 예약을 시작하세요.</div>
+                <div class="alert-time">오늘 09:15</div>
+              </div>
+            </div>
+            <div class="alert-item alert-orange">
+              <div class="alert-dot"></div>
+              <div class="alert-body">
+                <div class="alert-title">🌧️ 기상 변화 감지</div>
+                <div class="alert-desc">+3일 강우 예보(18mm). 수확 일정에 영향 가능.</div>
+                <div class="alert-time">오늘 08:40</div>
+              </div>
+            </div>
+            <div class="alert-item alert-green">
+              <div class="alert-dot"></div>
+              <div class="alert-body">
+                <div class="alert-title">🍊 성숙도 목표 도달</div>
+                <div class="alert-desc">착색도 85% 달성. 당도 10.8Brix — 출하 기준 충족.</div>
+                <div class="alert-time">어제 14:22</div>
+              </div>
+            </div>
+            <div class="alert-item alert-blue">
+              <div class="alert-dot"></div>
+              <div class="alert-body">
+                <div class="alert-title">🚚 물류 차량 4대 배정 완료</div>
+                <div class="alert-desc">10월 28일 출하 차량 자동 배정이 완료되었습니다.</div>
+                <div class="alert-time">어제 10:05</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 오른쪽: 수확 일정 + 농가 현황 -->
+      <div class="db-right-col">
+
+        <!-- 수확 D-Day 카드 -->
+        <div class="db-panel dday-panel fade-up">
+          <div class="dday-circle" id="ddayCircle">
+            <span class="dday-d">D</span>
+            <span class="dday-num" id="ddayNum">-8</span>
+          </div>
+          <div class="dday-info">
+            <div class="dday-date">예상 수확일 <strong>10월 28일</strong></div>
+            <div class="dday-sub">± 3일 오차 범위</div>
+            <div class="dday-conf">AI 신뢰도 <strong>96%</strong></div>
+          </div>
+        </div>
+
+        <!-- 출하 준비 체크리스트 -->
+        <div class="db-panel fade-up">
+          <div class="db-panel-head">
+            <span class="db-panel-title">✅ 출하 준비 현황</span>
+            <span class="db-badge orange">3/5 완료</span>
+          </div>
+          <div class="checklist">
+            <div class="check-item done">
+              <span class="check-icon">✓</span>
+              <span>AI 수확일 예측 완료</span>
+            </div>
+            <div class="check-item done">
+              <span class="check-icon">✓</span>
+              <span>출하 물량 입력 (2,400kg)</span>
+            </div>
+            <div class="check-item done">
+              <span class="check-icon">✓</span>
+              <span>물류 차량 4대 배정</span>
+            </div>
+            <div class="check-item pending">
+              <span class="check-icon">○</span>
+              <span>포장재 준비 (80박스)</span>
+            </div>
+            <div class="check-item pending">
+              <span class="check-icon">○</span>
+              <span>출하 신고서 작성</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 농가 정보 -->
+        <div class="db-panel fade-up">
+          <div class="db-panel-head">
+            <span class="db-panel-title">🌾 농가 정보</span>
+          </div>
+          <div class="farm-info-list">
+            <div class="farm-info-row">
+              <span class="fi-label">농가명</span>
+              <span class="fi-val">한림읍 A농가</span>
+            </div>
+            <div class="farm-info-row">
+              <span class="fi-label">품종</span>
+              <span class="fi-val">궁천조생</span>
+            </div>
+            <div class="farm-info-row">
+              <span class="fi-label">재배면적</span>
+              <span class="fi-val">3,200㎡</span>
+            </div>
+            <div class="farm-info-row">
+              <span class="fi-label">나무 수령</span>
+              <span class="fi-val">12년생</span>
+            </div>
+            <div class="farm-info-row">
+              <span class="fi-label">예상 생산량</span>
+              <span class="fi-val accent">32.5톤</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ③ 하단: 실시간 센서 데이터 로그 -->
+    <div class="db-panel sensor-panel fade-up">
+      <div class="db-panel-head">
+        <span class="db-panel-title">📡 실시간 센서 데이터 로그</span>
+        <span class="db-badge green"><span class="mn-dot small"></span> 수신 중</span>
+      </div>
+      <div class="sensor-table-wrap">
+        <table class="sensor-table">
+          <thead>
+            <tr>
+              <th>시각</th>
+              <th>기온(°C)</th>
+              <th>습도(%)</th>
+              <th>강수(mm)</th>
+              <th>일조(h)</th>
+              <th>성숙도(%)</th>
+              <th>당도(Brix)</th>
+              <th>상태</th>
+            </tr>
+          </thead>
+          <tbody id="sensorLog">
+            <tr>
+              <td>09:00</td><td>24.3</td><td>68</td><td>0.0</td>
+              <td>1.2</td><td>85.0</td><td>10.8</td>
+              <td><span class="status-tag green">정상</span></td>
+            </tr>
+            <tr>
+              <td>08:00</td><td>23.1</td><td>71</td><td>0.2</td>
+              <td>0.8</td><td>84.7</td><td>10.7</td>
+              <td><span class="status-tag green">정상</span></td>
+            </tr>
+            <tr>
+              <td>07:00</td><td>21.8</td><td>74</td><td>0.5</td>
+              <td>0.3</td><td>84.5</td><td>10.6</td>
+              <td><span class="status-tag green">정상</span></td>
+            </tr>
+            <tr>
+              <td>06:00</td><td>20.2</td><td>78</td><td>1.1</td>
+              <td>0.0</td><td>84.3</td><td>10.6</td>
+              <td><span class="status-tag yellow">주의</span></td>
+            </tr>
+            <tr>
+              <td>05:00</td><td>19.5</td><td>80</td><td>0.3</td>
+              <td>0.0</td><td>84.1</td><td>10.5</td>
+              <td><span class="status-tag green">정상</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ── Footer ── -->
+<footer class="mn-footer">
+  <div class="mn-container">
+    <div class="mn-footer-inner">
+      <div class="mn-footer-brand">
+        <div class="mn-logo">
+          <div class="mn-logo-icon"
+            style="background-image:url('../assets/images/hero-main.png');
+                   background-size:145%;background-position:50% 38%;background-repeat:no-repeat;">
+          </div>
+          <span class="mn-logo-text">제주<span>모아</span></span>
+        </div>
+        <p>AI 기반 제주 농산물 수확 예측 및 물류 매칭 플랫폼</p>
+      </div>
+      <p class="mn-footer-copy">© 2025 제주모아. All rights reserved. 🍊</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../scripts/monitoring/monitoringUI.js"></script>
+<script src="../scripts/monitoring/sensorSimulator.js"></script>
+<script src="../scripts/monitoring/monitoring.js"></script>
+</body>
+</html>

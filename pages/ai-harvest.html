@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="기상 데이터와 농가 데이터를 AI가 분석하여 제주 감귤의 수확 시기와 생산량을 예측하는 시스템 — 제주모아" />
+  <title>AI 수확 예측 시스템 | 제주모아</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <!-- 기존 공통 스타일 -->
+  <link rel="stylesheet" href="../css/reset.css" />
+  <!-- 페이지 전용 스타일 (기능별 분리) -->
+  <link rel="stylesheet" href="../styles/harvest/harvest.css" />
+  <link rel="stylesheet" href="../styles/harvest/flow-section.css" />
+  <link rel="stylesheet" href="../styles/harvest/prediction-card.css" />
+  <link rel="stylesheet" href="../styles/harvest/responsive.css" />
+</head>
+<body>
+
+<!-- =====================
+     HEADER
+     ===================== -->
+<header class="hv-header" id="hvHeader">
+  <div class="hv-header-inner">
+    <a href="../index.html" class="hv-logo" aria-label="제주모아 홈으로">
+      <div class="hv-logo-icon"
+        style="background-image:url('../assets/images/hero-main.png');
+               background-size:145%; background-position:50% 38%;
+               background-repeat:no-repeat;">
+      </div>
+      <span class="hv-logo-text">제주<span>모아</span></span>
+    </a>
+    <a href="../index.html" class="hv-back-btn" aria-label="메인으로 돌아가기">
+      ← 메인으로
+    </a>
+  </div>
+</header>
+
+<!-- =====================
+     HERO SECTION
+     ===================== -->
+<section class="hv-hero" id="hvHero">
+  <div class="hv-container">
+    <div class="hv-hero-badge">🤖 AI Harvest Prediction</div>
+    <h1 class="hv-hero-title">
+      AI 기반 제주 감귤<br>
+      <span class="hv-accent">수확 예측 시스템</span>
+    </h1>
+    <p class="hv-hero-desc">
+      기상 데이터와 농가 데이터를 AI가 분석하여<br>
+      감귤의 성장률, 수확 시기, 생산량을 예측하고<br>
+      물류회사의 배송 계획까지 최적화하는 시스템입니다.
+    </p>
+    <div class="hv-hero-btns">
+      <button class="hv-btn-primary" id="btnStartPredict">AI 예측 시작</button>
+      <a href="#flowSection" class="hv-btn-secondary">서비스 소개</a>
+    </div>
+    <!-- 실시간 수치 뱃지 -->
+    <div class="hv-hero-stats">
+      <div class="hv-stat-badge">
+        <span class="hv-stat-dot green"></span>실시간 분석 중
+      </div>
+      <div class="hv-stat-badge">
+        <span>🍊</span> 감귤 · 한림읍 A농가
+      </div>
+      <div class="hv-stat-badge">
+        <span>📅</span> 2025년 시즌
+      </div>
+    </div>
+  </div>
+  <!-- 배경 장식 -->
+  <div class="hv-hero-orb hv-orb-1"></div>
+  <div class="hv-hero-orb hv-orb-2"></div>
+</section>
+
+<!-- =====================
+     FLOW SECTION
+     ===================== -->
+<section class="hv-section" id="flowSection">
+  <div class="hv-container">
+    <div class="hv-section-head">
+      <span class="hv-section-label">AI 분석 프로세스</span>
+      <h2 class="hv-section-title">AI가 예측하는 <span class="hv-accent">8단계 과정</span></h2>
+      <p class="hv-section-sub">데이터 수집부터 물류 최적화까지, AI가 전 과정을 자동으로 처리합니다.</p>
+    </div>
+
+    <!-- Flow Diagram -->
+    <div class="flow-wrapper" id="flowWrapper">
+
+      <!-- ── 입력 데이터 그룹 ── -->
+      <div class="flow-input-group fade-up">
+        <div class="flow-input-card">
+          <div class="flow-input-icon">🌦️</div>
+          <div class="flow-input-title">기상청 기상 데이터</div>
+          <ul class="flow-input-list">
+            <li>기온</li><li>강수량</li><li>습도</li>
+            <li>일조시간</li><li>태풍</li>
+          </ul>
+        </div>
+        <div class="flow-input-plus">+</div>
+        <div class="flow-input-card">
+          <div class="flow-input-icon">🌾</div>
+          <div class="flow-input-title">농가 데이터</div>
+          <ul class="flow-input-list">
+            <li>품종</li><li>나무 나이</li>
+            <li>재배면적</li><li>과거 수확량</li>
+          </ul>
+        </div>
+        <div class="flow-input-plus">+</div>
+        <div class="flow-input-card">
+          <div class="flow-input-icon">📸</div>
+          <div class="flow-input-title">실시간 생육 데이터</div>
+          <ul class="flow-input-list">
+            <li>감귤 사진</li><li>크기</li><li>색상</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flow-arrow-down fade-up">↓</div>
+
+      <!-- ── Step 1 ── -->
+      <div class="flow-step fade-up" data-step="1">
+        <div class="flow-step-left">
+          <div class="flow-step-num">01</div>
+          <div class="flow-step-line"></div>
+        </div>
+        <div class="flow-step-card">
+          <div class="flow-step-icon">🤖</div>
+          <div class="flow-step-content">
+            <h3>AI 데이터 분석</h3>
+            <p>과거 5~10년 데이터와 비교·학습하여 현재 기상 패턴과 생육 상태를 종합 분석합니다.</p>
+          </div>
+          <div class="flow-step-tag">머신러닝 기반</div>
+        </div>
+      </div>
+
+      <div class="flow-arrow-down fade-up">↓</div>
+
+      <!-- ── Step 2 ── -->
+      <div class="flow-step fade-up" data-step="2">
+        <div class="flow-step-left">
+          <div class="flow-step-num">02</div>
+          <div class="flow-step-line"></div>
+        </div>
+        <div class="flow-step-card">
+          <div class="flow-step-icon">📊</div>
+          <div class="flow-step-content">
+            <h3>감귤 성장률 및 성숙도 예측</h3>
+            <p>실시간 생육 이미지와 센서 데이터를 기반으로 현재 성숙도를 수치화합니다.</p>
+          </div>
+          <div class="flow-step-result">현재 성숙도 <strong>85%</strong></div>
+        </div>
+      </div>
+
+      <div class="flow-arrow-down fade-up">↓</div>
+
+      <!-- ── Step 3 ── -->
+      <div class="flow-step fade-up" data-step="3">
+        <div class="flow-step-left">
+          <div class="flow-step-num">03</div>
+          <div class="flow-step-line"></div>
+        </div>
+        <div class="flow-step-card">
+          <div class="flow-step-icon">📅</div>
+          <div class="flow-step-content">
+            <h3>예상 수확 시기 예측</h3>
+            <p>성숙도와 기상 예보를 종합하여 최적 수확 시기를 오차 범위와 함께 제시합니다.</p>
+          </div>
+          <div class="flow-step-result">10월 28일 <strong>±3일</strong></div>
+        </div>
+      </div>
+
+      <div class="flow-arrow-down fade-up">↓</div>
+
+      <!-- ── Step 4 ── -->
+      <div class="flow-step fade-up" data-step="4">
+        <div class="flow-step-left">
+          <div class="flow-step-num">04</div>
+          <div class="flow-step-line"></div>
+        </div>
+        <div class="flow-step-card">
+          <div class="flow-step-icon">⚖️</div>
+          <div class="flow-step-content">
+            <h3>예상 생산량(톤) 계산</h3>
+            <p>재배면적, 나무 상태, 수확 시기를 기반으로 총 생산량을 예측합니다.</p>
+          </div>
+          <div class="flow-step-result">예상 생산량 <strong>32.5톤</strong></div>
+        </div>
+      </div>
+
+      <div class="flow-arrow-down fade-up">↓</div>
+
+      <!-- ── Step 5 ── -->
+      <div class="flow-step fade-up" data-step="5">
+        <div class="flow-step-left">
+          <div class="flow-step-num">05</div>
+          <div class="flow-step-line"></div>
+        </div>
+        <div class="flow-step-card">
+          <div class="flow-step-icon">📦</div>
+          <div class="flow-step-content">
+            <h3>택배 물량 및 출하량 예측</h3>
+            <p>생산량 데이터를 기반으로 박스 수량과 출하 일정을 자동 산출합니다.</p>
+          </div>
+          <div class="flow-step-result">택배 <strong>1,300박스</strong></div>
+        </div>
+      </div>
+
+      <div class="flow-arrow-down fade-up">↓</div>
+
+      <!-- ── Step 6 ── -->
+      <div class="flow-step fade-up" data-step="6">
+        <div class="flow-step-left">
+          <div class="flow-step-num">06</div>
+          <div class="flow-step-line"></div>
+        </div>
+        <div class="flow-step-card">
+          <div class="flow-step-icon">🚚</div>
+          <div class="flow-step-content">
+            <h3>물류회사 차량·인력 자동 배치</h3>
+            <p>예측된 물량을 바탕으로 필요 차량과 기사 인원을 AI가 자동으로 배치합니다.</p>
+          </div>
+          <div class="flow-step-result">트럭 <strong>3대</strong> / 기사 <strong>4명</strong></div>
+        </div>
+      </div>
+
+      <div class="flow-arrow-down fade-up">↓</div>
+
+      <!-- ── Step 7 ── -->
+      <div class="flow-step fade-up" data-step="7">
+        <div class="flow-step-left">
+          <div class="flow-step-num">07</div>
+        </div>
+        <div class="flow-step-card flow-step-final">
+          <div class="flow-step-icon">✅</div>
+          <div class="flow-step-content">
+            <h3>배송 일정 최적화 및 비용 절감</h3>
+            <p>통합 배차로 공차율을 낮추고, 최적 경로로 물류비를 절감합니다.</p>
+          </div>
+          <div class="flow-step-tag flow-tag-green">완료</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     AI 예측 결과 대시보드
+     ===================== -->
+<section class="hv-section hv-section-dark" id="predictionResult">
+  <div class="hv-container">
+    <div class="hv-section-head">
+      <span class="hv-section-label light">AI 분석 결과</span>
+      <h2 class="hv-section-title light">실시간 <span class="hv-accent">예측 대시보드</span></h2>
+      <p class="hv-section-sub light">AI가 분석한 결과를 실시간으로 확인하세요.</p>
+    </div>
+
+    <div class="pred-grid">
+      <div class="pred-card fade-up" data-target-val="85" data-suffix="%" data-label="현재 성숙도">
+        <div class="pred-icon">🍊</div>
+        <div class="pred-val" data-count="85" data-suffix="%">0%</div>
+        <div class="pred-label">현재 성숙도</div>
+        <div class="pred-bar"><div class="pred-bar-fill" style="width:0%" data-width="85"></div></div>
+      </div>
+      <div class="pred-card fade-up" data-label="예상 수확일">
+        <div class="pred-icon">📅</div>
+        <div class="pred-val pred-date">10월 28일</div>
+        <div class="pred-label">예상 수확일</div>
+        <div class="pred-sub">± 3일 오차</div>
+      </div>
+      <div class="pred-card fade-up" data-label="생산량">
+        <div class="pred-icon">⚖️</div>
+        <div class="pred-val" data-count="32" data-suffix=".5톤">0톤</div>
+        <div class="pred-label">예상 생산량</div>
+      </div>
+      <div class="pred-card fade-up" data-label="택배 박스">
+        <div class="pred-icon">📦</div>
+        <div class="pred-val" data-count="1300" data-suffix=" Box">0 Box</div>
+        <div class="pred-label">택배 물량</div>
+      </div>
+      <div class="pred-card fade-up" data-label="물류 차량">
+        <div class="pred-icon">🚚</div>
+        <div class="pred-val" data-count="3" data-suffix="대">0대</div>
+        <div class="pred-label">물류 차량</div>
+      </div>
+      <div class="pred-card fade-up" data-label="신뢰도">
+        <div class="pred-icon">🎯</div>
+        <div class="pred-val" data-count="96" data-suffix="%">0%</div>
+        <div class="pred-label">AI 신뢰도</div>
+        <div class="pred-bar"><div class="pred-bar-fill pred-bar-teal" style="width:0%" data-width="96"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- =====================
+     CTA
+     ===================== -->
+<section class="hv-cta-section">
+  <div class="hv-container">
+    <div class="hv-cta-inner">
+      <div class="hv-cta-emoji">🍊 🤖 🚚</div>
+      <h2 class="hv-cta-title">지금 바로 AI 수확 예측을 시작하세요</h2>
+      <p class="hv-cta-desc">작물 정보만 입력하면 AI가 수확 시기부터 물류 배차까지 자동으로 처리합니다.</p>
+      <div class="hv-cta-btns">
+        <button class="hv-btn-primary" id="btnStartPredict2">AI 예측 시작하기</button>
+        <a href="../index.html" class="hv-btn-secondary">메인으로 돌아가기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     FOOTER
+     ===================== -->
+<footer class="hv-footer">
+  <div class="hv-container">
+    <div class="hv-footer-inner">
+      <div class="hv-footer-brand">
+        <div class="hv-logo">
+          <div class="hv-logo-icon"
+            style="background-image:url('../assets/images/hero-main.png');
+                   background-size:145%; background-position:50% 38%;
+                   background-repeat:no-repeat;">
+          </div>
+          <span class="hv-logo-text">제주<span>모아</span></span>
+        </div>
+        <p>AI 기반 제주 농산물 수확 예측 및 물류 매칭 플랫폼</p>
+      </div>
+      <p class="hv-footer-copy">© 2025 제주모아. All rights reserved. 🍊</p>
+    </div>
+  </div>
+</footer>
+
+<!-- 스크립트 (기능별 분리) -->
+<script src="../scripts/harvest/flowAnimation.js"></script>
+<script src="../scripts/harvest/predictionSimulation.js"></script>
+<script src="../scripts/harvest/harvest.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+/* ===========================
+   responsive.css — AI 수확 예측 페이지
+   Breakpoints: 1024px / 768px / 480px
+   =========================== */
+
+/* ── 태블릿 ── */
+@media (max-width: 1024px) {
+  .hv-hero-title      { font-size: 2.4rem; }
+  .hv-section-title   { font-size: 1.8rem; }
+  .pred-grid          { grid-template-columns: repeat(3, 1fr); }
+  .logistics-grid     { grid-template-columns: repeat(3, 1fr); }
+  .logistics-card:nth-child(4),
+  .logistics-card:nth-child(5) { grid-column: auto; }
+}
+
+/* ── 모바일 ── */
+@media (max-width: 768px) {
+  .hv-container  { padding: 0 16px; }
+  .hv-section    { padding: 64px 0; }
+  .hv-section-dark { padding: 64px 0; }
+
+  /* 헤더 */
+  .hv-header-inner { height: 60px; }
+  .hv-logo-icon    { width: 36px; height: 36px; }
+  .hv-logo-text    { font-size: 1.1rem; }
+  .hv-back-btn     { font-size: 0.82rem; padding: 7px 14px; }
+
+  /* Hero */
+  .hv-hero          { padding: 110px 0 64px; }
+  .hv-hero-title    { font-size: 1.9rem; }
+  .hv-hero-desc     { font-size: 0.95rem; }
+  .hv-hero-btns     { flex-direction: column; align-items: center; }
+  .hv-btn-primary,
+  .hv-btn-secondary { width: 100%; max-width: 300px; justify-content: center; }
+
+  /* Flow */
+  .flow-input-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .flow-input-plus { align-self: center; }
+
+  .flow-step        { gap: 12px; }
+  .flow-step-card   { flex-direction: column; gap: 10px; padding: 16px; }
+  .flow-step-result { align-self: flex-start; }
+  .flow-step-num    { width: 36px; height: 36px; font-size: 0.75rem; }
+
+  /* 예측 카드 */
+  .pred-grid        { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .pred-val         { font-size: 1.9rem; }
+  .pred-date        { font-size: 1.3rem; }
+
+  /* 물류 카드 */
+  .logistics-grid   { grid-template-columns: 1fr; }
+  .logistics-card:nth-child(4),
+  .logistics-card:nth-child(5) { grid-column: auto; }
+
+  /* CTA */
+  .hv-cta-title     { font-size: 1.6rem; }
+  .hv-cta-btns      { flex-direction: column; align-items: center; }
+
+  /* Footer */
+  .hv-footer-inner  { flex-direction: column; text-align: center; }
+
+  /* Section 제목 */
+  .hv-section-title { font-size: 1.6rem; }
+  .hv-section-head  { margin-bottom: 36px; }
+}
+
+/* ── 소형 모바일 ── */
+@media (max-width: 480px) {
+  .hv-hero-title    { font-size: 1.55rem; }
+  .hv-hero-stats    { flex-direction: column; align-items: center; gap: 8px; }
+  .pred-grid        { grid-template-columns: 1fr 1fr; }
+  .pred-val         { font-size: 1.6rem; }
+  .flow-step-card   { padding: 14px; }
+  .flow-input-group { gap: 8px; }
+}

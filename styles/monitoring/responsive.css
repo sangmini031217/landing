@@ -1,0 +1,90 @@
+/* ===========================
+   responsive.css — 모니터링 페이지
+   Breakpoints: 1200px / 1024px / 768px / 480px
+   =========================== */
+
+@media (max-width: 1200px) {
+  .db-grid {
+    grid-template-columns: 240px 1fr 240px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .kpi-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .kpi-card:nth-child(4),
+  .kpi-card:nth-child(5) {
+    /* 4,5번째 카드는 두 번째 줄 2열 */
+  }
+  .db-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .db-right-col {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mn-container { padding: 0 16px; }
+  .mn-hero { padding: 96px 0 48px; }
+  .mn-hero-title { font-size: 1.8rem; }
+  .mn-dashboard { padding: 28px 0 60px; }
+
+  /* 헤더 */
+  .mn-header-inner { height: 60px; padding: 0 16px; }
+  .mn-logo-icon { width: 36px; height: 36px; }
+  .mn-logo-text { font-size: 1rem; }
+  .mn-header-center { display: none; }
+  .mn-back-btn { font-size: 0.8rem; padding: 6px 12px; }
+
+  /* KPI 바 */
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .kpi-card:last-child { grid-column: 1 / -1; }
+
+  /* 대시보드 그리드 */
+  .db-grid {
+    grid-template-columns: 1fr;
+  }
+  .db-right-col {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+  }
+
+  /* 기상 예보 */
+  .weather-row { grid-template-columns: repeat(4, 1fr); }
+  .weather-day:nth-child(5),
+  .weather-day:nth-child(6),
+  .weather-day:nth-child(7) { display: none; }
+
+  /* 센서 테이블 */
+  .sensor-table th:nth-child(6),
+  .sensor-table td:nth-child(6) { display: none; }
+}
+
+@media (max-width: 480px) {
+  .mn-hero-title { font-size: 1.5rem; }
+  .mn-hero-desc  { font-size: 0.9rem; }
+  .mn-hero-badges { flex-direction: column; align-items: center; gap: 6px; }
+
+  .kpi-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .kpi-val { font-size: 1.1rem; }
+
+  .growth-item {
+    grid-template-columns: 56px 1fr 36px;
+    gap: 6px;
+  }
+
+  .dday-panel { flex-direction: column; text-align: center; }
+
+  .db-right-col { grid-template-columns: 1fr; }
+
+  .weather-row { grid-template-columns: repeat(4, 1fr); gap: 4px; }
+
+  .sensor-table { font-size: 0.78rem; }
+  .sensor-table th, .sensor-table td { padding: 8px 10px; }
+}
