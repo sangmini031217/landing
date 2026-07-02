@@ -120,10 +120,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
       var isAvail = p.status === 'available';
       pin.innerHTML =
-        '<div class="map-pin-head ' + (isAvail ? 'map-pin-avail-head' : 'map-pin-busy-head') + '">' +
-          '<div class="map-pin-head-inner">' + (isAvail ? '🚚' : '✕') + '</div>' +
+        '<div class="pin-head ' + (isAvail ? 'pin-avail' : 'pin-busy') + '">' +
+          '<div class="pin-head-inner">' + (isAvail ? '🚚' : '✕') + '</div>' +
         '</div>' +
-        '<div class="map-pin-tail"></div>';
+        '<div class="pin-tail"></div>';
 
       overlay.appendChild(pin);
     });
@@ -156,16 +156,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ── Tab Navigation ── */
   var screens   = document.querySelectorAll('.screen');
-  var gnNavBtns = document.querySelectorAll('.gnav-link');
+  var tnavBtns  = document.querySelectorAll('.tnav-link');
   var tabBtns   = document.querySelectorAll('.tab-btn');
-  var subLinks  = document.querySelectorAll('.subnav-link, [data-tab]');
-
-  var subnavTitles = {
-    home:       '홈 대시보드',
-    harvest:    'AI 수확 예측',
-    monitoring: '실시간 모니터링',
-    vehicle:    '차량 매칭',
-  };
 
   function switchTab(id) {
     screens.forEach(function (s) {
@@ -173,15 +165,12 @@ document.addEventListener('DOMContentLoaded', function () {
       s.classList.toggle('active', on);
       if (on) s.scrollTop = 0;
     });
-    gnNavBtns.forEach(function (b) { b.classList.toggle('active', b.dataset.tab === id); });
-    tabBtns.forEach(function (b) { b.classList.toggle('active', b.dataset.tab === id); });
-
-    var titleEl = document.getElementById('subnav-title');
-    if (titleEl) titleEl.textContent = subnavTitles[id] || '';
+    tnavBtns.forEach(function (b) { b.classList.toggle('active', b.dataset.tab === id); });
+    tabBtns.forEach(function (b)  { b.classList.toggle('active', b.dataset.tab === id); });
   }
 
-  gnNavBtns.forEach(function (b) { b.addEventListener('click', function () { switchTab(this.dataset.tab); }); });
-  tabBtns.forEach(function (b)   { b.addEventListener('click', function () { switchTab(this.dataset.tab); }); });
+  tnavBtns.forEach(function (b) { b.addEventListener('click', function () { switchTab(this.dataset.tab); }); });
+  tabBtns.forEach(function (b)  { b.addEventListener('click', function () { switchTab(this.dataset.tab); }); });
 
   document.querySelectorAll('[data-tab]').forEach(function (el) {
     if (el.classList.contains('gnav-link') || el.classList.contains('tab-btn')) return;
@@ -266,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<div class="vc-icon">🚚</div>' +
         '<div class="vc-body"><div class="vc-name">' + v.name + '</div>' +
         '<div class="vc-info">' + v.driver + ' · ' + v.ton + ' · ' + v.dist + '</div></div>' +
-        '<span class="vc-badge ' + (ok ? 'vc-badge-ok' : 'vc-badge-busy') + '">' + (ok ? '배차 가능' : '운행 중') + '</span>';
+        '<span class="vc-status ' + (ok ? 'vs-ok' : 'vs-busy') + '">' + (ok ? '배차 가능' : '운행 중') + '</span>';
       if (ok) el.addEventListener('click', function () {
         if (selected.has(v.id)) selected.delete(v.id); else selected.add(v.id);
         renderList();
@@ -278,13 +267,13 @@ document.addEventListener('DOMContentLoaded', function () {
   function renderAI(region) {
     var body = document.getElementById('ai-body');
     if (!body) return;
-    if (!region || region === 'all') { body.innerHTML = '<span class="ai-empty">권역을 선택하면 AI가 최적 차량 TOP 3를 추천합니다.</span>'; return; }
+    if (!region || region === 'all') { body.innerHTML = '<span class="aip-empty">권역을 선택하면 AI가 최적 차량 TOP 3를 추천합니다.</span>'; return; }
     var recs = aiRecs[region];
     if (!recs) { body.innerHTML = '<span class="ai-empty">해당 권역 추천 데이터 없음</span>'; return; }
     body.innerHTML = recs.map(function (r, i) {
-      return '<div class="ai-rec-item">' +
+      return '<div class="ai-rec">' +
         '<span class="ai-rank">' + (i+1) + '위</span>' +
-        '<div><div class="ai-name">' + r[0] + ' · ' + r[1] + '</div>' +
+        '<div class="ai-info"><div class="ai-name">' + r[0] + ' · ' + r[1] + '</div>' +
         '<div class="ai-detail">' + r[2] + ' · ' + r[3] + '</div></div>' +
         '<span class="ai-score">' + [97,93,88][i] + '%</span></div>';
     }).join('');
@@ -303,9 +292,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  document.querySelectorAll('.filter-btn').forEach(function (btn) {
+  document.querySelectorAll('.f-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+      document.querySelectorAll('.f-btn').forEach(function (b) { b.classList.remove('active'); });
       this.classList.add('active');
       curFilter = this.dataset.filter;
       renderList();
