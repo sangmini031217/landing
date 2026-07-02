@@ -13,10 +13,6 @@
   .kpi-row {
     grid-template-columns: repeat(3, 1fr);
   }
-  .kpi-card:nth-child(4),
-  .kpi-card:nth-child(5) {
-    /* 4,5번째 카드는 두 번째 줄 2열 */
-  }
   .db-grid {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
@@ -31,9 +27,7 @@
 
 @media (max-width: 768px) {
   .mn-container { padding: 0 16px; }
-  .mn-hero { padding: 96px 0 48px; }
-  .mn-hero-title { font-size: 1.8rem; }
-  .mn-dashboard { padding: 28px 0 60px; }
+  .mn-dashboard { padding: 20px 0 48px; }
 
   /* 헤더 */
   .mn-header-inner { height: 60px; padding: 0 16px; }
@@ -42,14 +36,18 @@
   .mn-header-center { display: none; }
   .mn-back-btn { font-size: 0.8rem; padding: 6px 12px; }
 
+  /* 페이지 타이틀 바 */
+  .mn-page-bar-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .mn-page-bar-left  { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .mn-page-title     { font-size: 1.05rem; white-space: normal; }
+  .mn-page-bar-right { gap: 6px; }
+
   /* KPI 바 */
   .kpi-row { grid-template-columns: repeat(2, 1fr); }
   .kpi-card:last-child { grid-column: 1 / -1; }
 
   /* 대시보드 그리드 */
-  .db-grid {
-    grid-template-columns: 1fr;
-  }
+  .db-grid { grid-template-columns: 1fr; }
   .db-right-col {
     grid-column: auto;
     grid-template-columns: 1fr;
@@ -67,9 +65,8 @@
 }
 
 @media (max-width: 480px) {
-  .mn-hero-title { font-size: 1.5rem; }
-  .mn-hero-desc  { font-size: 0.9rem; }
-  .mn-hero-badges { flex-direction: column; align-items: center; gap: 6px; }
+  .mn-page-badge  { display: none; }
+  .mn-page-title  { font-size: 1rem; }
 
   .kpi-row { grid-template-columns: 1fr 1fr; gap: 10px; }
   .kpi-val { font-size: 1.1rem; }

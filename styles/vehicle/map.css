@@ -1,5 +1,5 @@
 /* ===========================
-   map.css — 전국 지도 패널 & 권역 버튼
+   map.css — Leaflet 지도 패널 & 권역 버튼
    =========================== */
 
 /* 권역 색상 변수 */
@@ -32,73 +32,56 @@
   margin-bottom: -4px;
 }
 
-/* ── 전국 SVG 지도 래퍼 ── */
+/* ── Leaflet 지도 래퍼 ── */
 .korea-map-wrap {
   border-radius: var(--vc-radius-md);
   overflow: hidden;
   border: 1px solid var(--vc-border);
-  background: linear-gradient(160deg, #dbeafe 0%, #ede9fe 50%, #dcfce7 100%);
-  padding: 8px 8px 4px;
+  background: #e8f4fd;
 }
 
-.korea-map-svg {
+#koreaLeafletMap {
   width: 100%;
-  height: auto;
-  display: block;
+  height: 340px;
+  border-radius: var(--vc-radius-md);
+  z-index: 0;
 }
 
-/* ── 권역 path 기본 ── */
-.kr-region-path {
-  stroke: #ffffff;
-  stroke-width: 2;
-  fill-opacity: 0.55;
-  cursor: pointer;
-  transition: fill-opacity 0.22s ease, stroke-width 0.22s ease;
-}
-.kr-region-path:hover { fill-opacity: 0.8; stroke-width: 2.5; }
-.kr-region-path.active-region { fill-opacity: 0.9; stroke-width: 3; }
-
-/* 권역별 색상 */
-.kr-region-path.metro        { fill: var(--region-metro); }
-.kr-region-path.gangwon      { fill: var(--region-gangwon); }
-.kr-region-path.chungcheong  { fill: var(--region-chungcheong); }
-.kr-region-path.gyeongsang   { fill: var(--region-gyeongsang); }
-.kr-region-path.jeolla       { fill: var(--region-jeolla); }
-.kr-region-path.jeju         { fill: var(--region-jeju-r); }
-
-/* 라벨 */
-.kr-label {
-  font-size: 11px;
-  font-weight: 800;
-  fill: #1e293b;
+/* ── Leaflet 팝업 커스텀 ── */
+.map-popup {
   font-family: 'Noto Sans KR', sans-serif;
-  pointer-events: none;
-  text-anchor: middle;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  min-width: 110px;
 }
-.kr-label-sub {
-  font-size: 8.5px;
-  fill: #475569;
+.map-popup b {
+  font-size: 0.88rem;
+  color: #1e293b;
+}
+.map-popup small {
+  color: #64748b;
+}
+.popup-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.popup-dot.available { background: #16a34a; }
+.popup-dot.busy      { background: #f97316; }
+
+/* Leaflet 권역 툴팁 */
+.region-tooltip {
   font-family: 'Noto Sans KR', sans-serif;
-  pointer-events: none;
-  text-anchor: middle;
-}
-
-/* ── 차량 핀 ── */
-.map-pin {
-  stroke: #ffffff;
-  stroke-width: 1.5;
-  cursor: pointer;
-  transition: r 0.18s ease, opacity 0.2s ease;
-}
-.map-pin.available { fill: #16a34a; }
-.map-pin.busy      { fill: #f97316; }
-.map-pin:hover     { r: 7.5; }
-
-/* ── 농가 마커 ── */
-.map-farm {
-  fill: var(--vc-teal);
-  stroke: #ffffff;
-  stroke-width: 1;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  color: #1e293b;
+  padding: 3px 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 /* ── 범례 ── */
@@ -106,9 +89,11 @@
   display: flex;
   gap: 12px;
   justify-content: center;
-  margin-top: 6px;
+  margin-top: 0;
+  padding: 8px 8px 4px;
   flex-wrap: wrap;
-  padding-bottom: 2px;
+  background: #fff;
+  border-top: 1px solid var(--vc-border);
 }
 .legend-item {
   display: flex;

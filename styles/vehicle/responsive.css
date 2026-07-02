@@ -29,23 +29,24 @@
 
 @media (max-width: 768px) {
   .vc-container { padding: 0 16px; }
-  .vc-hero { padding: 88px 0 32px; }
-  .vc-hero-title { font-size: 1.8rem; }
-  .vc-app { padding: 18px 0 56px; }
+  .vc-app { padding: 16px 0 48px; }
 
   .vc-header-inner { height: 58px; padding: 0 14px; }
   .vc-logo-icon { width: 34px; height: 34px; }
   .vc-header-status { display: none; }
 
-  .vc-hero-stats { padding: 10px 14px; }
-  .vc-stat { padding: 0 12px; }
-  .vc-stat-num { font-size: 1.4rem; }
+  /* 페이지 타이틀 바 */
+  .vc-page-bar-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .vc-page-bar-left  { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .vc-page-title     { font-size: 1.05rem; }
+  .vc-page-stats     { width: 100%; justify-content: center; padding: 8px 12px; }
+  .vc-stat           { padding: 0 10px; }
+  .vc-stat-num       { font-size: 1.1rem; }
 
   .vc-map-panel {
     grid-template-columns: 1fr;
   }
-  .korea-map-wrap { max-height: 320px; overflow: hidden; }
-  .korea-map-svg  { max-height: 300px; }
+  #koreaLeafletMap { height: 260px; }
 
   .region-btn-group {
     display: grid;
@@ -62,10 +63,9 @@
 }
 
 @media (max-width: 480px) {
-  .vc-hero-title { font-size: 1.5rem; }
-  .vc-hero-stats { flex-wrap: wrap; }
-  .vc-stat { padding: 6px 10px; }
+  .vc-page-badge  { display: none; }
   .vc-stat-divider { display: none; }
+  .vc-stat        { padding: 4px 8px; }
 
   .region-btn-group { grid-template-columns: 1fr; }
   .filter-btn { padding: 5px 10px; font-size: 0.76rem; }

@@ -6,6 +6,8 @@
   <title>전국 운송 자동 매칭 | 제주모아</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <!-- Leaflet.js CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="../css/reset.css" />
   <link rel="stylesheet" href="../styles/vehicle/vehicle.css" />
   <link rel="stylesheet" href="../styles/vehicle/map.css" />
@@ -32,23 +34,26 @@
   </div>
 </header>
 
-<!-- ── Hero ── -->
-<section class="vc-hero">
+<!-- ── 페이지 타이틀 바 ── -->
+<div class="vc-page-bar">
   <div class="vc-container">
-    <div class="vc-hero-badge">🚚 AI National Transport Matching System</div>
-    <h1 class="vc-hero-title">전국 권역별<br><span class="vc-accent">운송 자동 매칭</span></h1>
-    <p class="vc-hero-desc">권역을 선택하면 해당 지역 출하 농가와 매칭 가능한 차량 정보를 실시간으로 확인할 수 있습니다.</p>
-    <div class="vc-hero-stats">
-      <div class="vc-stat"><span class="vc-stat-num" id="statTotal">86</span><span class="vc-stat-label">전체 차량</span></div>
-      <div class="vc-stat-divider"></div>
-      <div class="vc-stat"><span class="vc-stat-num available" id="statAvail">61</span><span class="vc-stat-label">배차 가능</span></div>
-      <div class="vc-stat-divider"></div>
-      <div class="vc-stat"><span class="vc-stat-num busy" id="statBusy">25</span><span class="vc-stat-label">운행 중</span></div>
-      <div class="vc-stat-divider"></div>
-      <div class="vc-stat"><span class="vc-stat-num" id="statFarm">74</span><span class="vc-stat-label">대기 농가</span></div>
+    <div class="vc-page-bar-inner">
+      <div class="vc-page-bar-left">
+        <span class="vc-page-badge">🚚 AI National Transport Matching System</span>
+        <h1 class="vc-page-title">전국 권역별 <span class="vc-accent">운송 자동 매칭</span></h1>
+      </div>
+      <div class="vc-page-stats">
+        <div class="vc-stat"><span class="vc-stat-num" id="statTotal">86</span><span class="vc-stat-label">전체 차량</span></div>
+        <div class="vc-stat-divider"></div>
+        <div class="vc-stat"><span class="vc-stat-num available" id="statAvail">61</span><span class="vc-stat-label">배차 가능</span></div>
+        <div class="vc-stat-divider"></div>
+        <div class="vc-stat"><span class="vc-stat-num busy" id="statBusy">25</span><span class="vc-stat-label">운행 중</span></div>
+        <div class="vc-stat-divider"></div>
+        <div class="vc-stat"><span class="vc-stat-num" id="statFarm">74</span><span class="vc-stat-label">대기 농가</span></div>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- ── 메인 앱 레이아웃 ── -->
 <main class="vc-app" id="vcApp">
@@ -59,95 +64,9 @@
       <aside class="vc-map-panel">
         <p class="map-panel-title">📍 권역 선택</p>
 
-        <!-- 전국 SVG 지도 -->
+        <!-- Leaflet 지도 -->
         <div class="korea-map-wrap">
-          <svg class="korea-map-svg" viewBox="0 0 340 500" xmlns="http://www.w3.org/2000/svg" aria-label="전국 권역 지도">
-
-            <!-- ── 수도권 (서울·경기·인천) ── -->
-            <g class="kr-region" data-region="metro" id="mapMetro">
-              <path d="M 80,60 L 175,55 L 185,120 L 75,125 Z" class="kr-region-path metro"/>
-              <text class="kr-label" x="130" y="96">수도권</text>
-              <text class="kr-label-sub" x="130" y="110">서울·경기·인천</text>
-            </g>
-
-            <!-- ── 강원권 ── -->
-            <g class="kr-region" data-region="gangwon" id="mapGangwon">
-              <path d="M 175,55 L 270,60 L 265,145 L 185,120 Z" class="kr-region-path gangwon"/>
-              <text class="kr-label" x="222" y="98">강원권</text>
-            </g>
-
-            <!-- ── 충청권 (충남·충북·대전·세종) ── -->
-            <g class="kr-region" data-region="chungcheong" id="mapChungcheong">
-              <path d="M 75,125 L 185,120 L 195,205 L 65,210 Z" class="kr-region-path chungcheong"/>
-              <text class="kr-label" x="130" y="165">충청권</text>
-              <text class="kr-label-sub" x="130" y="179">충남·충북·대전</text>
-            </g>
-
-            <!-- ── 경상권 (경북·경남·대구·부산·울산) ── -->
-            <g class="kr-region" data-region="gyeongsang" id="mapGyeongsang">
-              <path d="M 185,120 L 265,145 L 275,320 L 185,335 L 195,205 Z" class="kr-region-path gyeongsang"/>
-              <text class="kr-label" x="232" y="230">경상권</text>
-              <text class="kr-label-sub" x="232" y="244">경북·경남·대구</text>
-            </g>
-
-            <!-- ── 전라권 (전북·전남·광주) ── -->
-            <g class="kr-region" data-region="jeolla" id="mapJeolla">
-              <path d="M 65,210 L 195,205 L 185,335 L 55,330 Z" class="kr-region-path jeolla"/>
-              <text class="kr-label" x="120" y="268">전라권</text>
-              <text class="kr-label-sub" x="120" y="282">전북·전남·광주</text>
-            </g>
-
-            <!-- ── 제주권 ── -->
-            <g class="kr-region" data-region="jeju" id="mapJeju">
-              <ellipse cx="115" cy="430" rx="68" ry="32" class="kr-region-path jeju"/>
-              <text class="kr-label" x="115" y="426">제주권</text>
-              <text class="kr-label-sub" x="115" y="440">제주특별자치도</text>
-            </g>
-
-            <!-- 제주 연결선 -->
-            <line x1="115" y1="330" x2="115" y2="398" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4 3"/>
-
-            <!-- 차량 핀 — 수도권 -->
-            <circle class="map-pin available" cx="100" cy="78"  r="5.5" data-region="metro"/>
-            <circle class="map-pin available" cx="145" cy="90"  r="5.5" data-region="metro"/>
-            <circle class="map-pin busy"      cx="165" cy="70"  r="5.5" data-region="metro"/>
-            <circle class="map-pin available" cx="120" cy="108" r="5.5" data-region="metro"/>
-
-            <!-- 차량 핀 — 강원 -->
-            <circle class="map-pin available" cx="210" cy="80"  r="5.5" data-region="gangwon"/>
-            <circle class="map-pin busy"      cx="245" cy="105" r="5.5" data-region="gangwon"/>
-
-            <!-- 차량 핀 — 충청 -->
-            <circle class="map-pin available" cx="105" cy="148" r="5.5" data-region="chungcheong"/>
-            <circle class="map-pin available" cx="148" cy="165" r="5.5" data-region="chungcheong"/>
-            <circle class="map-pin busy"      cx="170" cy="148" r="5.5" data-region="chungcheong"/>
-
-            <!-- 차량 핀 — 경상 -->
-            <circle class="map-pin available" cx="225" cy="175" r="5.5" data-region="gyeongsang"/>
-            <circle class="map-pin available" cx="252" cy="215" r="5.5" data-region="gyeongsang"/>
-            <circle class="map-pin busy"      cx="238" cy="270" r="5.5" data-region="gyeongsang"/>
-            <circle class="map-pin available" cx="210" cy="305" r="5.5" data-region="gyeongsang"/>
-
-            <!-- 차량 핀 — 전라 -->
-            <circle class="map-pin available" cx="95"  cy="248" r="5.5" data-region="jeolla"/>
-            <circle class="map-pin available" cx="135" cy="295" r="5.5" data-region="jeolla"/>
-            <circle class="map-pin busy"      cx="165" cy="265" r="5.5" data-region="jeolla"/>
-
-            <!-- 차량 핀 — 제주 -->
-            <circle class="map-pin available" cx="90"  cy="428" r="5.5" data-region="jeju"/>
-            <circle class="map-pin available" cx="140" cy="422" r="5.5" data-region="jeju"/>
-            <circle class="map-pin busy"      cx="115" cy="440" r="5.5" data-region="jeju"/>
-
-            <!-- 농가 마커 -->
-            <polygon class="map-farm" points="130,82 134,74 138,82"  data-region="metro"/>
-            <polygon class="map-farm" points="220,120 224,112 228,120" data-region="gangwon"/>
-            <polygon class="map-farm" points="128,180 132,172 136,180" data-region="chungcheong"/>
-            <polygon class="map-farm" points="245,295 249,287 253,295" data-region="gyeongsang"/>
-            <polygon class="map-farm" points="115,315 119,307 123,315" data-region="jeolla"/>
-            <polygon class="map-farm" points="112,415 116,407 120,415" data-region="jeju"/>
-
-          </svg>
-
+          <div id="koreaLeafletMap" aria-label="전국 권역 지도"></div>
           <!-- 범례 -->
           <div class="map-legend">
             <div class="legend-item"><span class="legend-dot available"></span>배차 가능</div>
@@ -273,6 +192,7 @@
   </div>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="../scripts/vehicle/vehicleData.js"></script>
 <script src="../scripts/vehicle/mapInteraction.js"></script>
 <script src="../scripts/vehicle/vehicleList.js"></script>

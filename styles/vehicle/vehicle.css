@@ -138,84 +138,96 @@ body {
   color: var(--vc-white);
 }
 
-/* ── Hero ── */
-.vc-hero {
-  padding: 120px 0 44px;
-  background: linear-gradient(160deg,#f0fdf9 0%,#e0f2fe 55%,#f0fdf4 100%);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+/* ── 페이지 타이틀 바 ── */
+.vc-page-bar {
+  margin-top: 68px; /* 헤더 높이만큼 */
+  background: linear-gradient(135deg, #f0fdf9 0%, #e0f2fe 100%);
+  border-bottom: 1px solid var(--vc-border);
+  padding: 18px 0;
 }
-.vc-hero-badge {
+.vc-page-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.vc-page-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.vc-page-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   background: var(--vc-white);
   border: 1px solid var(--vc-border);
   border-radius: 100px;
-  padding: 6px 18px;
-  font-size: 0.85rem;
+  padding: 4px 14px;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--vc-green-dark);
-  margin-bottom: 16px;
+  white-space: nowrap;
   box-shadow: var(--vc-shadow-sm);
 }
-.vc-hero-title {
-  font-size: 2.5rem;
-  font-weight: 900;
+.vc-page-title {
+  font-size: 1.25rem;
+  font-weight: 800;
   color: var(--vc-text);
-  line-height: 1.2;
-  margin-bottom: 12px;
+  white-space: nowrap;
 }
-.vc-accent { color: var(--vc-green-dark); }
-.vc-hero-desc {
-  font-size: 0.98rem;
-  color: var(--vc-text-light);
-  margin-bottom: 24px;
-}
-
-/* Hero 통계 */
-.vc-hero-stats {
-  display: inline-flex;
+.vc-page-stats {
+  display: flex;
   align-items: center;
-  gap: 0;
   background: var(--vc-white);
   border: 1px solid var(--vc-border);
   border-radius: var(--vc-radius-md);
-  padding: 16px 32px;
+  padding: 10px 24px;
   box-shadow: var(--vc-shadow-sm);
-  flex-wrap: wrap;
-  justify-content: center;
+  gap: 0;
+  flex-shrink: 0;
 }
+.vc-page-stats .vc-stat { padding: 0 16px; }
+.vc-page-stats .vc-stat-num {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--vc-text);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+/* 공통 stat */
 .vc-stat {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 16px;
 }
 .vc-stat-num {
-  font-size: 1.9rem;
+  font-size: 1.35rem;
   font-weight: 900;
   color: var(--vc-text);
   line-height: 1;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 .vc-stat-num.available { color: var(--vc-green-dark); }
 .vc-stat-num.busy      { color: var(--vc-orange); }
 .vc-stat-label {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--vc-text-muted);
   font-weight: 600;
   white-space: nowrap;
 }
 .vc-stat-divider {
   width: 1px;
-  height: 36px;
+  height: 30px;
   background: var(--vc-border);
 }
+.vc-accent { color: var(--vc-green-dark); }
 
 /* ── 앱 메인 레이아웃 ── */
-.vc-app { padding: 28px 0 80px; }
+.vc-app { padding: 20px 0 60px; }
 .vc-layout {
   display: grid;
   grid-template-columns: 380px 1fr;

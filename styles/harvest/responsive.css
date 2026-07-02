@@ -16,8 +16,8 @@
 /* ── 모바일 ── */
 @media (max-width: 768px) {
   .hv-container  { padding: 0 16px; }
-  .hv-section    { padding: 64px 0; }
-  .hv-section-dark { padding: 64px 0; }
+  .hv-section    { padding: 48px 0; }
+  .hv-section-dark { padding: 48px 0; }
 
   /* 헤더 */
   .hv-header-inner { height: 60px; }
@@ -25,13 +25,11 @@
   .hv-logo-text    { font-size: 1.1rem; }
   .hv-back-btn     { font-size: 0.82rem; padding: 7px 14px; }
 
-  /* Hero */
-  .hv-hero          { padding: 110px 0 64px; }
-  .hv-hero-title    { font-size: 1.9rem; }
-  .hv-hero-desc     { font-size: 0.95rem; }
-  .hv-hero-btns     { flex-direction: column; align-items: center; }
-  .hv-btn-primary,
-  .hv-btn-secondary { width: 100%; max-width: 300px; justify-content: center; }
+  /* 페이지 타이틀 바 */
+  .hv-page-bar-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .hv-page-bar-left  { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .hv-page-title     { font-size: 1.05rem; white-space: normal; }
+  .hv-page-bar-right { gap: 6px; }
 
   /* Flow */
   .flow-input-group {
@@ -69,8 +67,7 @@
 
 /* ── 소형 모바일 ── */
 @media (max-width: 480px) {
-  .hv-hero-title    { font-size: 1.55rem; }
-  .hv-hero-stats    { flex-direction: column; align-items: center; gap: 8px; }
+  .hv-page-badge    { display: none; }
   .pred-grid        { grid-template-columns: 1fr 1fr; }
   .pred-val         { font-size: 1.6rem; }
   .flow-step-card   { padding: 14px; }

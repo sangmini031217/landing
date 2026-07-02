@@ -137,46 +137,51 @@ body {
   color: var(--mn-white);
 }
 
-/* ── Hero ── */
-.mn-hero {
-  padding: 130px 0 56px;
-  background: linear-gradient(160deg, #f0fdf9 0%, #e0f2fe 55%, #fff7ed 100%);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+/* ── 페이지 타이틀 바 ── */
+.mn-page-bar {
+  margin-top: 68px; /* 헤더 높이 */
+  background: linear-gradient(135deg, #f0fdf9 0%, #e0f2fe 100%);
+  border-bottom: 1px solid var(--mn-border);
+  padding: 16px 0;
 }
-.mn-hero-badge {
+.mn-page-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.mn-page-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.mn-page-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   background: var(--mn-white);
   border: 1px solid var(--mn-border);
   border-radius: 100px;
-  padding: 6px 18px;
-  font-size: 0.85rem;
+  padding: 4px 14px;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--mn-teal-dark);
-  margin-bottom: 20px;
+  white-space: nowrap;
   box-shadow: var(--mn-shadow-sm);
 }
-.mn-hero-title {
-  font-size: 2.6rem;
-  font-weight: 900;
+.mn-page-title {
+  font-size: 1.25rem;
+  font-weight: 800;
   color: var(--mn-text);
-  line-height: 1.2;
-  margin-bottom: 16px;
+  white-space: nowrap;
 }
-.mn-accent { color: var(--mn-teal); }
-.mn-hero-desc {
-  font-size: 1rem;
-  color: var(--mn-text-light);
-  margin-bottom: 24px;
-}
-.mn-hero-badges {
+.mn-page-bar-right {
   display: flex;
-  gap: 10px;
-  justify-content: center;
+  align-items: center;
+  gap: 8px;
   flex-wrap: wrap;
+  flex-shrink: 0;
 }
 .mn-badge {
   display: inline-flex;
@@ -202,25 +207,8 @@ body {
 }
 .mn-dot.small { width: 6px; height: 6px; }
 
-/* 배경 orb */
-.mn-orb {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-}
-.mn-orb1 {
-  width: 360px; height: 360px;
-  top: -80px; right: -80px;
-  background: radial-gradient(circle,rgba(14,165,233,.1) 0%,transparent 70%);
-}
-.mn-orb2 {
-  width: 280px; height: 280px;
-  bottom: -60px; left: -60px;
-  background: radial-gradient(circle,rgba(249,115,22,.08) 0%,transparent 70%);
-}
-
 /* ── 대시보드 섹션 ── */
-.mn-dashboard { padding: 40px 0 80px; }
+.mn-dashboard { padding: 24px 0 64px; }
 
 /* ── 공통 패널 ── */
 .db-panel {
