@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>농가 정보 등록 | 제주모아</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/app.css" />
+  <style>
+    .reg-layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 20px;
+      align-items: start;
+    }
+    .reg-section-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--app-text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 24px 0 12px;
+    }
+    .reg-section-title:first-child { margin-top: 0; }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    /* 토글 스위치 */
+    .toggle-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 16px;
+      background: var(--app-bg);
+      border: 1.5px solid var(--app-border-mid);
+      border-radius: var(--r-sm);
+    }
+    .toggle-label { font-size: 0.92rem; color: var(--app-text); font-weight: 600; }
+    .toggle-sub   { font-size: 0.78rem; color: var(--app-text-sub); margin-top: 2px; }
+    .toggle-switch {
+      position: relative;
+      width: 46px; height: 26px;
+      flex-shrink: 0;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: var(--app-border-mid);
+      border-radius: var(--r-full);
+      cursor: pointer;
+      transition: var(--tr);
+    }
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 20px; height: 20px;
+      left: 3px; bottom: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: var(--tr);
+      box-shadow: var(--shadow-xs);
+    }
+    .toggle-switch input:checked + .toggle-slider { background: var(--app-primary); }
+    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
+
+    /* 미리보기 사이드 */
+    .preview-card {
+      background: var(--app-surface);
+      border: 1px solid var(--app-border);
+      border-radius: var(--r-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-xs);
+      position: sticky;
+      top: calc(var(--header-h) + 20px);
+    }
+    .preview-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--app-text-sub);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--app-border);
+    }
+    .preview-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--app-border);
+      font-size: 0.85rem;
+    }
+    .preview-row:last-of-type { border-bottom: none; }
+    .preview-row-label { color: var(--app-text-sub); font-weight: 600; }
+    .preview-row-val   { color: var(--app-text); font-weight: 700; text-align: right; }
+
+    /* 예측 결과 박스 */
+    .predict-box {
+      background: var(--app-primary-light);
+      border: 1px solid #bfdbfe;
+      border-radius: var(--r-md);
+      padding: 16px;
+      margin-top: 16px;
+    }
+    .predict-box-title {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--app-primary-dark);
+      margin-bottom: 10px;
+    }
+    .predict-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      padding: 4px 0;
+    }
+    .predict-label { color: var(--app-primary-dark); }
+    .predict-val   { font-weight: 800; color: var(--app-primary-dark); }
+
+    @media (max-width: 900px) {
+      .reg-layout { grid-template-columns: 1fr; }
+      .preview-card { position: static; }
+    }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<header class="app-header" id="appHeader">
+  <div class="app-header-inner">
+    <a href="../index.html" class="app-logo">
+      <div class="app-logo-icon"><img src="../assets/images/hero-main.png" alt="제주모아" /></div>
+      <span class="app-logo-text">제주<span>모아</span></span>
+    </a>
+    <nav class="app-nav">
+      <a href="../index.html" class="app-nav-link">홈</a>
+      <a href="farm-register.html" class="app-nav-link active">농가 등록</a>
+      <a href="mypage.html" class="app-nav-link">마이페이지</a>
+    </nav>
+    <div class="app-header-user">
+      <div class="app-user-chip">
+        <div class="app-user-avatar" id="userAvatar">?</div>
+        <div class="app-user-info">
+          <span class="app-user-name" data-user-name>-</span>
+          <span class="app-user-role" data-user-role>-</span>
+        </div>
+      </div>
+      <button class="app-logout-btn" data-logout-btn>로그아웃</button>
+    </div>
+  </div>
+</header>
+
+<!-- 페이지 타이틀 바 -->
+<div class="app-page-bar">
+  <div class="app-container">
+    <div class="app-page-bar-inner">
+      <div class="app-page-bar-left">
+        <span class="app-page-tag">🌾 농가 관리</span>
+        <h1 class="app-page-title">농가 정보 <span>등록 · 수정</span></h1>
+      </div>
+      <div id="editModeBadge" style="display:none;">
+        <span class="app-badge app-badge-orange">✏️ 수정 모드</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="app-main">
+  <div class="app-container">
+    <div class="reg-layout">
+
+      <!-- 왼쪽: 폼 -->
+      <div>
+        <div class="app-card">
+
+          <!-- 기본 정보 -->
+          <div class="reg-section-title">기본 정보</div>
+          <div class="app-field">
+            <label class="app-label">농가명 <span class="req">*</span></label>
+            <input class="app-input" type="text" id="farmName" placeholder="예: 한림읍 김제주 농가" />
+          </div>
+          <div class="form-row">
+            <div class="app-field">
+              <label class="app-label">지역 <span class="req">*</span></label>
+              <select class="app-select" id="region">
+                <option value="">선택하세요</option>
+                <option value="제주시 한림읍">제주시 한림읍</option>
+                <option value="제주시 애월읍">제주시 애월읍</option>
+                <option value="제주시 구좌읍">제주시 구좌읍</option>
+                <option value="제주시 조천읍">제주시 조천읍</option>
+                <option value="서귀포시 남원읍">서귀포시 남원읍</option>
+                <option value="서귀포시 표선면">서귀포시 표선면</option>
+                <option value="서귀포시 대정읍">서귀포시 대정읍</option>
+                <option value="서귀포시 안덕면">서귀포시 안덕면</option>
+                <option value="서귀포시">서귀포시</option>
+              </select>
+            </div>
+            <div class="app-field">
+              <label class="app-label">작물 종류 <span class="req">*</span></label>
+              <select class="app-select" id="cropType" onchange="updatePreview()">
+                <option value="">선택하세요</option>
+                <option value="감귤">🍊 감귤</option>
+                <option value="당근">🥕 당근</option>
+                <option value="브로콜리">🥦 브로콜리</option>
+                <option value="한라봉">🍊 한라봉</option>
+                <option value="천혜향">🍊 천혜향</option>
+                <option value="감자">🥔 감자</option>
+                <option value="양배추">🥬 양배추</option>
+                <option value="마늘">🧄 마늘</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 재배 정보 -->
+          <div class="reg-section-title">재배 정보</div>
+          <div class="form-row">
+            <div class="app-field">
+              <label class="app-label">재배 면적 (㎡) <span class="req">*</span></label>
+              <input class="app-input" type="number" id="area" placeholder="예: 3200" min="100" oninput="updatePreview()" />
+            </div>
+            <div class="app-field">
+              <label class="app-label">식재 수량 (그루/포기)</label>
+              <input class="app-input" type="number" id="treeCount" placeholder="예: 150" min="1" oninput="updatePreview()" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="app-field">
+              <label class="app-label">나무/작물 수령 (년)</label>
+              <input class="app-input" type="number" id="treeAge" placeholder="예: 12" min="1" />
+            </div>
+            <div class="app-field">
+              <label class="app-label">품종</label>
+              <input class="app-input" type="text" id="variety" placeholder="예: 궁천조생" />
+            </div>
+          </div>
+
+          <!-- 출하 정보 -->
+          <div class="reg-section-title">출하 예정 정보</div>
+          <div class="form-row">
+            <div class="app-field">
+              <label class="app-label">예상 출하 시기 <span class="req">*</span></label>
+              <input class="app-input" type="month" id="expectedDate" oninput="updatePreview()" />
+              <div class="app-input-hint">월 단위로 선택하세요</div>
+            </div>
+            <div class="app-field">
+              <label class="app-label">예상 출하량 (kg)</label>
+              <input class="app-input" type="number" id="estimatedAmount" placeholder="예: 32500" min="0" oninput="updatePreview()" />
+            </div>
+          </div>
+          <div class="app-field">
+            <label class="app-label">목적지 (도매시장/유통센터)</label>
+            <input class="app-input" type="text" id="destination" placeholder="예: 가락동 농수산물도매시장" />
+          </div>
+
+          <!-- 친환경 인증 -->
+          <div class="reg-section-title">친환경 인증</div>
+          <div class="toggle-wrap app-field">
+            <div>
+              <div class="toggle-label">친환경 인증 농가</div>
+              <div class="toggle-sub">무농약·유기농 인증을 보유한 경우 활성화하세요</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="organicToggle" onchange="updatePreview()" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div id="organicDetail" style="display:none;">
+            <div class="form-row">
+              <div class="app-field">
+                <label class="app-label">인증 종류</label>
+                <select class="app-select" id="certType">
+                  <option value="무농약">무농약</option>
+                  <option value="유기농">유기농</option>
+                  <option value="GAP">GAP(농산물우수관리)</option>
+                </select>
+              </div>
+              <div class="app-field">
+                <label class="app-label">인증 번호</label>
+                <input class="app-input" type="text" id="certNumber" placeholder="예: 국립농산물품질관리원-2024-00123" />
+              </div>
+            </div>
+          </div>
+
+          <!-- 추가 메모 -->
+          <div class="app-field">
+            <label class="app-label">특이사항 / 메모</label>
+            <textarea class="app-textarea" id="memo" rows="3" placeholder="재배 환경, 출하 조건 등 특이사항을 입력하세요."></textarea>
+          </div>
+
+          <div style="display:flex; gap:10px; margin-top:8px;">
+            <button class="app-btn app-btn-primary" style="flex:1;" onclick="saveFarm()">
+              💾 정보 저장
+            </button>
+            <button class="app-btn app-btn-secondary" onclick="location.href='../index.html'">
+              취소
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 오른쪽: 미리보기 + 예측 -->
+      <div>
+        <div class="preview-card">
+          <div class="preview-title">📋 입력 미리보기</div>
+          <div id="previewRows">
+            <div style="color:var(--app-text-muted);font-size:0.85rem;text-align:center;padding:20px 0;">
+              입력하면 여기서 바로 확인됩니다.
+            </div>
+          </div>
+
+          <div class="predict-box" id="predictBox" style="display:none;">
+            <div class="predict-box-title">🤖 AI 예측 (입력 기반)</div>
+            <div class="predict-row">
+              <span class="predict-label">예상 생산량</span>
+              <span class="predict-val" id="predProd">-</span>
+            </div>
+            <div class="predict-row">
+              <span class="predict-label">박스 수량 (15kg)</span>
+              <span class="predict-val" id="predBox">-</span>
+            </div>
+            <div class="predict-row">
+              <span class="predict-label">필요 차량 (1톤)</span>
+              <span class="predict-val" id="predVehicle">-</span>
+            </div>
+            <div class="predict-row">
+              <span class="predict-label">예상 물류비 절감</span>
+              <span class="predict-val" id="predSaving">-</span>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;">
+            <a href="ai-harvest.html" class="app-btn app-btn-ghost app-btn-full app-btn-sm">
+              🤖 상세 AI 예측 보기 →
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<div class="app-toast-wrap" id="toastWrap"></div>
+
+<script src="../js/auth.js"></script>
+<script>
+  JMAuth.requireLogin();
+  JMAuth.injectUserUI();
+
+  var user = JMAuth.currentUser();
+  if (user) document.getElementById('userAvatar').textContent = (user.name || '?')[0];
+
+  window.addEventListener('scroll', function() {
+    document.getElementById('appHeader').classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  var FARM_KEY = user ? 'jmoa_farm_' + user.id : null;
+
+  /* 기존 데이터 로드 */
+  (function loadExisting() {
+    if (!FARM_KEY) return;
+    var farm = JSON.parse(localStorage.getItem(FARM_KEY) || 'null');
+    if (!farm) return;
+
+    document.getElementById('editModeBadge').style.display = '';
+    var fields = ['farmName','region','cropType','area','treeCount','treeAge','variety',
+                  'expectedDate','estimatedAmount','destination','memo','certNumber'];
+    fields.forEach(function(f) {
+      var el = document.getElementById(f);
+      if (el && farm[f] != null) el.value = farm[f];
+    });
+    if (farm.organic) {
+      document.getElementById('organicToggle').checked = true;
+      document.getElementById('organicDetail').style.display = '';
+    }
+    if (farm.certType) document.getElementById('certType').value = farm.certType;
+    updatePreview();
+  })();
+
+  document.getElementById('organicToggle').addEventListener('change', function() {
+    document.getElementById('organicDetail').style.display = this.checked ? '' : 'none';
+    updatePreview();
+  });
+
+  /* 미리보기 업데이트 */
+  function updatePreview() {
+    var crop   = document.getElementById('cropType').value;
+    var area   = parseFloat(document.getElementById('area').value) || 0;
+    var trees  = parseInt(document.getElementById('treeCount').value) || 0;
+    var amount = parseInt(document.getElementById('estimatedAmount').value) || 0;
+    var date   = document.getElementById('expectedDate').value;
+    var organic= document.getElementById('organicToggle').checked;
+
+    var rows = [];
+    if (crop)    rows.push(['작물', crop]);
+    if (area)    rows.push(['재배면적', area.toLocaleString() + ' ㎡']);
+    if (trees)   rows.push(['식재 수량', trees.toLocaleString() + ' 그루']);
+    if (amount)  rows.push(['예상 출하량', amount.toLocaleString() + ' kg']);
+    if (date)    rows.push(['출하 예정', date]);
+    rows.push(['친환경 인증', organic ? '✅ 있음' : '❌ 없음']);
+
+    var html = rows.length
+      ? rows.map(function(r) {
+          return '<div class="preview-row">'
+            + '<span class="preview-row-label">' + r[0] + '</span>'
+            + '<span class="preview-row-val">' + r[1] + '</span>'
+            + '</div>';
+        }).join('')
+      : '<div style="color:var(--app-text-muted);font-size:0.85rem;text-align:center;padding:20px 0;">입력하면 여기서 바로 확인됩니다.</div>';
+
+    document.getElementById('previewRows').innerHTML = html;
+
+    /* AI 예측 */
+    if (area > 0 || amount > 0) {
+      var prod = amount > 0 ? amount : Math.round(area * 8.5);
+      var boxes = Math.ceil(prod / 15);
+      var vehicles = Math.ceil(prod / 1000);
+      var saving = Math.round(prod * 18 * 0.35);
+
+      document.getElementById('predProd').textContent    = prod.toLocaleString() + ' kg';
+      document.getElementById('predBox').textContent     = boxes.toLocaleString() + ' 박스';
+      document.getElementById('predVehicle').textContent = vehicles + ' 대';
+      document.getElementById('predSaving').textContent  = '₩ ' + saving.toLocaleString();
+      document.getElementById('predictBox').style.display = '';
+    }
+  }
+
+  /* 저장 */
+  function saveFarm() {
+    var farmName = document.getElementById('farmName').value.trim();
+    var region   = document.getElementById('region').value;
+    var cropType = document.getElementById('cropType').value;
+    var area     = document.getElementById('area').value;
+    var expectedDate = document.getElementById('expectedDate').value;
+
+    if (!farmName || !region || !cropType || !area || !expectedDate) {
+      showToast('필수 항목을 모두 입력해주세요.', 'error');
+      return;
+    }
+
+    var farm = {
+      farmName:        farmName,
+      region:          region,
+      cropType:        cropType,
+      area:            area,
+      treeCount:       document.getElementById('treeCount').value,
+      treeAge:         document.getElementById('treeAge').value,
+      variety:         document.getElementById('variety').value,
+      expectedDate:    expectedDate,
+      estimatedAmount: document.getElementById('estimatedAmount').value,
+      destination:     document.getElementById('destination').value,
+      organic:         document.getElementById('organicToggle').checked,
+      certType:        document.getElementById('certType').value,
+      certNumber:      document.getElementById('certNumber').value,
+      memo:            document.getElementById('memo').value,
+      updatedAt:       new Date().toLocaleString('ko-KR')
+    };
+
+    localStorage.setItem(FARM_KEY, JSON.stringify(farm));
+
+    /* 활동 기록 */
+    addActivity({
+      icon: '🌾',
+      colorClass: 'ic-green',
+      title: '농가 정보 저장 완료',
+      sub: farmName + ' · ' + cropType,
+      time: now()
+    });
+
+    showToast('농가 정보가 저장되었습니다! ✅', 'success');
+    setTimeout(function() { location.href = '../index.html'; }, 1200);
+  }
+
+  /* 활동 기록 추가 */
+  function addActivity(item) {
+    if (!user) return;
+    var key = 'jmoa_activity_' + user.id;
+    var list = JSON.parse(localStorage.getItem(key) || '[]');
+    list.unshift(item);
+    if (list.length > 20) list = list.slice(0, 20);
+    localStorage.setItem(key, JSON.stringify(list));
+  }
+
+  function now() {
+    return new Date().toLocaleString('ko-KR', { month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+  }
+
+  /* 토스트 */
+  function showToast(msg, type) {
+    var wrap = document.getElementById('toastWrap');
+    var t = document.createElement('div');
+    t.className = 'app-toast' + (type ? ' ' + type : '');
+    t.textContent = msg;
+    wrap.appendChild(t);
+    requestAnimationFrame(function() { t.classList.add('show'); });
+    setTimeout(function() {
+      t.classList.remove('show');
+      setTimeout(function() { t.remove(); }, 300);
+    }, 2800);
+  }
+</script>
+</body>
+</html>

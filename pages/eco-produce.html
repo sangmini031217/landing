@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>친환경 농산물 정보 | 제주모아</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/app.css" />
+  <style>
+    .filter-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
+    .filter-chip{padding:7px 16px;border:1.5px solid var(--app-border-mid);border-radius:var(--r-full);font-size:0.84rem;font-weight:700;color:var(--app-text-sub);background:var(--app-surface);cursor:pointer;transition:var(--tr);font-family:inherit;}
+    .filter-chip:hover{border-color:var(--app-primary);color:var(--app-primary);}
+    .filter-chip.active{border-color:var(--app-primary);color:var(--app-primary);background:var(--app-primary-light);}
+    .search-box{flex:1;max-width:300px;position:relative;}
+    .search-box input{padding-left:36px;}
+    .search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--app-text-muted);font-size:1rem;}
+    .produce-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    .produce-card{background:var(--app-surface);border:1px solid var(--app-border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-xs);transition:var(--tr);cursor:pointer;}
+    .produce-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);}
+    .produce-card-img{height:120px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,#f0fdf4,#e0f2fe);}
+    .produce-card-body{padding:16px;}
+    .produce-card-name{font-size:1rem;font-weight:800;color:var(--app-text);margin-bottom:4px;}
+    .produce-card-farm{font-size:0.78rem;color:var(--app-text-sub);margin-bottom:10px;}
+    .produce-card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+    .produce-card-info{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+    .pci-row{font-size:0.75rem;color:var(--app-text-sub);}
+    .pci-val{font-size:0.78rem;font-weight:700;color:var(--app-text);}
+    /* 상세 모달 */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;}
+    .modal-overlay.show{display:flex;}
+    .modal-box{background:var(--app-surface);border-radius:var(--r-xl);max-width:520px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:modalPop .25s ease;}
+    @keyframes modalPop{from{transform:scale(.9);opacity:0;}to{transform:scale(1);opacity:1;}}
+    .modal-header{padding:24px 24px 0;display:flex;align-items:center;gap:14px;}
+    .modal-emoji{font-size:3rem;}
+    .modal-title{font-size:1.2rem;font-weight:900;color:var(--app-text);}
+    .modal-sub{font-size:0.82rem;color:var(--app-text-sub);margin-top:3px;}
+    .modal-body{padding:20px 24px 24px;}
+    .modal-section-title{font-size:0.78rem;font-weight:800;color:var(--app-text-sub);text-transform:uppercase;letter-spacing:0.5px;margin:16px 0 10px;}
+    .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .detail-tile{background:var(--app-bg);border-radius:var(--r-md);padding:12px;}
+    .detail-tile-label{font-size:0.72rem;color:var(--app-text-sub);font-weight:600;margin-bottom:4px;}
+    .detail-tile-val{font-size:0.95rem;font-weight:800;color:var(--app-text);}
+    .process-list{display:flex;flex-direction:column;gap:8px;}
+    .process-item{display:flex;align-items:center;gap:10px;font-size:0.85rem;}
+    .process-dot{width:8px;height:8px;border-radius:50%;background:var(--app-green);flex-shrink:0;}
+    @media(max-width:900px){.produce-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:560px){.produce-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+<header class="app-header" id="appHeader">
+  <div class="app-header-inner">
+    <a href="../index.html" class="app-logo"><div class="app-logo-icon"><img src="../assets/images/hero-main.png" alt="제주모아" /></div><span class="app-logo-text">제주<span>모아</span></span></a>
+    <nav class="app-nav">
+      <a href="../index.html" class="app-nav-link">홈</a>
+      <a href="eco-produce.html" class="app-nav-link active">친환경 정보</a>
+    </nav>
+    <div class="app-header-user">
+      <div class="app-user-chip">
+        <div class="app-user-avatar" id="userAvatar">?</div>
+        <div class="app-user-info"><span class="app-user-name" data-user-name>-</span><span class="app-user-role" data-user-role>-</span></div>
+      </div>
+      <button class="app-logout-btn" data-logout-btn>로그아웃</button>
+    </div>
+  </div>
+</header>
+
+<div class="app-page-bar">
+  <div class="app-container">
+    <div class="app-page-bar-inner">
+      <div class="app-page-bar-left">
+        <span class="app-page-tag">🌿 친환경</span>
+        <h1 class="app-page-title">친환경 농산물 <span>정보 조회</span></h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="app-main">
+  <div class="app-container">
+
+    <!-- 필터 바 -->
+    <div class="filter-bar">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input class="app-input" type="text" id="searchInput" placeholder="농가명·작물·지역 검색" oninput="renderCards()" />
+      </div>
+      <button class="filter-chip active" data-filter="all" onclick="setFilter(this,'all')">전체</button>
+      <button class="filter-chip" data-filter="organic" onclick="setFilter(this,'organic')">🌿 유기농</button>
+      <button class="filter-chip" data-filter="noagri" onclick="setFilter(this,'noagri')">🚫 무농약</button>
+      <button class="filter-chip" data-filter="gap" onclick="setFilter(this,'gap')">✅ GAP</button>
+      <button class="filter-chip" data-filter="citrus" onclick="setFilter(this,'citrus')">🍊 감귤류</button>
+      <button class="filter-chip" data-filter="veg" onclick="setFilter(this,'veg')">🥦 채소류</button>
+    </div>
+
+    <!-- 카드 그리드 -->
+    <div class="produce-grid" id="produceGrid"></div>
+
+  </div>
+</main>
+
+<!-- 상세 모달 -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-header">
+      <div class="modal-emoji" id="mEmoji">🍊</div>
+      <div><div class="modal-title" id="mTitle">-</div><div class="modal-sub" id="mSub">-</div></div>
+      <button onclick="document.getElementById('modalOverlay').classList.remove('show')" style="margin-left:auto;background:var(--app-bg);border:none;border-radius:50%;width:32px;height:32px;font-size:1.1rem;cursor:pointer;">✕</button>
+    </div>
+    <div class="modal-body" id="mBody"></div>
+  </div>
+</div>
+
+<div class="app-toast-wrap" id="toastWrap"></div>
+
+<script src="../js/auth.js"></script>
+<script>
+  JMAuth.requireLogin();
+  JMAuth.injectUserUI();
+  var user = JMAuth.currentUser();
+  if(user) document.getElementById('userAvatar').textContent=(user.name||'?')[0];
+  window.addEventListener('scroll',function(){document.getElementById('appHeader').classList.toggle('scrolled',window.scrollY>10);},{passive:true});
+
+  var PRODUCES = [
+    {id:1,emoji:'🍊',name:'궁천조생 감귤',farm:'한림 A농가',region:'제주시 한림읍',cert:'무농약',certType:'noagri',cat:'citrus',
+     area:'3,200㎡',trees:'150그루',harvest:'2025년 11월',amount:'2,400kg',brix:'10.8°',color:'85%',
+     process:['천연 퇴비만 사용','농약 미사용 재배','GAP 기준 수확 관리','저온 저장 후 출하'],
+     desc:'한림읍 해안가의 온화한 기후에서 재배된 감귤로, 당도와 착색도가 우수합니다.'},
+    {id:2,emoji:'🍊',name:'한라봉',farm:'남원 C농가',region:'서귀포시 남원읍',cert:'유기농',certType:'organic',cat:'citrus',
+     area:'2,800㎡',trees:'120그루',harvest:'2025년 12월',amount:'1,800kg',brix:'12.5°',color:'90%',
+     process:['유기농 비료만 사용','천적 방제','무농약 3년 이상 유지','생산 이력 시스템 등록'],
+     desc:'서귀포 남원의 비옥한 토양에서 유기농으로 재배된 한라봉입니다.'},
+    {id:3,emoji:'🥕',name:'제주 당근',farm:'애월 B농가',region:'제주시 애월읍',cert:'GAP',certType:'gap',cat:'veg',
+     area:'1,500㎡',trees:'2,000포기',harvest:'2025년 12월',amount:'950kg',brix:'-',color:'-',
+     process:['GAP 우수관리기준 적용','잔류농약 검사 완료','토양 검사 주기적 실시','냉장 유통'],
+     desc:'제주 화산토에서 재배된 당근으로 단단하고 당도가 높습니다.'},
+    {id:4,emoji:'🥦',name:'제주 브로콜리',farm:'대정 D농가',region:'서귀포시 대정읍',cert:'무농약',certType:'noagri',cat:'veg',
+     area:'1,200㎡',trees:'800포기',harvest:'2025년 11월',amount:'480kg',brix:'-',color:'-',
+     process:['무농약 인증 취득','IPM(통합해충관리) 적용','수확 후 바로 냉장'],
+     desc:'대정읍의 서늘한 기후에서 재배된 브로콜리로 조직이 단단하고 선도가 높습니다.'},
+    {id:5,emoji:'🍊',name:'천혜향',farm:'구좌 E농가',region:'제주시 구좌읍',cert:'유기농',certType:'organic',cat:'citrus',
+     area:'2,100㎡',trees:'90그루',harvest:'2026년 1월',amount:'1,500kg',brix:'13.2°',color:'88%',
+     process:['유기농 비료 사용','녹비작물 재배','생태계 보전 농법'],
+     desc:'구좌읍의 깨끗한 자연환경에서 유기농 인증을 받아 재배된 천혜향입니다.'},
+    {id:6,emoji:'🥔',name:'제주 감자',farm:'표선 F농가',region:'서귀포시 표선면',cert:'GAP',certType:'gap',cat:'veg',
+     area:'2,500㎡',trees:'3,000포기',harvest:'2025년 11월',amount:'2,800kg',brix:'-',color:'-',
+     process:['GAP 기준 재배','잔류농약 검사 통과','생산이력 추적 가능'],
+     desc:'제주 화산토의 미네랄을 흡수한 표선 감자는 분질성이 높고 맛이 좋습니다.'},
+  ];
+
+  /* 내 농가 등록된 친환경 작물 추가 */
+  if(user){
+    var myFarm = JSON.parse(localStorage.getItem('jmoa_farm_'+user.id)||'null');
+    if(myFarm && myFarm.organic){
+      PRODUCES.push({
+        id:99,emoji:{감귤:'🍊',당근:'🥕',브로콜리:'🥦',한라봉:'🍊',천혜향:'🍊',감자:'🥔',양배추:'🥬'}[myFarm.cropType]||'🌾',
+        name: myFarm.cropType||'작물',
+        farm: myFarm.farmName||'내 농가',
+        region: myFarm.region||'제주',
+        cert: myFarm.certType||'무농약',
+        certType: myFarm.certType==='유기농'?'organic':myFarm.certType==='GAP'?'gap':'noagri',
+        cat: ['감귤','한라봉','천혜향'].includes(myFarm.cropType)?'citrus':'veg',
+        area: (myFarm.area||'-')+'㎡',
+        trees: (myFarm.treeCount||'-')+'그루',
+        harvest: myFarm.expectedDate||'-',
+        amount: myFarm.estimatedAmount?Number(myFarm.estimatedAmount).toLocaleString()+'kg':'-',
+        brix: '-', color: '-',
+        process: ['친환경 인증 취득','생산이력 등록'],
+        desc: myFarm.memo || '직접 등록하신 친환경 농산물입니다.'
+      });
+    }
+  }
+
+  var currentFilter = 'all';
+
+  function setFilter(btn, filter){
+    document.querySelectorAll('.filter-chip').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    currentFilter = filter;
+    renderCards();
+  }
+
+  function renderCards(){
+    var q = document.getElementById('searchInput').value.trim().toLowerCase();
+    var list = PRODUCES.filter(function(p){
+      var matchFilter = currentFilter==='all' || p.certType===currentFilter || p.cat===currentFilter;
+      var matchSearch = !q || p.name.toLowerCase().includes(q) || p.farm.toLowerCase().includes(q) || p.region.includes(q);
+      return matchFilter && matchSearch;
+    });
+    if(!list.length){
+      document.getElementById('produceGrid').innerHTML = '<div class="app-empty" style="grid-column:1/-1;"><div class="app-empty-icon">🔍</div><div class="app-empty-msg">검색 결과가 없습니다.</div></div>';
+      return;
+    }
+    var certColors={유기농:'green',무농약:'blue',GAP:'orange'};
+    var certClass={유기농:'app-badge-green',무농약:'app-badge-blue',GAP:'app-badge-orange'};
+    document.getElementById('produceGrid').innerHTML = list.map(function(p){
+      return '<div class="produce-card" onclick="openModal('+p.id+')">'
+        +'<div class="produce-card-img">'+p.emoji+'</div>'
+        +'<div class="produce-card-body">'
+        +'<div class="produce-card-name">'+p.name+'</div>'
+        +'<div class="produce-card-farm">'+p.farm+' · '+p.region+'</div>'
+        +'<div class="produce-card-tags">'
+        +'<span class="app-badge '+certClass[p.cert]+'">'+p.cert+'</span>'
+        +'<span class="app-badge app-badge-gray">🌾 '+p.region.split(' ').pop()+'</span>'
+        +'</div>'
+        +'<div class="produce-card-info">'
+        +'<div><div class="pci-row">출하 예정</div><div class="pci-val">'+p.harvest+'</div></div>'
+        +'<div><div class="pci-row">예상 물량</div><div class="pci-val">'+p.amount+'</div></div>'
+        +'</div>'
+        +'</div></div>';
+    }).join('');
+  }
+
+  function openModal(id){
+    var p = PRODUCES.find(function(x){return x.id===id;});
+    if(!p) return;
+    document.getElementById('mEmoji').textContent  = p.emoji;
+    document.getElementById('mTitle').textContent  = p.name;
+    document.getElementById('mSub').textContent    = p.farm+' · '+p.region;
+    var certClass={유기농:'app-badge-green',무농약:'app-badge-blue',GAP:'app-badge-orange'};
+    document.getElementById('mBody').innerHTML =
+      '<div style="font-size:0.88rem;color:var(--app-text-sub);margin-bottom:14px;">'+p.desc+'</div>'
+      +'<span class="app-badge '+certClass[p.cert]+'" style="font-size:0.8rem;padding:4px 14px;">✅ '+p.cert+' 인증</span>'
+      +'<div class="modal-section-title">상세 정보</div>'
+      +'<div class="detail-grid">'
+      +dtile('재배 면적', p.area)+dtile('식재 수량', p.trees)
+      +dtile('출하 예정', p.harvest)+dtile('예상 물량', p.amount)
+      +(p.brix!=='-'?dtile('당도(Brix)', p.brix):'')
+      +(p.color!=='-'?dtile('착색도', p.color):'')
+      +'</div>'
+      +'<div class="modal-section-title">친환경 생산 과정</div>'
+      +'<div class="process-list">'+p.process.map(function(t){
+        return '<div class="process-item"><div class="process-dot"></div><span>'+t+'</span></div>';
+      }).join('')+'</div>'
+      +'<div style="margin-top:20px;"><a href="ai-harvest.html" class="app-btn app-btn-primary app-btn-sm">🤖 AI 출하 예측 →</a></div>';
+    document.getElementById('modalOverlay').classList.add('show');
+  }
+
+  function dtile(label, val){
+    return '<div class="detail-tile"><div class="detail-tile-label">'+label+'</div><div class="detail-tile-val">'+val+'</div></div>';
+  }
+
+  function closeModal(e){
+    if(e.target===document.getElementById('modalOverlay'))
+      document.getElementById('modalOverlay').classList.remove('show');
+  }
+
+  renderCards();
+</script>
+</body>
+</html>

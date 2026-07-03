@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>물류 경로 최적화 | 제주모아</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/app.css" />
+  <style>
+    .lg-layout{display:grid;grid-template-columns:360px 1fr;gap:20px;align-items:start;}
+    .lg-panel{position:sticky;top:calc(var(--header-h) + 20px);}
+    .farm-row{display:flex;align-items:center;gap:12px;padding:12px;border:1.5px solid var(--app-border-mid);border-radius:var(--r-md);background:var(--app-bg);margin-bottom:8px;cursor:pointer;transition:var(--tr);}
+    .farm-row:hover{border-color:var(--app-primary);background:var(--app-primary-light);}
+    .farm-row.selected{border-color:var(--app-primary);background:var(--app-primary-light);}
+    .farm-row input[type=checkbox]{width:16px;height:16px;accent-color:var(--app-primary);flex-shrink:0;}
+    .farm-row-info{flex:1;}
+    .farm-row-name{font-size:0.88rem;font-weight:700;color:var(--app-text);}
+    .farm-row-sub{font-size:0.75rem;color:var(--app-text-sub);margin-top:2px;}
+    .farm-row-amount{font-size:0.85rem;font-weight:800;color:var(--app-primary);white-space:nowrap;}
+    /* 경로 시각화 */
+    .route-viz{display:flex;flex-direction:column;gap:0;padding:16px 0;}
+    .route-stop{display:flex;align-items:flex-start;gap:14px;}
+    .route-line-wrap{display:flex;flex-direction:column;align-items:center;width:28px;flex-shrink:0;}
+    .route-dot{width:14px;height:14px;border-radius:50%;background:var(--app-primary);border:2.5px solid #fff;box-shadow:0 0 0 2px var(--app-primary);flex-shrink:0;}
+    .route-dot.green{background:var(--app-green);box-shadow:0 0 0 2px var(--app-green);}
+    .route-dot.orange{background:var(--app-orange);box-shadow:0 0 0 2px var(--app-orange);}
+    .route-dot.dest{background:var(--app-red);box-shadow:0 0 0 2px var(--app-red);}
+    .route-line{width:2px;flex:1;background:var(--app-border-mid);min-height:28px;}
+    .route-body{flex:1;padding-bottom:20px;}
+    .route-body-name{font-size:0.9rem;font-weight:800;color:var(--app-text);}
+    .route-body-sub{font-size:0.78rem;color:var(--app-text-sub);margin-top:3px;}
+    .route-body-tag{display:inline-flex;align-items:center;gap:4px;margin-top:6px;font-size:0.75rem;font-weight:700;background:var(--app-bg);border:1px solid var(--app-border-mid);border-radius:var(--r-full);padding:2px 10px;color:var(--app-text-sub);}
+    /* 차량 배정 테이블 */
+    .dispatch-table{width:100%;border-collapse:collapse;font-size:0.85rem;}
+    .dispatch-table th{padding:10px 12px;background:var(--app-bg);font-size:0.76rem;font-weight:700;color:var(--app-text-sub);text-align:left;border-bottom:1px solid var(--app-border);}
+    .dispatch-table td{padding:12px;border-bottom:1px solid var(--app-border);}
+    .dispatch-table tr:last-child td{border-bottom:none;}
+    /* 절감 효과 */
+    .saving-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+    .saving-tile{background:var(--app-surface);border:1px solid var(--app-border);border-radius:var(--r-lg);padding:18px;text-align:center;box-shadow:var(--shadow-xs);}
+    .saving-val{font-size:1.5rem;font-weight:900;margin-bottom:4px;}
+    .saving-label{font-size:0.76rem;color:var(--app-text-sub);font-weight:600;}
+    @media(max-width:960px){.lg-layout{grid-template-columns:1fr;}.lg-panel{position:static;}.saving-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:480px){.saving-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+<header class="app-header" id="appHeader">
+  <div class="app-header-inner">
+    <a href="../index.html" class="app-logo"><div class="app-logo-icon"><img src="../assets/images/hero-main.png" alt="제주모아" /></div><span class="app-logo-text">제주<span>모아</span></span></a>
+    <nav class="app-nav">
+      <a href="../index.html" class="app-nav-link">홈</a>
+      <a href="logistics.html" class="app-nav-link active">물류 최적화</a>
+      <a href="vehicle-matching.html" class="app-nav-link">차량 매칭</a>
+    </nav>
+    <div class="app-header-user">
+      <div class="app-user-chip">
+        <div class="app-user-avatar" id="userAvatar">?</div>
+        <div class="app-user-info"><span class="app-user-name" data-user-name>-</span><span class="app-user-role" data-user-role>-</span></div>
+      </div>
+      <button class="app-logout-btn" data-logout-btn>로그아웃</button>
+    </div>
+  </div>
+</header>
+
+<div class="app-page-bar">
+  <div class="app-container">
+    <div class="app-page-bar-inner">
+      <div class="app-page-bar-left">
+        <span class="app-page-tag">🗺️ 물류</span>
+        <h1 class="app-page-title">물류 경로 <span>최적화</span></h1>
+      </div>
+      <div><span class="live-dot"></span><span style="font-size:0.82rem;color:var(--app-text-sub);font-weight:600;margin-left:6px;">실시간 배차 시스템</span></div>
+    </div>
+  </div>
+</div>
+
+<main class="app-main">
+  <div class="app-container">
+    <div class="lg-layout">
+
+      <!-- 왼쪽: 농가 선택 패널 -->
+      <div class="lg-panel">
+        <div class="app-card">
+          <div class="app-card-title"><span>🌾</span> 통합 배차 농가 선택</div>
+          <p style="font-size:0.82rem;color:var(--app-text-sub);margin-bottom:14px;">통합 배차할 농가를 선택하면 최적 경로를 자동 계산합니다.</p>
+          <div id="farmList">
+            <div class="app-empty"><div class="app-empty-icon">🌱</div><div class="app-empty-msg">데이터 로딩 중...</div></div>
+          </div>
+          <hr class="app-divider" />
+          <div class="app-field">
+            <label class="app-label">목적지 (도매시장/물류센터)</label>
+            <select class="app-select" id="destSelect">
+              <option value="가락동 농수산물도매시장">가락동 농수산물도매시장 (서울)</option>
+              <option value="제주항 물류센터">제주항 물류센터 (제주)</option>
+              <option value="구리 농수산물도매시장">구리 농수산물도매시장 (경기)</option>
+              <option value="부산 엄궁 시장">부산 엄궁 농수산물 시장</option>
+            </select>
+          </div>
+          <div class="app-field">
+            <label class="app-label">출하 예정일</label>
+            <input class="app-input" type="date" id="lgDate" />
+          </div>
+          <button class="app-btn app-btn-primary app-btn-full" onclick="optimize()">🤖 최적 경로 계산</button>
+        </div>
+      </div>
+
+      <!-- 오른쪽: 결과 -->
+      <div id="lgResult">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 0;color:var(--app-text-muted);gap:12px;">
+          <div style="font-size:3rem;">🗺️</div>
+          <div style="font-size:0.95rem;font-weight:600;">농가를 선택하고 최적 경로 계산을 눌러보세요.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+<div class="app-toast-wrap" id="toastWrap"></div>
+
+<script src="../js/auth.js"></script>
+<script>
+  JMAuth.requireLogin();
+  JMAuth.injectUserUI();
+  var user = JMAuth.currentUser();
+  if(user) document.getElementById('userAvatar').textContent=(user.name||'?')[0];
+  window.addEventListener('scroll',function(){document.getElementById('appHeader').classList.toggle('scrolled',window.scrollY>10);},{passive:true});
+
+  /* 오늘 날짜 기본값 */
+  var today = new Date(); today.setDate(today.getDate()+7);
+  document.getElementById('lgDate').value = today.toISOString().slice(0,10);
+
+  /* 샘플 농가 데이터 + 내 농가 */
+  var sampleFarms = [
+    {id:'my', name:'내 농가', region:'입력 지역', crop:'감귤', amount:0, organic:false},
+    {id:'f1', name:'한림 A농가', region:'제주시 한림읍', crop:'감귤', amount:1800, organic:true},
+    {id:'f2', name:'애월 B농가', region:'제주시 애월읍', crop:'당근', amount:950, organic:false},
+    {id:'f3', name:'남원 C농가', region:'서귀포 남원읍', crop:'감귤', amount:2100, organic:true},
+    {id:'f4', name:'대정 D농가', region:'서귀포 대정읍', crop:'브로콜리', amount:780, organic:false},
+    {id:'f5', name:'구좌 E농가', region:'제주시 구좌읍', crop:'감귤', amount:1500, organic:true},
+  ];
+
+  /* 내 농가 데이터 반영 */
+  if(user){
+    var myFarm = JSON.parse(localStorage.getItem('jmoa_farm_'+user.id)||'null');
+    if(myFarm){
+      sampleFarms[0].name   = myFarm.farmName || '내 농가';
+      sampleFarms[0].region = myFarm.region   || '제주';
+      sampleFarms[0].crop   = myFarm.cropType || '감귤';
+      sampleFarms[0].amount = parseInt(myFarm.estimatedAmount||0)||2400;
+    }
+  }
+
+  function renderFarmList(){
+    document.getElementById('farmList').innerHTML = sampleFarms.map(function(f,i){
+      var emoji = {감귤:'🍊',당근:'🥕',브로콜리:'🥦',한라봉:'🍊',감자:'🥔',양배추:'🥬'}[f.crop]||'🌾';
+      return '<label class="farm-row" id="farmRow'+i+'" onclick="toggleFarm('+i+')">'
+        +'<input type="checkbox" id="fc'+i+'" '+(i===0?'checked':'')+'>'
+        +'<div class="farm-row-info"><div class="farm-row-name">'+emoji+' '+f.name+(f.organic?' <span style="font-size:0.7rem;color:var(--app-green-dark);">친환경</span>':'')+'</div>'
+        +'<div class="farm-row-sub">'+f.region+'</div></div>'
+        +'<div class="farm-row-amount">'+f.amount.toLocaleString()+'kg</div>'
+        +'</label>';
+    }).join('');
+    document.querySelector('#farmRow0').classList.add('selected');
+  }
+
+  function toggleFarm(i){
+    var cb = document.getElementById('fc'+i);
+    document.getElementById('farmRow'+i).classList.toggle('selected', cb.checked);
+  }
+
+  renderFarmList();
+
+  function getSelectedFarms(){
+    return sampleFarms.filter(function(_,i){
+      var cb = document.getElementById('fc'+i);
+      return cb && cb.checked;
+    });
+  }
+
+  function optimize(){
+    var selected = getSelectedFarms();
+    if(!selected.length){ showToast('농가를 1개 이상 선택해주세요.','error'); return; }
+    var dest = document.getElementById('destSelect').value;
+    var date = document.getElementById('lgDate').value;
+
+    var btn = document.querySelector('[onclick="optimize()"]');
+    btn.disabled=true; btn.textContent='⏳ 경로 계산 중...';
+
+    setTimeout(function(){
+      renderResult(selected, dest, date);
+      btn.disabled=false; btn.textContent='🤖 최적 경로 계산';
+      if(user){
+        var key='jmoa_activity_'+user.id;
+        var list=JSON.parse(localStorage.getItem(key)||'[]');
+        list.unshift({icon:'🗺️',colorClass:'ic-green',title:'물류 경로 최적화 완료',sub:selected.length+'개 농가 · '+dest,time:now()});
+        if(list.length>20)list=list.slice(0,20);
+        localStorage.setItem(key,JSON.stringify(list));
+      }
+    }, 1400);
+  }
+
+  function renderResult(farms, dest, date){
+    var totalAmount = farms.reduce(function(s,f){return s+f.amount;},0);
+    var vehicles1t  = Math.ceil(totalAmount/900);
+    var vehicles25t = Math.ceil(totalAmount/2200);
+    var bestVehicle = totalAmount>5000 ? vehicles25t+'대 (2.5톤)' : vehicles1t+'대 (1톤)';
+    var saving      = Math.round(totalAmount*18*0.35);
+    var emptyRate   = Math.round(Math.random()*8+5);
+    var co2         = Math.round(totalAmount*0.012);
+
+    var html = '';
+
+    /* 절감 효과 */
+    html += '<div class="saving-grid">';
+    html += saveTile('💰','₩'+saving.toLocaleString(),'물류비 절감 예상','green');
+    html += saveTile('🚚',bestVehicle,'최적 배차','blue');
+    html += saveTile('📉',emptyRate+'%↓','공차율 감소','orange');
+    html += '</div>';
+
+    /* 경로 시각화 */
+    html += '<div class="app-card" style="margin-bottom:16px;">';
+    html += '<div class="app-card-title"><span>🗺️</span> 최적 경로 · '+date+'</div>';
+    html += '<div class="route-viz">';
+    farms.forEach(function(f,i){
+      var emoji={감귤:'🍊',당근:'🥕',브로콜리:'🥦',한라봉:'🍊',감자:'🥔',양배추:'🥬'}[f.crop]||'🌾';
+      var isLast = i===farms.length-1;
+      html += '<div class="route-stop">';
+      html += '<div class="route-line-wrap"><div class="route-dot '+(i===0?'green':'')+'"></div>'+(isLast?'':'<div class="route-line"></div>')+'</div>';
+      html += '<div class="route-body"><div class="route-body-name">'+emoji+' '+f.name+'</div>'
+        +'<div class="route-body-sub">'+f.region+' · '+f.amount.toLocaleString()+'kg</div>'
+        +'<div class="route-body-tag">🚚 차량 '+Math.ceil(f.amount/900)+'대 필요</div>'
+        +'</div></div>';
+    });
+    /* 목적지 */
+    html += '<div class="route-stop"><div class="route-line-wrap"><div class="route-dot dest"></div></div>';
+    html += '<div class="route-body"><div class="route-body-name">📦 '+dest+'</div><div class="route-body-sub">최종 도착지 · 총 '+totalAmount.toLocaleString()+'kg</div></div></div>';
+    html += '</div></div>';
+
+    /* 차량 배정 테이블 */
+    html += '<div class="app-card">';
+    html += '<div class="app-card-title"><span>🚛</span> 차량 배정 현황</div>';
+    html += '<table class="dispatch-table"><thead><tr><th>농가</th><th>지역</th><th>출하량</th><th>배차</th><th>상태</th></tr></thead><tbody>';
+    var vNum=1;
+    farms.forEach(function(f){
+      var n=Math.ceil(f.amount/900);
+      html += '<tr><td><strong>'+(f.crop==='감귤'?'🍊':f.crop==='당근'?'🥕':'🥦')+' '+f.name+'</strong></td>'
+        +'<td style="color:var(--app-text-sub);">'+f.region+'</td>'
+        +'<td>'+f.amount.toLocaleString()+' kg</td>'
+        +'<td>1톤 '+n+'대 (#J-'+String(vNum).padStart(2,'0')+'~'+(vNum+n-1)+')</td>'
+        +'<td><span class="app-badge app-badge-green">배차완료</span></td></tr>';
+      vNum+=n;
+    });
+    html += '</tbody></table>';
+    html += '<div style="margin-top:14px;padding:12px;background:var(--app-green-light);border-radius:var(--r-md);font-size:0.85rem;font-weight:700;color:var(--app-green-dark);">'
+      +'✅ 통합 배차 완료 — 총 '+totalAmount.toLocaleString()+'kg · CO₂ '+co2+'kg 절감 예상'
+      +'</div>';
+    html += '<div style="margin-top:12px;display:flex;gap:10px;">'
+      +'<a href="vehicle-matching.html" class="app-btn app-btn-primary app-btn-sm">🚚 차량 매칭 확인 →</a>'
+      +'<button class="app-btn app-btn-secondary app-btn-sm" onclick="saveRoute()">💾 경로 저장</button>'
+      +'</div></div>';
+
+    document.getElementById('lgResult').innerHTML = html;
+  }
+
+  function saveTile(icon,val,label,color){
+    var colors={green:'var(--app-green-dark)',blue:'var(--app-primary)',orange:'var(--app-orange)'};
+    return '<div class="saving-tile"><div style="font-size:1.4rem;margin-bottom:6px;">'+icon+'</div>'
+      +'<div class="saving-val" style="color:'+colors[color]+';">'+val+'</div>'
+      +'<div class="saving-label">'+label+'</div></div>';
+  }
+
+  function saveRoute(){
+    showToast('경로가 마이페이지에 저장되었습니다.','success');
+  }
+
+  function now(){return new Date().toLocaleString('ko-KR',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});}
+  function showToast(msg,type){
+    var wrap=document.getElementById('toastWrap');
+    var t=document.createElement('div');
+    t.className='app-toast'+(type?' '+type:'');
+    t.textContent=msg;
+    wrap.appendChild(t);
+    requestAnimationFrame(function(){t.classList.add('show');});
+    setTimeout(function(){t.classList.remove('show');setTimeout(function(){t.remove();},300);},2800);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>물류업체 대시보드 | 제주모아</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/reset.css" />
+  <link rel="stylesheet" href="../css/app.css" />
+  <style>
+    .lg-tabs{display:flex;gap:4px;margin-bottom:24px;background:var(--app-bg);border-radius:var(--r-md);padding:4px;}
+    .lg-tab{flex:1;padding:10px;border:none;background:transparent;border-radius:var(--r-sm);font-size:0.88rem;font-weight:700;color:var(--app-text-sub);cursor:pointer;font-family:inherit;transition:var(--tr);text-align:center;}
+    .lg-tab.active{background:var(--app-surface);color:var(--app-primary);box-shadow:var(--shadow-xs);}
+    .lg-panel{display:none;} .lg-panel.active{display:block;}
+    /* KPI */
+    .lg-kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+    .lg-kpi-tile{background:var(--app-surface);border:1px solid var(--app-border);border-radius:var(--r-lg);padding:20px;box-shadow:var(--shadow-xs);}
+    .lg-kpi-icon{font-size:1.4rem;margin-bottom:8px;}
+    .lg-kpi-val{font-size:1.6rem;font-weight:900;color:var(--app-text);letter-spacing:-0.5px;margin-bottom:4px;}
+    .lg-kpi-val.blue{color:var(--app-primary);} .lg-kpi-val.green{color:var(--app-green-dark);} .lg-kpi-val.orange{color:var(--app-orange);}
+    .lg-kpi-label{font-size:0.75rem;color:var(--app-text-sub);font-weight:600;}
+    /* 배차 테이블 */
+    .dispatch-tbl{width:100%;border-collapse:collapse;font-size:0.86rem;}
+    .dispatch-tbl th{padding:10px 12px;background:var(--app-bg);font-size:0.76rem;font-weight:700;color:var(--app-text-sub);text-align:left;border-bottom:1px solid var(--app-border);}
+    .dispatch-tbl td{padding:12px;border-bottom:1px solid var(--app-border);}
+    .dispatch-tbl tr:last-child td{border-bottom:none;}
+    .dispatch-tbl tr:hover td{background:var(--app-bg);}
+    /* 기사 카드 */
+    .driver-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+    .driver-card{background:var(--app-surface);border:1px solid var(--app-border);border-radius:var(--r-lg);padding:18px;display:flex;gap:14px;align-items:flex-start;box-shadow:var(--shadow-xs);}
+    .driver-avatar{width:48px;height:48px;border-radius:50%;background:var(--app-primary);color:#fff;font-size:1.2rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .driver-info{flex:1;}
+    .driver-name{font-size:0.95rem;font-weight:800;color:var(--app-text);margin-bottom:4px;}
+    .driver-meta{font-size:0.78rem;color:var(--app-text-sub);line-height:1.7;}
+    .driver-actions{display:flex;flex-direction:column;gap:6px;align-items:flex-end;}
+    /* 수익 차트 */
+    .revenue-bar-list{display:flex;flex-direction:column;gap:10px;}
+    .rev-row{display:flex;align-items:center;gap:10px;font-size:0.84rem;}
+    .rev-label{width:60px;color:var(--app-text-sub);font-weight:600;flex-shrink:0;}
+    .rev-track{flex:1;height:12px;background:var(--app-border);border-radius:var(--r-full);overflow:hidden;}
+    .rev-fill{height:100%;border-radius:var(--r-full);background:linear-gradient(90deg,var(--app-primary),var(--app-teal));transition:width 1s ease;width:0%;}
+    .rev-val{width:80px;text-align:right;font-weight:700;font-size:0.82rem;}
+    /* 등록 폼 그리드 */
+    .reg-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .vtype-mini{display:flex;flex-wrap:wrap;gap:7px;}
+    .vtype-chip{padding:6px 13px;border:1.5px solid var(--app-border-mid);border-radius:var(--r-full);font-size:0.8rem;font-weight:700;color:var(--app-text-sub);background:var(--app-bg);cursor:pointer;transition:var(--tr);font-family:inherit;}
+    .vtype-chip.sel{border-color:var(--app-primary);color:var(--app-primary);background:var(--app-primary-light);}
+    @media(max-width:800px){.lg-kpi{grid-template-columns:repeat(2,1fr);}.driver-grid{grid-template-columns:1fr;}.reg-form-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+<header class="app-header" id="appHeader">
+  <div class="app-header-inner">
+    <a href="../index.html" class="app-logo">
+      <div class="app-logo-icon"><img src="../assets/images/hero-main.png" alt="제주모아" /></div>
+      <span class="app-logo-text">제주<span>모아</span></span>
+    </a>
+    <nav class="app-nav">
+      <a href="logistics-dashboard.html" class="app-nav-link active">대시보드</a>
+      <a href="logistics.html" class="app-nav-link">경로 최적화</a>
+      <a href="vehicle-matching.html" class="app-nav-link">차량 매칭</a>
+    </nav>
+    <div class="app-header-user">
+      <div class="app-user-chip">
+        <div class="app-user-avatar" id="userAvatar">?</div>
+        <div class="app-user-info"><span class="app-user-name" data-user-name>-</span><span class="app-user-role" data-user-role>-</span></div>
+      </div>
+      <button class="app-logout-btn" data-logout-btn>로그아웃</button>
+    </div>
+  </div>
+</header>
+
+<div class="app-page-bar">
+  <div class="app-container">
+    <div class="app-page-bar-inner">
+      <div class="app-page-bar-left">
+        <span class="app-page-tag">🚚 물류업체</span>
+        <h1 class="app-page-title">물류 <span>대시보드</span></h1>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="live-dot"></span>
+        <span style="font-size:0.82rem;color:var(--app-text-sub);font-weight:600;" id="companyLabel">업체명 로딩 중</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="app-main">
+  <div class="app-container">
+
+    <!-- KPI -->
+    <div class="lg-kpi">
+      <div class="lg-kpi-tile"><div class="lg-kpi-icon">💰</div><div class="lg-kpi-val green" id="kpiEarnings">₩0</div><div class="lg-kpi-label">이번 달 수익</div></div>
+      <div class="lg-kpi-tile"><div class="lg-kpi-icon">🔄</div><div class="lg-kpi-val blue" id="kpiTrips">0회</div><div class="lg-kpi-label">총 운행 횟수</div></div>
+      <div class="lg-kpi-tile"><div class="lg-kpi-icon">🚛</div><div class="lg-kpi-val" id="kpiVehicles">0대</div><div class="lg-kpi-label">등록 차량</div></div>
+      <div class="lg-kpi-tile"><div class="lg-kpi-icon">⭐</div><div class="lg-kpi-val orange" id="kpiRating">-</div><div class="lg-kpi-label">평균 평점</div></div>
+    </div>
+
+    <!-- 탭 -->
+    <div class="lg-tabs">
+      <button class="lg-tab active" onclick="showTab('dispatch',this)">📋 배차 현황</button>
+      <button class="lg-tab" onclick="showTab('drivers',this)">👤 기사 관리</button>
+      <button class="lg-tab" onclick="showTab('revenue',this)">💰 수익 분석</button>
+      <button class="lg-tab" onclick="showTab('register',this)">➕ 기사·차량 등록</button>
+      <button class="lg-tab" onclick="showTab('reviews',this)">⭐ 리뷰 관리</button>
+    </div>
+
+    <!-- 배차 현황 -->
+    <div class="lg-panel active" id="panelDispatch">
+      <div class="app-card">
+        <div class="app-card-title"><span>📋</span> 실시간 배차 현황
+          <div style="margin-left:auto;display:flex;gap:8px;">
+            <span class="app-badge app-badge-green" id="activeCount">운행중 0대</span>
+            <span class="app-badge app-badge-blue" id="waitCount">대기 0대</span>
+          </div>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="dispatch-tbl">
+            <thead><tr><th>차량·기사</th><th>운행 구간</th><th>화물</th><th>출발</th><th>도착 예정</th><th>상태</th><th>수익</th></tr></thead>
+            <tbody id="dispatchTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 기사 관리 -->
+    <div class="lg-panel" id="panelDrivers">
+      <div class="app-card-title" style="margin-bottom:16px;font-size:1rem;font-weight:800;display:flex;align-items:center;gap:8px;">
+        <span>👤</span> 소속 기사
+        <button class="app-btn app-btn-primary app-btn-sm" style="margin-left:auto;" onclick="showTab('register',document.querySelectorAll('.lg-tab')[3])">+ 기사 등록</button>
+      </div>
+      <div class="driver-grid" id="driverGrid"></div>
+    </div>
+
+    <!-- 수익 분석 -->
+    <div class="lg-panel" id="panelRevenue">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div class="app-card">
+          <div class="app-card-title"><span>📊</span> 월별 수익</div>
+          <div class="revenue-bar-list" id="revBarList"></div>
+        </div>
+        <div class="app-card">
+          <div class="app-card-title"><span>🚛</span> 차량별 수익</div>
+          <div class="revenue-bar-list" id="revVehicleList"></div>
+        </div>
+      </div>
+      <div class="app-card" style="margin-top:16px;">
+        <div class="app-card-title"><span>💡</span> 수익 분석 요약</div>
+        <div id="revSummary" style="font-size:0.88rem;line-height:2;color:var(--app-text-sub);"></div>
+      </div>
+    </div>
+
+    <!-- 기사·차량 등록 -->
+    <div class="lg-panel" id="panelRegister">      <div class="app-card">
+        <div class="app-card-title"><span>👤</span> 기사 등록</div>
+        <div class="reg-form-grid">
+          <div class="app-field"><label class="app-label">기사 이름 <span class="req">*</span></label><input class="app-input" type="text" id="newDriverName" placeholder="홍길동" /></div>
+          <div class="app-field"><label class="app-label">연락처 <span class="req">*</span></label><input class="app-input" type="tel" id="newDriverPhone" placeholder="010-0000-0000" /></div>
+          <div class="app-field"><label class="app-label">면허 종류</label>
+            <select class="app-select" id="newDriverLicense">
+              <option value="1종대형">1종 대형</option>
+              <option value="1종보통">1종 보통</option>
+              <option value="2종보통">2종 보통</option>
+            </select>
+          </div>
+          <div class="app-field"><label class="app-label">경력 (년)</label><input class="app-input" type="number" id="newDriverExp" placeholder="예: 5" min="0" /></div>
+        </div>
+        <button class="app-btn app-btn-primary" onclick="addDriver()">기사 등록</button>
+      </div>
+
+      <div class="app-card" style="margin-top:16px;">
+        <div class="app-card-title"><span>🚛</span> 차량 등록</div>
+        <div class="reg-form-grid">
+          <div class="app-field"><label class="app-label">차량 번호 <span class="req">*</span></label><input class="app-input" type="text" id="newCarNum" placeholder="12가 3456" /></div>
+          <div class="app-field"><label class="app-label">차량 종류 <span class="req">*</span></label>
+            <div class="vtype-mini" id="newCarTypeWrap">
+              <button class="vtype-chip" data-vt="1톤" onclick="selCarType(this)">🚐 1톤</button>
+              <button class="vtype-chip" data-vt="2.5톤" onclick="selCarType(this)">🚚 2.5톤</button>
+              <button class="vtype-chip" data-vt="5톤" onclick="selCarType(this)">🚛 5톤</button>
+              <button class="vtype-chip" data-vt="11톤" onclick="selCarType(this)">🚜 11톤</button>
+              <button class="vtype-chip" data-vt="냉동" onclick="selCarType(this)">❄️ 냉동</button>
+              <button class="vtype-chip" data-vt="윙바디" onclick="selCarType(this)">📦 윙바디</button>
+            </div>
+          </div>
+          <div class="app-field"><label class="app-label">담당 기사</label>
+            <select class="app-select" id="newCarDriver"><option value="">기사 선택</option></select>
+          </div>
+          <div class="app-field"><label class="app-label">기본 운임 (원/km)</label><input class="app-input" type="number" id="newCarPrice" placeholder="800" /></div>
+        </div>
+        <button class="app-btn app-btn-primary" onclick="addVehicle()">차량 등록</button>
+      </div>
+    </div>
+
+  </div>
+</main>
+<div class="app-toast-wrap" id="toastWrap"></div>
+
+<script src="../js/auth.js"></script>
+<script>
+  JMAuth.requireLogin();
+  JMAuth.injectUserUI();
+  var user = JMAuth.currentUser();
+  if (user) document.getElementById('userAvatar').textContent = (user.name||'?')[0];
+  window.addEventListener('scroll',function(){document.getElementById('appHeader').classList.toggle('scrolled',window.scrollY>10);},{passive:true});
+
+  var LG_KEY = user ? 'jmoa_logistics_' + user.id : null;
+  var DR_KEY = user ? 'jmoa_drivers_'   + user.id : null;
+  var VC_KEY = user ? 'jmoa_vehicles_'  + user.id : null;
+
+  /* 물류 데이터 로드 */
+  var lgData = LG_KEY ? JSON.parse(localStorage.getItem(LG_KEY)||'null') : null;
+  if (lgData) document.getElementById('companyLabel').textContent = lgData.company || user.name + ' 물류';
+  else document.getElementById('companyLabel').textContent = (user ? user.name : '') + ' 물류';
+
+  /* 기사/차량 */
+  function getDrivers()  { return DR_KEY ? JSON.parse(localStorage.getItem(DR_KEY)||'[]')  : []; }
+  function getVehicles() { return VC_KEY ? JSON.parse(localStorage.getItem(VC_KEY)||'[]') : []; }
+  function saveDrivers(d)  { if(DR_KEY) localStorage.setItem(DR_KEY, JSON.stringify(d)); }
+  function saveVehicles(v) { if(VC_KEY) localStorage.setItem(VC_KEY, JSON.stringify(v)); }
+
+  /* 샘플 데이터 초기화 (첫 방문) */
+  (function initSample(){
+    if (!DR_KEY) return;
+    if (getDrivers().length) return;
+    var sampleD = [
+      {id:'d1', name:'김철수', phone:'010-1111-2222', license:'1종대형', exp:8, rating:4.9, trips:156, status:'active'},
+      {id:'d2', name:'이영희', phone:'010-3333-4444', license:'1종보통', exp:5, rating:4.7, trips:98,  status:'active'},
+      {id:'d3', name:'박민준', phone:'010-5555-6666', license:'1종대형', exp:12,rating:4.8, trips:203, status:'rest'},
+    ];
+    var sampleV = [
+      {id:'v1', carNum:'제주 12가 3456', type:'1톤',  driverId:'d1', price:800, status:'운행중', trips:156},
+      {id:'v2', carNum:'제주 34나 7890', type:'2.5톤',driverId:'d2', price:1100,status:'대기',   trips:98},
+      {id:'v3', carNum:'제주 56다 1234', type:'5톤',  driverId:'d3', price:1400,status:'대기',   trips:203},
+    ];
+    saveDrivers(sampleD); saveVehicles(sampleV);
+  })();
+
+  /* KPI */
+  function loadKPI(){
+    var drivers  = getDrivers();
+    var vehicles = getVehicles();
+    var totalTrips   = drivers.reduce(function(s,d){return s+d.trips;},0);
+    var avgRating    = drivers.length ? (drivers.reduce(function(s,d){return s+(d.rating||5);},0)/drivers.length).toFixed(1) : '-';
+    var earnings     = lgData ? (lgData.earnings || totalTrips * 85000) : totalTrips * 85000;
+    setText('kpiEarnings', '₩' + Math.round(earnings/10000) + '만');
+    setText('kpiTrips',    totalTrips + '회');
+    setText('kpiVehicles', vehicles.length + '대');
+    setText('kpiRating',   avgRating);
+    var active = vehicles.filter(function(v){return v.status==='운행중';}).length;
+    setText('activeCount', '운행중 ' + active + '대');
+    setText('waitCount',   '대기 ' + (vehicles.length - active) + '대');
+  }
+
+  /* 배차 현황 */
+  var DISPATCH_SAMPLE = [
+    {carNum:'제주 12가 3456', driver:'김철수', type:'1톤',  from:'제주시 한림읍', to:'가락동 도매시장', cargo:'감귤 1,800kg',  depart:'09:15', eta:'당일 19:00', status:'운행중',  earn:95000},
+    {carNum:'제주 34나 7890', driver:'이영희', type:'2.5톤',from:'서귀포 남원읍', to:'구리 도매시장',   cargo:'당근 950kg',   depart:'08:30', eta:'당일 20:30', status:'운행중',  earn:130000},
+    {carNum:'제주 56다 1234', driver:'박민준', type:'5톤',  from:'제주항 물류센터',to:'부산 엄궁시장',  cargo:'혼적 2,800kg', depart:'예정',  eta:'내일 08:00', status:'대기예정',earn:190000},
+    {carNum:'제주 78라 5678', driver:'최지영', type:'1톤',  from:'제주시 구좌읍', to:'제주항',          cargo:'천혜향 600kg',  depart:'완료',  eta:'완료',       status:'완료',    earn:68000},
+  ];
+  function loadDispatch(){
+    var statusMap = {'운행중':'green','대기예정':'blue','완료':'gray','대기':'orange'};
+    document.getElementById('dispatchTbody').innerHTML = DISPATCH_SAMPLE.map(function(r){
+      var cls = statusMap[r.status] || 'gray';
+      return '<tr>'
+        +'<td><strong>'+r.carNum+'</strong><br><span style="font-size:0.75rem;color:var(--app-text-sub);">'+r.driver+' · '+r.type+'</span></td>'
+        +'<td>'+r.from+'<br><span style="font-size:0.75rem;color:var(--app-text-sub);">→ '+r.to+'</span></td>'
+        +'<td>'+r.cargo+'</td>'
+        +'<td>'+r.depart+'</td>'
+        +'<td>'+r.eta+'</td>'
+        +'<td><span class="app-badge app-badge-'+cls+'">'+r.status+'</span></td>'
+        +'<td style="font-weight:800;color:var(--app-green-dark);">₩'+r.earn.toLocaleString()+'</td>'
+        +'</tr>';
+    }).join('');
+  }
+
+  /* 기사 카드 */
+  function loadDrivers(){
+    var drivers = getDrivers();
+    var vehicles = getVehicles();
+    if (!drivers.length){
+      document.getElementById('driverGrid').innerHTML='<div class="app-empty" style="grid-column:1/-1;"><div class="app-empty-icon">👤</div><div class="app-empty-msg">등록된 기사가 없습니다.</div></div>';
+      return;
+    }
+    document.getElementById('driverGrid').innerHTML = drivers.map(function(d){
+      var vc = vehicles.find(function(v){return v.driverId===d.id;});
+      var statusColor = d.status==='active'?'green':'gray';
+      return '<div class="driver-card">'
+        +'<div class="driver-avatar">'+d.name[0]+'</div>'
+        +'<div class="driver-info">'
+        +'<div class="driver-name">'+d.name+' 기사님</div>'
+        +'<div class="driver-meta">'
+        +'📞 '+d.phone+'<br>'
+        +'🪪 '+d.license+' · 경력 '+d.exp+'년<br>'
+        +'⭐ '+d.rating+' · 🔄 '+d.trips+'회 운행<br>'
+        +(vc?'🚛 '+vc.carNum+' ('+vc.type+')':'차량 미배정')
+        +'</div></div>'
+        +'<div class="driver-actions">'
+        +'<span class="app-badge app-badge-'+statusColor+'">'+(d.status==='active'?'활성':'휴식')+'</span>'
+        +'<button class="app-btn app-btn-secondary app-btn-sm" onclick="deleteDriver(\''+d.id+'\')">삭제</button>'
+        +'</div></div>';
+    }).join('');
+  }
+
+  /* 수익 분석 */
+  function loadRevenue(){
+    var months = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+    var now = new Date().getMonth();
+    var revenueData = months.map(function(_,i){
+      var base = 180 + Math.round(Math.sin(i*0.8)*60);
+      return {label: months[i], val: (i<=now ? base+Math.round(Math.random()*40) : 0)};
+    });
+    var maxRev = Math.max.apply(null, revenueData.map(function(r){return r.val;})) || 1;
+    document.getElementById('revBarList').innerHTML = revenueData.filter(function(r){return r.val>0;}).map(function(r){
+      var pct = Math.round(r.val/maxRev*100);
+      return '<div class="rev-row"><div class="rev-label">'+r.label+'</div>'
+        +'<div class="rev-track"><div class="rev-fill" data-w="'+pct+'"></div></div>'
+        +'<div class="rev-val">₩'+r.val+'만</div></div>';
+    }).join('');
+    /* 차량별 */
+    var vehicles = getVehicles();
+    var vcRevData = vehicles.map(function(v){
+      return {label:v.type, val: v.trips * Math.round(v.price*20 + 30000)};
+    });
+    if(!vcRevData.length) vcRevData=[{label:'1톤',val:320},{label:'2.5톤',val:480},{label:'5톤',val:610}];
+    var maxVc = Math.max.apply(null, vcRevData.map(function(r){return r.val;})) || 1;
+    document.getElementById('revVehicleList').innerHTML = vcRevData.map(function(r){
+      var pct = Math.round(r.val/maxVc*100);
+      return '<div class="rev-row"><div class="rev-label">'+r.label+'</div>'
+        +'<div class="rev-track"><div class="rev-fill" data-w="'+pct+'"></div></div>'
+        +'<div class="rev-val">₩'+Math.round(r.val)+'만</div></div>';
+    }).join('');
+    /* 애니메이션 */
+    setTimeout(function(){
+      document.querySelectorAll('.rev-fill').forEach(function(el){el.style.width=el.dataset.w+'%';});
+    },100);
+    /* 요약 */
+    var totalTrips = getDrivers().reduce(function(s,d){return s+d.trips;},0);
+    document.getElementById('revSummary').innerHTML =
+      '📈 이번 달 총 운행: <strong>'+totalTrips+'회</strong><br>'
+      +'💰 예상 월 수익: <strong>₩'+Math.round(totalTrips*85000/10000)+'만</strong><br>'
+      +'📉 평균 공차율: <strong>12%</strong> (통합 배차 적용 시 ↓7%)<br>'
+      +'🏆 최다 운행 기사: <strong>'+(getDrivers().sort(function(a,b){return b.trips-a.trips;})[0]||{name:'-'}).name+'</strong>';
+  }
+
+  /* 기사 등록 */
+  function addDriver(){
+    var name = document.getElementById('newDriverName').value.trim();
+    var phone= document.getElementById('newDriverPhone').value.trim();
+    if(!name||!phone){showToast('이름과 연락처는 필수입니다.','error');return;}
+    var drivers = getDrivers();
+    drivers.push({
+      id:'d'+Date.now(), name:name, phone:phone,
+      license: document.getElementById('newDriverLicense').value,
+      exp: parseInt(document.getElementById('newDriverExp').value)||0,
+      rating:5.0, trips:0, status:'active'
+    });
+    saveDrivers(drivers);
+    document.getElementById('newDriverName').value='';
+    document.getElementById('newDriverPhone').value='';
+    updateDriverSelect();
+    loadKPI(); loadDrivers();
+    showToast('기사 '+name+'님이 등록되었습니다.','success');
+  }
+
+  /* 차량 등록 */
+  var selectedCarType='';
+  function selCarType(btn){
+    document.querySelectorAll('.vtype-chip').forEach(function(b){b.classList.remove('sel');});
+    btn.classList.add('sel'); selectedCarType=btn.dataset.vt;
+  }
+  function addVehicle(){
+    var carNum = document.getElementById('newCarNum').value.trim();
+    if(!carNum||!selectedCarType){showToast('차량번호와 종류를 입력해주세요.','error');return;}
+    var vehicles = getVehicles();
+    var dId = document.getElementById('newCarDriver').value;
+    vehicles.push({
+      id:'v'+Date.now(), carNum:carNum, type:selectedCarType,
+      driverId:dId, price:parseInt(document.getElementById('newCarPrice').value)||800,
+      status:'대기', trips:0
+    });
+    saveVehicles(vehicles);
+    document.getElementById('newCarNum').value='';
+    selectedCarType='';
+    document.querySelectorAll('.vtype-chip').forEach(function(b){b.classList.remove('sel');});
+    loadKPI(); showToast('차량 '+carNum+'이(가) 등록되었습니다.','success');
+  }
+
+  function deleteDriver(id){
+    var drivers = getDrivers().filter(function(d){return d.id!==id;});
+    saveDrivers(drivers);
+    loadDrivers(); loadKPI();
+    showToast('기사가 삭제되었습니다.');
+  }
+
+  function updateDriverSelect(){
+    var sel = document.getElementById('newCarDriver');
+    if(!sel) return;
+    var drivers = getDrivers();
+    sel.innerHTML='<option value="">기사 선택</option>'
+      + drivers.map(function(d){return '<option value="'+d.id+'">'+d.name+'</option>';}).join('');
+  }
+
+  /* 탭 전환 */
+  function showTab(name, btn){
+    ['dispatch','drivers','revenue','register','reviews'].forEach(function(t){
+      var panel = document.getElementById('panel' + t.charAt(0).toUpperCase() + t.slice(1));
+      if (panel) panel.classList.toggle('active', t === name);
+    });
+    document.querySelectorAll('.lg-tab').forEach(function(b){b.classList.remove('active');});
+    if(btn) btn.classList.add('active');
+    if(name==='drivers') loadDrivers();
+    if(name==='revenue') loadRevenue();
+    if(name==='reviews') loadReviews();
+  }
+
+  function setText(id,val){var el=document.getElementById(id);if(el)el.textContent=val;}
+  function showToast(msg,type){
+    var wrap=document.getElementById('toastWrap');
+    var t=document.createElement('div'); t.className='app-toast'+(type?' '+type:''); t.textContent=msg;
+    wrap.appendChild(t); requestAnimationFrame(function(){t.classList.add('show');});
+    setTimeout(function(){t.classList.remove('show');setTimeout(function(){t.remove();},300);},2800);
+  }
+
+  /* 초기화 */
+  loadKPI();
+  loadDispatch();
+  updateDriverSelect();
+</script>
+</body>
+</html>
