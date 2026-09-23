@@ -1,0 +1,481 @@
+/* =========================================================
+   main.css — 리셋 / 디자인 토큰 / 레이아웃 / 컨트롤
+   무채색 톤온톤 + 딥 네이비 단일 포인트.
+   면 분리는 테두리가 아니라 여백과 헤어라인으로 처리한다.
+   ========================================================= */
+
+/* ---------- 1. Reset ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body, h1, h2, p, ul, li, figure { margin: 0; padding: 0; }
+ul { list-style: none; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+img { max-width: 100%; display: block; }
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button { cursor: pointer; }
+
+:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- 2. 디자인 토큰 ---------- */
+:root {
+  /* 면 */
+  --paper:          #f8f9fa;
+  --surface:        #ffffff;
+  --sunken:         #f3f4f6;
+
+  /* 선: 보일 듯 말 듯 */
+  --hair:           rgba(17, 24, 39, 0.06);
+  --hair-mid:       rgba(17, 24, 39, 0.11);
+
+  /* 글자 위계 */
+  --ink:            #111827;
+  --ink-2:          #4b5563;
+  --ink-3:          #9ca3af;
+  --ink-4:          #d1d5db;
+
+  /* 단 하나의 포인트 컬러 */
+  --accent:         #16324f;
+  --accent-hover:   #1d4066;
+  --accent-wash:    rgba(22, 50, 79, 0.07);
+
+  --danger:         #8b3a3a;
+
+  /* 모서리: 각진 면 · 미세 곡선 · 알약을 섞어 리듬을 만든다 */
+  --r-crisp:        3px;
+  --r-soft:         6px;
+  --r-pill:         999px;
+
+  --bar-h:          60px;
+
+  --font: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard",
+          "Malgun Gothic", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* ---------- 3. Base ---------- */
+body {
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.55;
+  letter-spacing: -0.003em;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+strong { font-weight: 600; color: var(--ink); }
+
+/* 섹션 라벨: 작고 넓은 자간의 대문자 */
+.eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* ---------- 4. 상단 바 ---------- */
+.app-bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  height: var(--bar-h);
+  padding: 0 40px;
+  padding-left: max(40px, env(safe-area-inset-left));
+  padding-right: max(40px, env(safe-area-inset-right));
+  background: var(--paper);
+  border-bottom: 1px solid var(--hair);
+}
+
+.app-bar__title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.app-bar__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ---------- 5. 레이아웃 (비대칭 2단) ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 288px;
+  gap: 72px;
+  align-items: start;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 44px 40px 140px;
+}
+
+.board {
+  position: sticky;
+  top: calc(var(--bar-h) + 36px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;   /* 가운데 정렬 대신 왼쪽 기준 */
+  gap: 16px;
+}
+
+.board__hint {
+  max-width: 36em;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+
+/* ---------- 6. 패널: 상자 대신 헤어라인과 여백 ---------- */
+.panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel__group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px 0;
+  border-top: 1px solid var(--hair);
+}
+
+.panel__group:first-child {
+  padding-top: 2px;
+  border-top: 0;
+}
+
+.panel__title {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.panel__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.panel__note {
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+
+/* ---------- 7. 버튼 ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--hair-mid);
+  border-radius: var(--r-crisp);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s ease-in-out;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:hover { background: #f5f6f7; }
+
+.btn--primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #ffffff;
+}
+.btn--primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+.btn--ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--ink-2);
+}
+.btn--ghost:hover { background: rgba(17, 24, 39, 0.04); }
+
+.btn--danger {
+  border-color: transparent;
+  background: transparent;
+  color: var(--danger);
+  font-weight: 500;
+}
+.btn--danger:hover { background: rgba(139, 58, 58, 0.06); }
+
+.btn--mini {
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: var(--r-crisp);
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.btn--block { width: 100%; }
+
+.btn[disabled] { opacity: 0.45; pointer-events: none; }
+
+.share-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ---------- 8. 세그먼트 / 칩 ---------- */
+.segmented {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  background: var(--sunken);
+  border-radius: var(--r-pill);
+}
+
+.segmented__btn {
+  flex: 1 1 0;
+  min-height: 30px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--ink-3);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: all 0.2s ease-in-out;
+}
+
+.segmented__btn:hover { color: var(--ink-2); }
+
+.segmented__btn[aria-pressed="true"] {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.chip {
+  min-height: 30px;
+  padding: 0 12px;
+  border: 1px solid var(--hair);
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+  transition: all 0.2s ease-in-out;
+}
+
+.chip:hover { background: rgba(17, 24, 39, 0.035); }
+
+.chip[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #ffffff;
+}
+
+/* ---------- 9. 폼 ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field--row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.field--row .field__input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.field-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.field__label {
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+}
+
+.field__input {
+  width: 100%;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--hair);
+  border-radius: var(--r-crisp);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 13.5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.field__input::placeholder { color: var(--ink-4); }
+
+.field__input:hover { border-color: var(--hair-mid); }
+
+.field__input:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent-wash);
+}
+
+select.field__input {
+  appearance: none;
+  padding-right: 30px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink-3) 50%),
+                    linear-gradient(135deg, var(--ink-3) 50%, transparent 50%);
+  background-position: calc(100% - 16px) 17px, calc(100% - 12px) 17px;
+  background-size: 4px 4px, 4px 4px;
+  background-repeat: no-repeat;
+}
+
+.field__color {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 30px;
+  padding: 2px;
+  border: 1px solid var(--hair);
+  border-radius: 2px;
+  background: var(--surface);
+  cursor: pointer;
+}
+.field__color::-webkit-color-swatch-wrapper { padding: 0; }
+.field__color::-webkit-color-swatch { border: 0; border-radius: 1px; }
+
+/* ---------- 10. 스위치 ---------- */
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 26px;
+  font-size: 13px;
+  color: var(--ink-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.switch input {
+  appearance: none;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: #e5e7eb;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+.switch input::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: transform 0.2s ease-in-out;
+}
+
+.switch input:checked { background: var(--accent); }
+.switch input:checked::after { transform: translateX(14px); }
+.switch input:checked + span { color: var(--ink); }
+
+/* ---------- 11. 색상 프리셋 ---------- */
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.swatch {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--hair-mid);
+  border-radius: 2px;
+  background: var(--swatch, #888);
+  transition: all 0.2s ease-in-out;
+}
+
+.swatch:hover { opacity: 0.82; }
+
+.swatch[aria-pressed="true"] {
+  outline: 1px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* ---------- 12. 반응형 ---------- */
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    padding: 24px 20px 120px;
+  }
+
+  .board { position: static; }
+  .panel { max-width: 520px; }
+}
+
+@media (max-width: 520px) {
+  .app-bar { height: 54px; padding-left: 18px; padding-right: 18px; }
+  .app-bar__title { font-size: 14px; }
+  .layout { padding: 18px 18px 110px; }
+  .btn { min-height: 40px; }
+  .segmented__btn { min-height: 34px; }
+  .chip { min-height: 34px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
