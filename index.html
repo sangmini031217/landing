@@ -1,241 +1,304 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#f8f9fa">
-<meta name="description" content="축구·풋살 포메이션 전술판. 드래그로 라인업을 만들고 이미지로 저장하거나 카카오톡·SNS에 바로 공유하세요.">
-<title>포메이션 전술판 · 축구 &amp; 풋살 라인업 메이커</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%23111827'/%3E%3Cg fill='none' stroke='white' stroke-width='1.3' opacity='.9'%3E%3Crect x='7.5' y='4.5' width='17' height='23'/%3E%3Cpath d='M7.5 16h17'/%3E%3Ccircle cx='16' cy='16' r='4'/%3E%3C/g%3E%3C/svg%3E">
-
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/pitch.css">
-<link rel="stylesheet" href="css/player.css">
-<link rel="stylesheet" href="css/export.css">
-
-<!-- 이미지 캡처용 라이브러리 (없으면 exporter.js가 런타임에 재시도 로드) -->
-<script defer src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>대한민국 주당 지도</title>
+  <meta name="description" content="KOSIS 음주 행태 통계로 보는 연령대·성별·시군구별 음주 리포트">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<!-- ============ 상단 앱 바 ============ -->
-<header class="app-bar">
-  <h1 class="app-bar__title">
-    포메이션 전술판
-    <span class="eyebrow">Football &amp; Futsal</span>
-  </h1>
-
-  <div class="app-bar__actions">
-    <button type="button" class="btn btn--ghost" id="btnResetTop" title="라인업 초기화">초기화</button>
-    <button type="button" class="btn btn--primary" id="btnDownloadTop">이미지 저장</button>
-  </div>
-</header>
-
-<main class="layout">
-
-  <!-- ============ 왼쪽: 캡처 대상 카드 ============ -->
-  <section class="board" aria-label="전술판">
-
-    <!-- ⬇⬇ 이 요소 전체가 하나의 이미지로 캡처됩니다 (exporter.js) ⬇⬇ -->
-    <article class="export-card" id="exportCard">
-
-      <header class="card-head">
-        <div class="card-head__main">
-          <p class="card-head__team" id="cardTeam">FC 우리팀</p>
-          <p class="card-head__sub" id="cardSub">vs 상대팀</p>
-        </div>
-        <div class="card-head__meta">
-          <span class="card-badge" id="cardFormation">4-3-3</span>
-          <span class="card-head__date" id="cardDate">2026.09.22</span>
-        </div>
-      </header>
-
-      <!-- 경기장: canvas = 라인, div.player-layer = 선수 노드 -->
-      <div class="pitch-frame" id="pitchFrame" data-mode="football11">
-        <canvas class="pitch-canvas" id="pitchCanvas" aria-hidden="true"></canvas>
-        <div class="player-layer" id="playerLayer" role="group" aria-label="선수 배치 영역"></div>
-      </div>
-
-      <footer class="card-foot">
-        <p class="card-foot__subs" id="cardSubs" hidden></p>
-        <p class="card-foot__brand">
-          <span id="cardModeLabel">11인제 축구</span>
-          <span class="card-foot__dot" aria-hidden="true">·</span>
-          <span>Formation Board</span>
-        </p>
-      </footer>
-
-    </article>
-    <!-- ⬆⬆ 캡처 영역 끝 ⬆⬆ -->
-
-    <p class="board__hint no-export">
-      선수를 <strong>드래그</strong>해 위치를 바꾸고, <strong>탭(클릭)</strong>하면 이름·등번호를 수정할 수 있어요.
-    </p>
-  </section>
-
-  <!-- ============ 오른쪽: 컨트롤 패널 ============ -->
-  <aside class="panel" aria-label="설정 패널">
-
-    <!-- 경기 모드 -->
-    <section class="panel__group">
-      <h2 class="panel__title">경기 모드</h2>
-      <div class="segmented" id="modeGroup" role="group" aria-label="경기 모드 선택"></div>
-    </section>
-
-    <!-- 포메이션 프리셋 -->
-    <section class="panel__group">
-      <h2 class="panel__title">포메이션</h2>
-      <div class="chips" id="formationGroup" role="group" aria-label="포메이션 프리셋"></div>
-    </section>
-
-    <!-- 팀 정보 -->
-    <section class="panel__group">
-      <h2 class="panel__title">팀 정보</h2>
-      <div class="field">
-        <label class="field__label" for="inputTeam">팀명</label>
-        <input class="field__input" type="text" id="inputTeam" maxlength="20" placeholder="FC 우리팀" value="FC 우리팀">
-      </div>
-      <div class="field">
-        <label class="field__label" for="inputSub">부제 (상대팀·대회명)</label>
-        <input class="field__input" type="text" id="inputSub" maxlength="28" placeholder="vs 상대팀" value="vs 상대팀">
-      </div>
-      <div class="field">
-        <label class="field__label" for="inputDate">경기 날짜</label>
-        <input class="field__input" type="date" id="inputDate">
-      </div>
-    </section>
-
-    <!-- 유니폼 -->
-    <section class="panel__group">
-      <h2 class="panel__title">유니폼</h2>
-      <div class="swatches" id="kitSwatches" role="group" aria-label="유니폼 색상 프리셋"></div>
-      <div class="field field--row">
-        <label class="field__label" for="inputKit">유니폼 색</label>
-        <input class="field__color" type="color" id="inputKit" value="#1a73e8">
-      </div>
-      <div class="field field--row">
-        <label class="field__label" for="inputInk">등번호 색</label>
-        <input class="field__color" type="color" id="inputInk" value="#ffffff">
-      </div>
-    </section>
-
-    <!-- 표시 옵션 -->
-    <section class="panel__group">
-      <h2 class="panel__title">표시 옵션</h2>
-      <label class="switch"><input type="checkbox" id="optName" checked><span>이름 표시</span></label>
-      <label class="switch"><input type="checkbox" id="optNumber" checked><span>등번호 표시</span></label>
-      <label class="switch"><input type="checkbox" id="optPos" checked><span>포지션 표시</span></label>
-      <label class="switch"><input type="checkbox" id="optSubsOnCard" checked><span>후보 명단을 이미지에 포함</span></label>
-    </section>
-
-    <!-- 후보 명단 -->
-    <section class="panel__group">
-      <div class="panel__title-row">
-        <h2 class="panel__title">후보 명단 (SUB)</h2>
-        <button type="button" class="btn btn--mini" id="btnAddSub">+ 추가</button>
-      </div>
-      <ul class="sub-list" id="subList"></ul>
-      <p class="panel__note" id="subEmptyNote">후보를 추가하고 <strong>교체</strong>를 누르면 선발 선수와 맞바꿀 수 있어요.</p>
-    </section>
-
-    <!-- 공유 -->
-    <section class="panel__group panel__group--share">
-      <h2 class="panel__title">공유 / 내보내기</h2>
-      <div class="share-grid">
-        <button type="button" class="btn btn--primary btn--block" id="btnDownload">이미지 저장 (PNG)</button>
-        <button type="button" class="btn btn--block" id="btnCopy">클립보드 복사</button>
-        <button type="button" class="btn btn--block" id="btnShare">카카오톡·SNS 공유</button>
-      </div>
-      <p class="panel__note">복사한 뒤 카카오톡 채팅창에서 <strong>⌘V</strong> · <strong>Ctrl+V</strong> 로 붙여넣으면 됩니다.</p>
-    </section>
-
-  </aside>
-</main>
-
-<!-- ============ 선수 편집 모달 ============ -->
-<div class="modal-backdrop" id="playerModal" hidden>
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
-    <header class="modal__head">
-      <h2 class="modal__title" id="pmTitle">선수 정보</h2>
-      <button type="button" class="modal__close" id="pmClose" aria-label="닫기">✕</button>
-    </header>
-
-    <form class="modal__body" id="playerForm">
-      <div class="field">
-        <label class="field__label" for="pmName">이름</label>
-        <input class="field__input" type="text" id="pmName" maxlength="12" placeholder="선수 이름">
-      </div>
-
-      <div class="field-pair">
-        <div class="field">
-          <label class="field__label" for="pmNumber">등번호</label>
-          <input class="field__input" type="number" id="pmNumber" min="0" max="99" inputmode="numeric">
-        </div>
-        <div class="field">
-          <label class="field__label" for="pmPos">포지션</label>
-          <input class="field__input" type="text" id="pmPos" maxlength="6" placeholder="GK">
-        </div>
-      </div>
-
-      <div class="field-pair">
-        <div class="field field--row">
-          <label class="field__label" for="pmKit">유니폼 색</label>
-          <input class="field__color" type="color" id="pmKit">
-        </div>
-        <div class="field field--row">
-          <label class="field__label" for="pmInk">번호 색</label>
-          <input class="field__color" type="color" id="pmInk">
-        </div>
-      </div>
-
-      <div class="field">
-        <label class="field__label" for="pmSwap">다른 선수와 교체</label>
-        <div class="field--row">
-          <select class="field__input" id="pmSwap"></select>
-          <button type="button" class="btn btn--mini" id="pmSwapBtn">교체</button>
-        </div>
-      </div>
-
-      <footer class="modal__foot">
-        <button type="button" class="btn btn--danger" id="pmDelete">삭제</button>
-        <div class="modal__foot-right">
-          <button type="button" class="btn btn--ghost" id="pmCancel">취소</button>
-          <button type="submit" class="btn btn--primary">저장</button>
-        </div>
-      </footer>
-    </form>
-  </div>
-</div>
-
-<!-- ============ 내보내기 폴백 모달 (클립보드/공유 미지원 시) ============ -->
-<div class="modal-backdrop" id="exportModal" hidden>
-  <div class="modal modal--export" role="dialog" aria-modal="true" aria-labelledby="emTitle">
-    <header class="modal__head">
-      <h2 class="modal__title" id="emTitle">이미지 저장</h2>
-      <button type="button" class="modal__close" id="emClose" aria-label="닫기">✕</button>
-    </header>
-    <div class="modal__body">
-      <p class="export-guide" id="exportGuide">
-        이미지를 <strong>길게 눌러</strong> 저장하거나, 아래 버튼으로 내려받으세요.
-      </p>
-      <div class="export-preview">
-        <img id="exportPreview" alt="완성된 포메이션 이미지 미리보기">
-      </div>
-      <a class="btn btn--primary btn--block" id="exportDownloadLink" download="formation.png">이미지 다운로드</a>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a href="#top" class="logo"><span class="logo-mark"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12l-1.6 15.2a1 1 0 0 1-1 .8H8.6a1 1 0 0 1-1-.8L6 4Z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path d="M7.2 10h9.6l-.9 8.4H8.1L7.2 10Z" fill="#fff"/></svg></span>주당 지도</a>
+      <nav>
+        <a href="#guide">기준 해독</a>
+        <a href="#check">내 포지션</a>
+        <a href="#survey">셀프 체크</a>
+        <a href="#map">블록맵</a>
+        <a href="#insight">인사이트</a>
+        <a href="#market">주류 시장</a>
+        <a href="#regression">회귀 분석</a>
+      </nav>
     </div>
-  </div>
-</div>
+  </header>
 
-<!-- ============ 토스트 / 진행 오버레이 ============ -->
-<div class="toast-wrap" id="toastWrap" role="status" aria-live="polite"></div>
+  <div id="load-error" class="wrap notice" hidden></div>
 
-<div class="busy" id="busyOverlay" hidden>
-  <div class="busy__box">
-    <span class="busy__spinner" aria-hidden="true"></span>
-    <span class="busy__text" id="busyText">이미지를 만들고 있어요…</span>
-  </div>
-</div>
+  <main id="top">
+    <!-- 1. Hero -->
+    <section class="hero wrap">
+      <div class="hero-top">
+      <div class="hero-text">
+      <p class="eyebrow"><span class="dot"></span>KOSIS 음주 행태 통계 리포트 · 시군구 229곳</p>
+      <h1>우리 동네는 얼마나 마실까?<br><span>데이터로 보는<br>대한민국 주당 지도</span></h1>
+      <p class="lead">한 달에 한 번 가볍게 즐기는 사람부터 주당 모임 최상위권 지역까지, KOSIS 통계로 들여다본 연령대·성별·시군구별 음주 리포트</p>
+      <div class="cta">
+        <a href="#check" class="btn primary">내 지역·구간 위치 보기</a>
+        <a href="#map" class="btn">전국 주당 블록맵 보기</a>
+      </div>
+      </div>
+      <a href="#map" class="hero-map card" aria-label="전국 블록맵으로 이동">
+        <div class="hero-map-head"><span>고위험음주율 지도</span><span class="muted">진할수록 ↑</span></div>
+        <div id="mini-map" class="mini-map"></div>
+      </a>
+      </div>
+      <div class="facts" id="facts">
+        <article class="card fact">
+          <p class="fact-label">지역 고위험음주율 설명력</p>
+          <p class="fact-num">R² = 0.967</p>
+          <p class="fact-desc">결국 핵심은 '얼마나 자주 진하게 마시느냐' (음주자 내 고위험 비율 계수 <b>β = 0.696</b>)</p>
+        </article>
+        <article class="card fact">
+          <p class="fact-label">전국 1위 vs 최소 지역</p>
+          <p class="fact-num" id="f-top">–</p>
+          <p class="fact-desc" id="f-top-desc">고위험음주율 기준</p>
+        </article>
+        <article class="card fact">
+          <p class="fact-label">남녀 격차가 가장 큰 구간</p>
+          <p class="fact-num" id="f-gap">–</p>
+          <p class="fact-desc" id="f-gap-desc"></p>
+        </article>
+        <article class="card fact">
+          <p class="fact-label">고위험 음주 피크 연령대</p>
+          <p class="fact-num" id="f-peak">–</p>
+          <p class="fact-desc" id="f-peak-desc"></p>
+        </article>
+      </div>
+    </section>
 
-<script type="module" src="js/app.js"></script>
+    <!-- 2. Guide -->
+    <section class="wrap section" id="guide">
+      <p class="kicker">01 · 기준 해독</p>
+      <h2>통계 기준 해독하기</h2>
+      <p class="sub">소주 몇 잔부터 폭음·고위험일까? 술자리 말과 통계 말은 조금 다릅니다.</p>
+      <div class="guide-grid">
+        <article class="card guide">
+          <span class="step">1</span><span class="tag">입문</span>
+          <h3>연간음주율</h3>
+          <p>최근 1년간 술을 <b>딱 1잔이라도</b> 마셔본 사람 비율</p>
+          <div class="dose" aria-hidden="true"><div><span class="who">누구나</span><span class="shots" data-n="1"></span></div><span class="freq">1년에 1번이라도</span></div>
+        </article>
+        <article class="card guide">
+          <span class="step">2</span><span class="tag">정기</span>
+          <h3>월간음주율</h3>
+          <p>최근 1년간 <b>한 달에 1번 이상</b> 술자리를 가진 사람 비율</p>
+          <div class="dose" aria-hidden="true"><div><span class="who">누구나</span><span class="shots" data-n="1"></span></div><span class="freq">월 1회 이상</span></div>
+        </article>
+        <article class="card guide">
+          <span class="step">3</span><span class="tag">"한 번 앉으면 꽤 달리는 편"</span>
+          <h3>월간폭음률</h3>
+          <p>한 자리에서 <b>남자 소주 7잔 이상(맥주 5캔)</b>, <b>여자 소주 5잔 이상(맥주 3캔)</b>을 <b>월 1회 이상</b> 마신 비율</p>
+          <div class="dose" aria-hidden="true"><div><span class="who">남</span><span class="shots" data-n="7"></span></div><div><span class="who">여</span><span class="shots" data-n="5"></span></div><span class="freq">월 1회 이상</span></div>
+        </article>
+        <article class="card guide strong">
+          <span class="step">4</span><span class="tag">"주 2회 이상 소주 7잔/5잔 루틴"</span>
+          <h3>고위험음주율</h3>
+          <p>한 자리에서 <b>남자 소주 7잔 이상(맥주 5캔)</b>, <b>여자 소주 5잔 이상(맥주 3캔)</b>을 <b>주 2회 이상</b> 마신 비율</p>
+          <div class="dose" aria-hidden="true"><div><span class="who">남</span><span class="shots" data-n="7"></span></div><div><span class="who">여</span><span class="shots" data-n="5"></span></div><span class="freq hot">주 2회 이상</span></div>
+        </article>
+      </div>
+      <p class="footnote">※ <b>연간음주자의 고위험음주율</b>은 술을 마시는 사람들 중 고위험 비율, <b>표준화율</b>은 지역별 인구 연령구조 차이를 보정한 비교용 수치(조율은 보정 전 실제 비율)입니다.</p>
+    </section>
+
+    <!-- 3. Check -->
+    <section class="wrap section" id="check">
+      <p class="kicker">02 · 내 포지션</p>
+      <h2>내 포지션 체크</h2>
+      <p class="sub">성별·연령대·시군구를 고르면 통계 속 내 자리를 보여드려요. (개인 진단이 아닌, 내가 속한 집단의 평균입니다)</p>
+      <div class="card check">
+        <form id="check-form" class="check-form">
+          <label>성별
+            <select id="c-gender"><option>남자</option><option>여자</option></select>
+          </label>
+          <label>연령대
+            <select id="c-age"></select>
+          </label>
+          <label>시·도
+            <select id="c-sido"></select>
+          </label>
+          <label>시·군·구
+            <select id="c-sgg"></select>
+          </label>
+        </form>
+        <div class="check-out">
+          <div class="out-block">
+            <p class="out-label">내 동네</p>
+            <p class="out-title" id="o-region">–</p>
+            <p class="out-num" id="o-region-num">–</p>
+            <p class="out-meta" id="o-region-rank"></p>
+            <a href="#map" class="link">블록맵에서 보기 →</a>
+          </div>
+          <div class="out-block">
+            <p class="out-label">내 성별·연령대</p>
+            <p class="out-title" id="o-group">–</p>
+            <ul class="group-list" id="o-group-list"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3-1. Survey -->
+    <section class="wrap section" id="survey">
+      <p class="kicker">03 · 셀프 체크</p>
+      <h2>나는 얼마나 마실까? 30초 셀프 체크</h2>
+      <p class="sub">질문 4개에 답하면 통계 기준으로 내 음주 단계를 알려드려요. 성별·연령대는 위 '내 포지션 체크' 선택값을 씁니다. 답변은 어디에도 저장되지 않아요.</p>
+      <div class="card survey">
+        <form id="survey-form" class="survey-form">
+          <fieldset>
+            <legend>Q1. 최근 1년 동안 술을 한 잔이라도 마신 적이 있나요?</legend>
+            <label><input type="radio" name="q1" value="0" required> 없다</label>
+            <label><input type="radio" name="q1" value="1"> 있다</label>
+          </fieldset>
+          <fieldset class="drinker">
+            <legend>Q2. 술자리는 얼마나 자주 갖나요?</legend>
+            <label><input type="radio" name="q2" value="0"> 월 1회 미만</label>
+            <label><input type="radio" name="q2" value="1"> 월 1회 정도</label>
+            <label><input type="radio" name="q2" value="2"> 월 2~4회</label>
+            <label><input type="radio" name="q2" value="3"> 주 2~3회</label>
+            <label><input type="radio" name="q2" value="4"> 주 4회 이상</label>
+          </fieldset>
+          <fieldset class="drinker">
+            <legend>Q3. 한 번 마실 때 보통 몇 잔? <small>(소주 잔 기준 · 맥주 1캔 ≈ 소주 1.5잔)</small></legend>
+            <label><input type="radio" name="q3" value="1"> 1~2잔</label>
+            <label><input type="radio" name="q3" value="3"> 3~4잔</label>
+            <label><input type="radio" name="q3" value="5"> 5~6잔</label>
+            <label><input type="radio" name="q3" value="7"> 7~9잔</label>
+            <label><input type="radio" name="q3" value="10"> 10잔 이상</label>
+          </fieldset>
+          <fieldset class="drinker">
+            <legend>Q4. 한 자리에서 <b id="q4-cut">소주 7잔(맥주 5캔)</b> 이상 마시는 날은?</legend>
+            <label><input type="radio" name="q4" value="0"> 전혀 없음</label>
+            <label><input type="radio" name="q4" value="1"> 월 1회 미만</label>
+            <label><input type="radio" name="q4" value="2"> 월 1회 정도</label>
+            <label><input type="radio" name="q4" value="3"> 주 1회 정도</label>
+            <label><input type="radio" name="q4" value="4"> 주 2회 이상</label>
+          </fieldset>
+          <button type="submit" class="btn primary">내 단계 확인하기</button>
+        </form>
+        <div class="survey-out" id="survey-out" hidden>
+          <p class="out-label">당신의 음주 단계</p>
+          <div class="level-row"><span class="lv" id="s-lv"></span><p class="level" id="s-level"></p></div>
+          <p class="level-desc" id="s-desc"></p>
+          <ol class="ladder" id="s-ladder"></ol>
+          <p class="footnote" id="s-compare"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Map -->
+    <section class="wrap section" id="map">
+      <p class="kicker">04 · 전국 지도</p>
+      <h2>전국 시군구 블록맵 & 랭킹</h2>
+      <p class="sub">한 칸이 시·군·구 하나. 진할수록 많이 마십니다.</p>
+      <div class="controls">
+        <div class="seg" id="metric-seg" role="group" aria-label="지표 선택">
+          <button data-v="고위험음주율" class="on">고위험음주율</button>
+          <button data-v="월간음주율">월간음주율</button>
+          <button data-v="연간음주자_고위험음주율">연간음주자의 고위험음주율</button>
+        </div>
+        <div class="seg" id="type-seg" role="group" aria-label="율 종류">
+          <button data-v="표준화" class="on">표준화율</button>
+          <button data-v="조율">조율</button>
+        </div>
+        <input type="search" id="m-search" placeholder="지역 검색 (예: 속초)" aria-label="지역 검색">
+        <select id="m-sido" aria-label="시도 필터"><option value="">전체 시·도</option></select>
+      </div>
+      <div class="map-layout">
+        <div class="card map-card">
+          <div id="blockmap" class="blockmap" role="img" aria-label="시군구별 블록맵"></div>
+          <div class="legend" id="legend"></div>
+          <div class="tooltip" id="tooltip" hidden></div>
+        </div>
+        <div class="card rank-card">
+          <div class="seg small" id="rank-seg">
+            <button data-v="top" class="on">TOP 10</button>
+            <button data-v="bottom">BOTTOM 10</button>
+          </div>
+          <div class="chart-box tall"><canvas id="rank-chart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Insight -->
+    <section class="wrap section" id="insight">
+      <p class="kicker">05 · 인사이트</p>
+      <h2>연령대 · 성별 인사이트</h2>
+      <div class="insight-grid">
+        <article class="card">
+          <h3>연령대별 3대 지표</h3>
+          <p class="sub small" id="age-note"></p>
+          <div class="chart-box"><canvas id="age-chart"></canvas></div>
+        </article>
+        <article class="card">
+          <h3>남녀 평균 비교 (t-검정)</h3>
+          <p class="sub small">연령대별 남녀 값을 Welch t-검정으로 비교</p>
+          <div class="chart-box"><canvas id="gender-chart"></canvas></div>
+          <div class="table-wrap">
+            <table class="ttable">
+              <thead><tr><th>지표</th><th>남</th><th>여</th><th>차이</th><th>t</th><th>p</th><th>유의</th></tr></thead>
+              <tbody id="t-body"></tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 5-1. 주류 시장 -->
+    <section class="wrap section" id="market">
+      <p class="kicker">06 · 주류 시장</p>
+      <h2>잔 밖의 이야기: 소주·맥주 시장 트렌드</h2>
+      <p class="sub">지금까지가 사람들이 '얼마나 마시는지'였다면, 여기는 시장에서 소주와 맥주가 실제로 얼마나 팔려 나가는지입니다.</p>
+      <div id="market-error" class="notice" hidden></div>
+      <div class="insight-grid">
+        <article class="card">
+          <h3>2025년 주류별 출고량</h3>
+          <p class="sub small">막대: 출고량(kl) · 라벨: 전체 출고량 중 비중</p>
+          <div class="chart-box tall"><canvas id="market-chart"></canvas></div>
+          <p class="market-note" id="market-note"></p>
+        </article>
+        <article class="card">
+          <h3>맥주 vs 소주 판매 점유율 추이 (2018~2025)</h3>
+          <p class="sub small">국내 주류 판매액 중 비중 · 점에 마우스를 올리면 그해 판매액이 보여요</p>
+          <div class="chart-box tall"><canvas id="trend-chart"></canvas></div>
+          <p class="market-note" id="trend-note"></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 7. Feature band: 다중회귀 -->
+    <section class="band" id="regression">
+      <div class="wrap band-inner">
+        <div>
+          <p class="kicker">07 · 다중회귀</p>
+          <h2>무엇이 동네 고위험음주율을 결정할까?</h2>
+          <p>단순히 술 마시는 인구 비율보다 <b>음주자 중 고위험 음주 비율</b>이 지역별 고위험음주율을 강하게 결정합니다. "마시는 사람이 많은 동네"보다 <b>"한 번 마시면 진하게 자주 마시는 동네"</b>가 순위를 끌어올려요.</p>
+          <div class="cta">
+            <a href="#check" class="btn on-dark">우리 동네 확인하기</a>
+            <a href="#map" class="btn on-dark-outline">전국 블록맵 보기</a>
+          </div>
+        </div>
+        <div>
+          <p class="formula">고위험음주율 = −6.04 + <b>0.123</b>×월간음주율 + <b>0.696</b>×음주자 중 고위험 비율</p>
+          <div class="reg-stats">
+            <div><span>R²</span><b>0.967</b></div>
+            <div><span>Adj. R²</span><b>0.967</b></div>
+            <div><span>F-statistic</span><b>3,315</b></div>
+            <div><span>시군구 수 (n)</span><b>229</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap"><b>주당 지도</b> · 출처: KOSIS 국가통계포털 (시군구 2025년, 연령·성별 2024년, 주류 출고·판매액) · 블록맵 좌표 data_draw_korea</div>
+  </footer>
+
+  <a href="#survey" class="frap" aria-label="셀프 체크로 이동"><span class="frap-label">30초 셀프 체크</span><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12l-1.6 15.2a1 1 0 0 1-1 .8H8.6a1 1 0 0 1-1-.8L6 4Z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path d="M7.2 10h9.6l-.9 8.4H8.1L7.2 10Z" fill="#fff"/></svg></a>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
